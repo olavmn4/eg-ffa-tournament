@@ -101,7 +101,7 @@ body {
 
 #pgrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
   gap: 1px;
   background: #1a1a1a;
 }
@@ -270,29 +270,58 @@ body {
 .mv.worse  { color: #c05a5a; }
 .pc-wr { font-size: 11px; color: #888; }
 /* ── PICKEMS ── */
-.pk-col { display:flex; flex-direction:column; flex-shrink:0; }
-.pk-col-hd { font-size:11px; color:#444; text-align:center; padding:4px 0 8px;
-  letter-spacing:.06em; text-transform:uppercase; width:208px; }
+#pk-outer { display:flex; align-items:flex-start; min-width:max-content; }
+.pk-col { display:flex; flex-direction:column; }
+.pk-col-hd {
+  font-size:11px; color:#444; text-align:center;
+  padding:4px 0 8px; letter-spacing:.06em;
+  text-transform:uppercase; width:208px;
+}
 .pk-col-body { display:flex; flex-direction:column; width:208px; }
-.pk-row { display:flex; align-items:center; }
-.pk-match { width:190px; min-width:190px; border:1px solid #1e1e1e;
-  background:#141414; flex-shrink:0; }
+.pk-row { display:flex; align-items:center; flex-shrink:0; }
+.pk-match {
+  width:190px; min-width:190px;
+  border:1px solid #1e1e1e; background:#141414; flex-shrink:0;
+  transition: border-color .15s;
+}
+.pk-match:hover { border-color:#2e2e2e; }
+.pk-conn {
+  width:16px; min-width:16px;
+  align-self:stretch; flex-shrink:0;
+  display:flex; flex-direction:column;
+  transition: opacity .15s;
+}
+.pk-conn .c-top    { flex:1; border-right:1px solid #222; border-bottom:1px solid #222; transition:border-color .15s; }
+.pk-conn .c-bottom { flex:1; border-right:1px solid #222; border-top:1px solid #222;    transition:border-color .15s; }
+.pk-conn .c-empty  { flex:1; }
+.pk-conn.path-lit .c-top    { border-right-color:#4a7a3a; border-bottom-color:#4a7a3a; }
+.pk-conn.path-lit .c-bottom { border-right-color:#4a7a3a; border-top-color:#4a7a3a; }
 .pk-slot {
   display:flex; align-items:center; gap:5px; padding:4px 8px;
   height:28px; overflow:hidden; border-bottom:1px solid #1a1a1a;
-  cursor:pointer; user-select:none; transition:background .1s;
+  cursor:pointer; user-select:none;
+  transition: background .1s, opacity .15s;
 }
 .pk-slot:last-child { border-bottom:none; }
 .pk-slot:hover:not(.pk-locked):not(.pk-tbd) { background:#1c1c1c; }
 .pk-slot.pk-picked { background:#1a2a1a; }
 .pk-slot.pk-picked .s-name { color:#7dc95e; }
 .pk-slot.pk-locked { cursor:default; opacity:.55; }
-.pk-slot.pk-tbd { cursor:default; }
+.pk-slot.pk-tbd    { cursor:default; }
+.pk-slot .s-seed { font-size:10px; color:#303030; min-width:24px; text-align:right; flex-shrink:0; }
+.pk-slot .s-flag { font-size:13px; flex-shrink:0; width:1.4em; text-align:center; }
 .pk-slot .s-name { flex:1; font-size:13px; color:#aaa; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .pk-slot .s-name.tbd { color:#333; font-style:italic; }
-.pk-slot .s-flag { font-size:13px; flex-shrink:0; width:1.4em; text-align:center; }
-.pk-slot .s-elo { font-size:11px; flex-shrink:0; }
-.pk-connector { width:18px; flex-shrink:0; position:relative; align-self:stretch; }
+.pk-slot .s-elo  { font-size:11px; flex-shrink:0; }
+/* hover path highlight */
+#pk-outer.hovering .pk-slot  { opacity:0.2; }
+#pk-outer.hovering .pk-slot.path-player { opacity:1; }
+#pk-outer.hovering .pk-match { border-color:#181818; background:#111; }
+#pk-outer.hovering .pk-match.path-match { border-color:#3a5a2a; background:#141414; }
+#pk-outer.hovering .pk-conn .c-top,
+#pk-outer.hovering .pk-conn .c-bottom { border-color:#1a1a1a; }
+#pk-outer.hovering .pk-conn.path-lit .c-top    { border-right-color:#4a7a3a; border-bottom-color:#4a7a3a; }
+#pk-outer.hovering .pk-conn.path-lit .c-bottom { border-right-color:#4a7a3a; border-top-color:#4a7a3a; }
 </style>
 </head>
 <body>
@@ -460,23 +489,22 @@ function openMatchModal(u1, u2) {
         <table class="ms-table">
           ${statRow('peak elo',   c.seasonHighest,  opp?.seasonHighest,  true)}
           ${statRow('win rate',   wr_s,  owr_s,  true,  wr_s != null ? wr_s + '%' : null)}
+          ${statRow('matches played', s.played,   os.played,   true)}
           ${statRow('wins',       s.wins,     os.wins,     true)}
           ${statRow('losses',     s.loses,    os.loses,    false)}
-          ${statRow('played',     s.played,   os.played,   true)}
           ${statRow('forfeit rate', s.forfeits && s.played ? s.forfeits/s.played : null, os.forfeits && os.played ? os.forfeits/os.played : null, false, s.forfeits && s.played ? Math.round(s.forfeits/s.played*100)+'%' : null)}
           ${statRow('best time',  s.bestTime, os.bestTime, false, fmt(s.bestTime))}
           ${statRow('avg time', s.completionTime && s.completions ? s.completionTime/s.completions : null, os.completionTime && os.completions ? os.completionTime/os.completions : null, false, s.completionTime && s.completions ? fmt(s.completionTime/s.completions) : null)}
           ${statRow('best streak',s.highestStreak,os.highestStreak,true)}
-          ${statRow('phase pts',  c.phasePoint, opp?.phasePoint, true)}
         </table>
       </div>
       <div class="ms-section">
         <div class="ms-head">all time</div>
         <table class="ms-table">
           ${statRow('win rate',   wr_t,  owr_t,  true,  wr_t != null ? wr_t + '%' : null)}
+          ${statRow('matches played', t.played,  ot.played,  true)}
           ${statRow('wins',       t.wins,    ot.wins,    true)}
           ${statRow('losses',     t.loses,   ot.loses,   false)}
-          ${statRow('played',     t.played,  ot.played,  true)}
           ${statRow('forfeit rate', t.forfeits && t.played ? t.forfeits/t.played : null, ot.forfeits && ot.played ? ot.forfeits/ot.played : null, false, t.forfeits && t.played ? Math.round(t.forfeits/t.played*100)+'%' : null)}
           ${statRow('best time',  t.bestTime,ot.bestTime, false, fmt(t.bestTime))}
           ${statRow('avg time', t.completionTime && t.completions ? t.completionTime/t.completions : null, ot.completionTime && ot.completions ? ot.completionTime/ot.completions : null, false, t.completionTime && t.completions ? fmt(t.completionTime/t.completions) : null)}
@@ -824,41 +852,6 @@ function pkResolveSlots(picks, rounds) {
   return slots;
 }
 
-function pkMakeSlot(player, matchId, isP1, isBye, isLocked, picks, onPick) {
-  const div = document.createElement('div');
-  div.className = 'pk-slot';
-  const picked = picks[matchId];
-
-  if (!player) {
-    div.classList.add('pk-tbd');
-    div.innerHTML = `<span class="s-flag" style="opacity:0">·</span><span class="s-name tbd">tbd</span>`;
-    return div;
-  }
-
-  const username = String(player.username ?? '');
-  const display  = String(player.display  ?? username);
-  const c  = getCache(username);
-  const e  = c?.eloRate ?? null;
-  const country = typeof c?.country === 'string' ? c.country : '';
-  const flag = country ? countryFlag(country) : '';
-  const ec = eloClass(e);
-  const isPicked = picked === username;
-
-  if (isLocked) div.classList.add('pk-locked');
-  if (isPicked) div.classList.add('pk-picked');
-
-  div.innerHTML = `
-    <span class="s-flag">${flag}</span>
-    <span class="s-name">${x(display)}</span>
-    ${e !== null ? `<span class="s-elo ${ec}">${e}</span>` : ''}
-  `;
-
-  if (!isLocked) {
-    div.onclick = () => onPick(matchId, username, isPicked);
-  }
-  return div;
-}
-
 function buildPickems() {
   pickemBuilt = true;
   const outer = document.getElementById('pk-outer');
@@ -868,12 +861,65 @@ function buildPickems() {
   const rounds = pkBuildRounds();
   const names = ['R1','R2','R3','R4','R5','R6','R7','R8','Semi','Final'];
 
+  // Build a lookup: matchId -> connectorEl, slotEl (for hover path)
+  // We store refs after render
+  const connRefs  = {}; // matchId -> conn div (the connector to the RIGHT of this match)
+  const matchRefs = {}; // matchId -> card div
+  const slotRefs  = {}; // "matchId:username" -> slot div
+
+  function pkMakeSlotEl(player, matchId, isLocked, picks, onPick) {
+    const div = document.createElement('div');
+    div.className = 'pk-slot';
+
+    if (!player) {
+      div.classList.add('pk-tbd');
+      div.innerHTML = `<span class="s-seed"></span><span class="s-name tbd">tbd</span>`;
+      return div;
+    }
+
+    const username = String(player.username ?? '');
+    const display  = String(player.display  ?? username);
+    const c        = getCache(username);
+    const e        = c?.eloRate ?? null;
+    const rank     = c?.eloRank ?? null;
+    const country  = typeof c?.country === 'string' ? c.country : '';
+    const flag     = country ? countryFlag(country) : '';
+    const ec       = eloClass(e);
+    const picked   = picks[matchId];
+    const isPicked = picked === username;
+    const rankStr  = rank ? '#' + rank : '';
+
+    if (isLocked) div.classList.add('pk-locked');
+    if (isPicked) div.classList.add('pk-picked');
+
+    div.innerHTML = `<span class="s-seed">${rankStr}</span>${flag ? `<span class="s-flag">${flag}</span>` : ''}<span class="s-name">${x(username)}</span>${e !== null ? `<span class="s-elo ${ec}">${e}</span>` : ''}`;
+
+    // Store ref for hover path
+    slotRefs[matchId + ':' + username] = div;
+
+    if (!isLocked) {
+      div.onclick = () => onPick(matchId, username, isPicked);
+    }
+
+    // Hover: trace this player's path forward and backward
+    if (!isLocked) {
+      div.addEventListener('mouseenter', () => highlightPath(username, matchId, rounds, picks));
+      div.addEventListener('mouseleave', () => clearHighlight());
+    }
+
+    return div;
+  }
+
   function render() {
     outer.innerHTML = '';
+    // Clear refs
+    for (const k in connRefs)  delete connRefs[k];
+    for (const k in matchRefs) delete matchRefs[k];
+    for (const k in slotRefs)  delete slotRefs[k];
+
     const picks = pkLoad();
     const slots = pkResolveSlots(picks, rounds);
 
-    // Count total pickable matches (non-bye R1) + all later round matches
     let total = 0, made = 0;
     rounds[0].forEach(m => {
       if (!m.hasBye) total++;
@@ -885,8 +931,7 @@ function buildPickems() {
         if (s?.p1 && s?.p2) { total++; if (picks[m.id]) made++; }
       });
     }
-    document.getElementById('pk-progress').textContent =
-      `${made} / ${total} picks made`;
+    document.getElementById('pk-progress').textContent = `${made} / ${total} picks made`;
 
     rounds.forEach((matches, ri) => {
       const col = document.createElement('div');
@@ -901,15 +946,15 @@ function buildPickems() {
       body.className = 'pk-col-body';
       const matchH = Math.pow(2, ri) * SLOT_H;
 
-      matches.forEach(m => {
+      matches.forEach((m, mi) => {
         const row = document.createElement('div');
         row.className = 'pk-row';
         row.style.height = matchH + 'px';
 
         const card = document.createElement('div');
         card.className = 'pk-match';
+        matchRefs[m.id] = card;
 
-        // Resolve actual players for this slot
         let p1, p2, hasBye;
         if (ri === 0) {
           p1 = m.p1; p2 = m.p2; hasBye = m.hasBye;
@@ -921,7 +966,7 @@ function buildPickems() {
         const isLocked = hasBye;
         const currentPick = picks[m.id] ?? null;
 
-        // Auto-pick byes in R1
+        // Auto-pick byes
         if (hasBye && p1 && !picks[m.id]) {
           picks[m.id] = p1.username;
           pkSave(picks);
@@ -930,44 +975,130 @@ function buildPickems() {
         const onPick = (matchId, username, alreadyPicked) => {
           const p = pkLoad();
           if (alreadyPicked) {
-            // Deselect — also clear all downstream picks that depended on this
             delete p[matchId];
             clearDownstream(matchId, rounds, p);
           } else {
-            // Clear the other slot's downstream if switching pick
             const prevPick = p[matchId];
-            if (prevPick && prevPick !== username) {
-              clearDownstream(matchId, rounds, p);
-            }
+            if (prevPick && prevPick !== username) clearDownstream(matchId, rounds, p);
             p[matchId] = username;
           }
           pkSave(p);
           render();
         };
 
-        card.appendChild(pkMakeSlot(p1, m.id, true,  isLocked, isLocked, picks, onPick));
-        card.appendChild(pkMakeSlot(p2, m.id, false, false,     isLocked, picks, onPick));
+        card.appendChild(pkMakeSlotEl(p1, m.id, isLocked, picks, onPick));
+        card.appendChild(pkMakeSlotEl(p2, m.id, false,    picks, onPick));
 
-        // Highlight card if a pick is made
-        if (currentPick && (p1 || p2)) card.style.borderColor = '#2a3a2a';
+        if (currentPick) card.classList.add('has-pick');
 
         row.appendChild(card);
 
-        // Connector line (all rounds except last)
+        // Connector — exact same logic as rebuildBracket
         if (ri < rounds.length - 1) {
           const conn = document.createElement('div');
-          conn.className = 'pk-connector';
+          conn.className = 'pk-conn';
+          const a = document.createElement('div');
+          const b = document.createElement('div');
+          if (mi % 2 === 0) {
+            a.className = 'c-empty'; b.className = 'c-top';
+          } else {
+            a.className = 'c-bottom'; b.className = 'c-empty';
+          }
+          conn.appendChild(a); conn.appendChild(b);
           row.appendChild(conn);
+          connRefs[m.id] = conn; // store for hover
         }
 
         body.appendChild(row);
       });
+
       col.appendChild(body);
       outer.appendChild(col);
     });
   }
 
-  try { render(); } catch(e) { console.error("pickems render error:", e); console.error("player data sample:", JSON.stringify(R1.slice(0,3))); document.getElementById("pk-outer").innerHTML = '<p style="color:#c05a5a;padding:16px">Error rendering pickems: ' + e.message + '</p>'; }
+  // Trace a player's full path through the bracket and highlight it
+  function highlightPath(username, startMatchId, rounds, picks) {
+    outer.classList.add('hovering');
+
+    // Find all matchIds this player appears in (by following picks)
+    const pathMatchIds = new Set();
+    const pathSlotKeys = new Set();
+
+    // Walk forward from startMatchId following picks
+    let curMatchId = startMatchId;
+    while (curMatchId) {
+      pathMatchIds.add(curMatchId);
+      // Mark this player's slot
+      pathSlotKeys.add(curMatchId + ':' + username);
+      // Follow the pick forward if it's this player
+      if (picks[curMatchId] === username) {
+        // Find next round match
+        const nextId = getNextMatchId(curMatchId, rounds);
+        if (nextId) {
+          // Check if this player appears in the next slot
+          const nextSlot = slotRefs[nextId + ':' + username];
+          if (nextSlot) {
+            curMatchId = nextId;
+          } else break;
+        } else break;
+      } else break;
+    }
+
+    // Also trace backward — find which earlier match fed this player into startMatchId
+    let backMatchId = startMatchId;
+    while (true) {
+      const feedIds = getFeedMatchIds(backMatchId, rounds);
+      if (!feedIds) break;
+      // Which feed contains this player?
+      const feedMatch = feedIds.find(fid => slotRefs[fid + ':' + username]);
+      if (!feedMatch) break;
+      pathMatchIds.add(feedMatch);
+      pathSlotKeys.add(feedMatch + ':' + username);
+      backMatchId = feedMatch;
+    }
+
+    // Apply classes
+    for (const [key, el] of Object.entries(slotRefs)) {
+      if (pathSlotKeys.has(key)) el.classList.add('path-player');
+    }
+    for (const [mid, el] of Object.entries(matchRefs)) {
+      if (pathMatchIds.has(mid)) el.classList.add('path-match');
+    }
+    // Light up connectors along the path
+    for (const mid of pathMatchIds) {
+      if (connRefs[mid]) connRefs[mid].classList.add('path-lit');
+    }
+  }
+
+  function clearHighlight() {
+    outer.classList.remove('hovering');
+    document.querySelectorAll('.path-player').forEach(el => el.classList.remove('path-player'));
+    document.querySelectorAll('.path-match').forEach(el => el.classList.remove('path-match'));
+    document.querySelectorAll('.path-lit').forEach(el => el.classList.remove('path-lit'));
+  }
+
+  try { render(); } catch(e) { console.error("pickems render error:", e); document.getElementById("pk-outer").innerHTML = '<p style="color:#c05a5a;padding:16px">Error rendering pickems: ' + e.message + '</p>'; }
+}
+
+// Given a matchId, return the matchId in the next round that it feeds into
+function getNextMatchId(matchId, rounds) {
+  for (let r = 0; r < rounds.length - 1; r++) {
+    const idx = rounds[r].findIndex(m => m.id === matchId);
+    if (idx === -1) continue;
+    const nextIdx = Math.floor(idx / 2);
+    return rounds[r+1]?.[nextIdx]?.id ?? null;
+  }
+  return null;
+}
+
+// Given a matchId, return the two matchIds that feed into it (from the previous round)
+function getFeedMatchIds(matchId, rounds) {
+  for (let r = 1; r < rounds.length; r++) {
+    const match = rounds[r].find(m => m.id === matchId);
+    if (match) return [match.feedA, match.feedB].filter(Boolean);
+  }
+  return null;
 }
 
 // Clear picks for any matches downstream of a given matchId
