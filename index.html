@@ -13,7 +13,7 @@ body {
   color: #ccc;
   font-family: 'IBM Plex Mono', monospace;
   font-size: 13px;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 /* ── TOP BAR ── */
@@ -128,8 +128,8 @@ body {
 .bk-slot .s-flag { font-size: 10px; flex-shrink: 0; line-height: 1; }
 
 /* ── BRACKET ── */
-#v-bracket { display: none; overflow: auto; padding: 16px; max-height: calc(100vh - 80px); }
-#v-pickems { display: none; overflow: auto; max-height: calc(100vh - 80px); }
+#v-bracket { display: none; overflow: auto; padding: 16px; }
+#v-pickems { display: none; overflow: auto; }
 
 .bk-outer {
   display: flex;
@@ -766,6 +766,16 @@ function eloClass(eloRate) {
   return 'elo-coal';
 }
 
+function setViewHeights() {
+  const used = document.getElementById('topbar').offsetHeight
+              + document.getElementById('tabs').offsetHeight;
+  const h = (window.innerHeight - used) + 'px';
+  document.getElementById('v-bracket').style.maxHeight = h;
+  document.getElementById('v-pickems').style.maxHeight = h;
+  document.getElementById('v-list').style.maxHeight = h;
+}
+window.addEventListener('resize', setViewHeights);
+
 function switchTab(id, btn) {
   document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
   btn.classList.add('on');
@@ -1122,6 +1132,7 @@ function resetPickems() {
 
 renderList();
 loadElo();
+  setViewHeights();
 </script>
 </body>
 </html>
