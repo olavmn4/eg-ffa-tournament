@@ -294,6 +294,7 @@ body {
       <button class="srt"    onclick="setSort('name',this)">name</button>
       <button class="srt"    onclick="setSort('winrate',this)">win rate ↓</button>
       <button class="srt"    onclick="setSort('besttime',this)">best time ↑</button>
+      <button class="srt"    onclick="setSort('avgtime',this)">avg time ↑</button>
     </div>
     <div id="pgrid"></div>
   </div>
@@ -305,6 +306,7 @@ body {
       <button class="srt"    onclick="setBracketSort('avg_elo',this)">avg elo ↓</button>
       <button class="srt"    onclick="setBracketSort('discrepancy',this)">elo gap ↓</button>
       <button class="srt"    onclick="setBracketSort('top_elo',this)">top elo ↓</button>
+      <button class="srt"    onclick="setBracketSort('avg_time',this)">avg time ↑</button>
     </div>
     <div class="bk-outer" id="bk-outer"></div>
   </div>
@@ -430,6 +432,7 @@ function openMatchModal(u1, u2) {
           ${statRow('forfeits',   s.forfeits, os.forfeits, false)}
           ${statRow('completions',s.completions,os.completions,true)}
           ${statRow('best time',  s.bestTime, os.bestTime, false, fmt(s.bestTime))}
+          ${statRow('avg time', s.completionTime && s.completions ? s.completionTime/s.completions : null, os.completionTime && os.completions ? os.completionTime/os.completions : null, false, s.completionTime && s.completions ? fmt(s.completionTime/s.completions) : null)}
           ${statRow('best streak',s.highestStreak,os.highestStreak,true)}
           ${statRow('phase pts',  c.phasePoint, opp?.phasePoint, true)}
         </table>
@@ -441,6 +444,7 @@ function openMatchModal(u1, u2) {
           ${statRow('record',     null,  null,   true,  t.wins != null ? t.wins + 'W / ' + t.loses + 'L' : null)}
           ${statRow('played',     t.played,  ot.played,  true)}
           ${statRow('best time',  t.bestTime,ot.bestTime, false, fmt(t.bestTime))}
+          ${statRow('avg time', t.completionTime && t.completions ? t.completionTime/t.completions : null, ot.completionTime && ot.completions ? ot.completionTime/ot.completions : null, false, t.completionTime && t.completions ? fmt(t.completionTime/t.completions) : null)}
           ${statRow('best streak',t.highestStreak,ot.highestStreak,true)}
         </table>
       </div>
@@ -497,6 +501,10 @@ function renderList() {
   if (sortMode === 'besttime') list = [...list].sort((a,b) => {
     const bt = p => getCache(p.username)?.season?.bestTime ?? Infinity;
     return bt(a) - bt(b);
+  });
+  if (sortMode === 'avgtime') list = [...list].sort((a,b) => {
+    const at = p => { const c = getCache(p.username); if (!c?.season?.completionTime || !c?.season?.completions) return Infinity; return c.season.completionTime / c.season.completions; };
+    return at(a) - at(b);
   });
 
   document.getElementById('pgrid').innerHTML = list.map(p => {
@@ -573,6 +581,13 @@ function matchScore(m) {
   }
   if (bracketSort === 'top_elo') {
     return Math.max(e1 ?? -1, e2 ?? -1);
+  }
+  if (bracketSort === 'avg_time') {
+    // Lower avg time = better, so negate for descending sort
+    const at = u => { const c = u ? getCache(u) : null; if (!c?.season?.completionTime || !c?.season?.completions) return Infinity; return c.season.completionTime / c.season.completions; };
+    const a1 = at(m.p1?.username), a2 = at(m.p2?.username);
+    const best = Math.min(a1, a2);
+    return best === Infinity ? -1 : -best; // sort ascending (lower = higher priority)
   }
   return 0; // default = bracket order, no sort
 }
