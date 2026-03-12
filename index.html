@@ -299,7 +299,7 @@ body {
 
 <div id="topbar">
   <h1>EG FFA Tournament</h1>
-  <div class="meta">956 players &nbsp;·&nbsp; <span id="elo-count">—</span> elo loaded</div>
+  <div class="meta">956 players &nbsp;·&nbsp; <span id="elo-count">—</span> ranked players</div>
   <div id="elo-updated">—</div>
   <input id="search" type="text" placeholder="search..." oninput="onSearch(this.value)">
 </div>
@@ -725,7 +725,7 @@ function mkSlot(p, isBye) {
 }
 
 function countryFlag(code) {
-  if (!code) return '';
+  if (!code || typeof code !== 'string') return '';
   // Convert ISO 3166-1 alpha-2 to regional indicator emoji
   return code.toUpperCase().split('').map(c =>
     String.fromCodePoint(0x1F1E6 - 65 + c.charCodeAt(0))
@@ -754,7 +754,7 @@ function switchTab(id, btn) {
 
 function x(s) {
   if (!s) return '';
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 // ── PICKEMS ──────────────────────────────────────────────
@@ -835,23 +835,26 @@ function pkMakeSlot(player, matchId, isP1, isBye, isLocked, picks, onPick) {
     return div;
   }
 
-  const c = getCache(player.username);
-  const e = c?.eloRate ?? null;
-  const flag = c?.country ? countryFlag(c.country) : '';
+  const username = String(player.username ?? '');
+  const display  = String(player.display  ?? username);
+  const c  = getCache(username);
+  const e  = c?.eloRate ?? null;
+  const country = typeof c?.country === 'string' ? c.country : '';
+  const flag = country ? countryFlag(country) : '';
   const ec = eloClass(e);
-  const isPicked = picked === player.username;
+  const isPicked = picked === username;
 
   if (isLocked) div.classList.add('pk-locked');
   if (isPicked) div.classList.add('pk-picked');
 
   div.innerHTML = `
     <span class="s-flag">${flag}</span>
-    <span class="s-name">${x(player.display ?? player.username)}</span>
+    <span class="s-name">${x(display)}</span>
     ${e !== null ? `<span class="s-elo ${ec}">${e}</span>` : ''}
   `;
 
   if (!isLocked) {
-    div.onclick = () => onPick(matchId, player.username, isPicked);
+    div.onclick = () => onPick(matchId, username, isPicked);
   }
   return div;
 }
@@ -964,7 +967,7 @@ function buildPickems() {
     });
   }
 
-  try { render(); } catch(e) { console.error("pickems render error:", e); document.getElementById("pk-outer").innerHTML = '<p style="color:#c05a5a;padding:16px">Error rendering pickems: ' + e.message + '</p>'; }
+  try { render(); } catch(e) { console.error("pickems render error:", e); console.error("player data sample:", JSON.stringify(R1.slice(0,3))); document.getElementById("pk-outer").innerHTML = '<p style="color:#c05a5a;padding:16px">Error rendering pickems: ' + e.message + '</p>'; }
 }
 
 // Clear picks for any matches downstream of a given matchId
