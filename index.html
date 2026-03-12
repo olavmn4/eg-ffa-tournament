@@ -715,9 +715,9 @@ function rebuildBracket() {
         const a = document.createElement('div');
         const b = document.createElement('div');
         if (mi % 2 === 0) {
-          a.className = 'c-empty'; b.className = 'c-top';
+          a.className = 'c-top'; b.className = 'c-empty';
         } else {
-          a.className = 'c-bottom'; b.className = 'c-empty';
+          a.className = 'c-empty'; b.className = 'c-bottom';
         }
         conn.appendChild(a); conn.appendChild(b);
         row.appendChild(conn);
@@ -995,9 +995,9 @@ function buildPickems() {
           const a = document.createElement('div');
           const b = document.createElement('div');
           if (mi % 2 === 0) {
-            a.className = 'c-empty'; b.className = 'c-top';
+            a.className = 'c-top'; b.className = 'c-empty';
           } else {
-            a.className = 'c-bottom'; b.className = 'c-empty';
+            a.className = 'c-empty'; b.className = 'c-bottom';
           }
           conn.appendChild(a); conn.appendChild(b);
           row.appendChild(conn);
