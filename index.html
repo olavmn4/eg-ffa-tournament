@@ -289,12 +289,12 @@ body {
   <div id="v-list">
     <div class="list-controls">
       <label>sort:</label>
-      <button class="srt on" onclick="setSort('seed',this)">seed</button>
-      <button class="srt"    onclick="setSort('elo',this)">elo ↓</button>
-      <button class="srt"    onclick="setSort('name',this)">name</button>
+      <button class="srt on" onclick="setSort('elo',this)">elo ↓</button>
       <button class="srt"    onclick="setSort('winrate',this)">win rate ↓</button>
       <button class="srt"    onclick="setSort('besttime',this)">best time ↑</button>
       <button class="srt"    onclick="setSort('avgtime',this)">avg time ↑</button>
+      <button class="srt"    onclick="setSort('name',this)">name</button>
+      <button class="srt"    onclick="setSort('seed',this)">seed</button>
     </div>
     <div id="pgrid"></div>
   </div>
@@ -306,7 +306,6 @@ body {
       <button class="srt"    onclick="setBracketSort('avg_elo',this)">avg elo ↓</button>
       <button class="srt"    onclick="setBracketSort('discrepancy',this)">elo gap ↓</button>
       <button class="srt"    onclick="setBracketSort('top_elo',this)">top elo ↓</button>
-      <button class="srt"    onclick="setBracketSort('avg_time',this)">avg time ↑</button>
     </div>
     <div class="bk-outer" id="bk-outer"></div>
   </div>
@@ -417,7 +416,7 @@ function openMatchModal(u1, u2) {
 
     return `<div class="mc-col">
       <div class="mc-name"><span style="display:inline-block;width:1.4em;text-align:center">${flag || ''}</span>${x(c.nickname ?? '')}</div>
-      <div class="mc-meta">${c.country ? c.country.toUpperCase() : ''}&nbsp;</div>
+      
       <div class="mc-elo-row">
         <span class="mc-elo ${eloClass(c.eloRate)}">${c.eloRate ?? '—'}</span>
         ${c.eloRank ? `<span class="mc-rank">#${c.eloRank}</span>` : ''}
@@ -480,7 +479,7 @@ document.addEventListener('click', e => {
 });
 
 // ── LIST ──
-let sortMode = 'seed', searchQ = '', hlUser = null;
+let sortMode = 'elo', searchQ = '', hlUser = null;
 
 function renderList() {
   let list = PLAYERS.filter(p => {
