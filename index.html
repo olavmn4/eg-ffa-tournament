@@ -332,6 +332,8 @@ body {
   <button class="tab on" onclick="switchTab('list',this)">players</button>
   <button class="tab"    onclick="switchTab('bracket',this)">bracket</button>
   <button class="tab"    onclick="switchTab('pickems',this)">pickems</button>
+  <button class="tab"    onclick="switchTab('predict',this)">predictions</button>
+  <button class="tab"    onclick="switchTab('simulate',this)">simulate</button>
 </div>
 
 <div id="main">
@@ -368,6 +370,34 @@ body {
     <div id="pk-outer" style="overflow-x:auto;padding:16px 8px 24px;"></div>
   </div>
 
+</div>
+
+<div id="v-predict" style="display:none; overflow:auto; padding:16px;">
+  <div id="predict-controls" style="margin-bottom:14px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+    <button id="predict-run-btn" onclick="runPredictions()" style="background:#1e1e1e; border:1px solid #333; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:12px; padding:6px 14px; cursor:pointer;">run 10,000 simulations</button>
+    <span id="predict-status" style="color:#555; font-size:11px;"></span>
+    <label style="color:#666; font-size:11px; margin-left:auto;">variance:</label>
+    <select id="predict-variance" style="background:#1a1a1a; border:1px solid #2a2a2a; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 6px;">
+      <option value="0.15">low — favourites dominate</option>
+      <option value="0.30" selected>medium — realistic upsets</option>
+      <option value="0.55">high — total chaos</option>
+    </select>
+  </div>
+  <div id="predict-output"></div>
+</div>
+
+<div id="v-simulate" style="display:none; overflow:auto; padding:16px;">
+  <div style="margin-bottom:14px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+    <button onclick="runSimulation()" style="background:#1e1e1e; border:1px solid #333; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:12px; padding:6px 14px; cursor:pointer;">▶ run simulation</button>
+    <label style="color:#666; font-size:11px; margin-left:auto;">variance:</label>
+    <select id="sim-variance" style="background:#1a1a1a; border:1px solid #2a2a2a; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 6px;">
+      <option value="0.15">low</option>
+      <option value="0.30" selected>medium</option>
+      <option value="0.55">high</option>
+    </select>
+    <span id="sim-status" style="color:#555; font-size:11px;"></span>
+  </div>
+  <div id="sim-output"></div>
 </div>
 
 <div id="modal">
@@ -780,8 +810,11 @@ function switchTab(id, btn) {
   document.getElementById('v-list').style.display     = id==='list'    ? 'block' : 'none';
   document.getElementById('v-bracket').style.display  = id==='bracket' ? 'block' : 'none';
   document.getElementById('v-pickems').style.display  = id==='pickems' ? 'block' : 'none';
+  document.getElementById('v-predict').style.display  = id==='predict' ? 'block' : 'none';
+  document.getElementById('v-simulate').style.display = id==='simulate'? 'block' : 'none';
   if (id === 'bracket' && !bracketBuilt) buildBracket();
   if (id === 'pickems' && !pickemBuilt) buildPickems();
+  setViewHeights();
 }
 
 function x(s) {
@@ -1131,6 +1164,341 @@ function resetPickems() {
 renderList();
 loadElo();
   setViewHeights();
+
+// ── SIMULATION ENGINE ──
+
+const ROUNDS_LABELS = ['R1','R2','R3','R4','R5','R6','R7','R8','R9','Final','Winner'];
+const N_ROUNDS = 10;
+const NO_ELO_SCORE = 400; // heavy underdog baseline
+
+function playerScore(username) {
+  const c = getCache(username);
+  if (!c || c.eloRate == null) return NO_ELO_SCORE;
+  const s = c.statistics?.season || {};
+  const played = (s.wins || 0) + (s.loses || 0);
+  const winRate = played > 5 ? s.wins / played : 0.5;
+  const forfeitRate = played > 5 ? (s.forfeits || 0) / played : 0.1;
+  const compRate = played > 5 ? (s.completions || 0) / played : 0.5;
+  // Best time score: lower is better, normalize against ~5min (300000ms) baseline
+  const bestTime = s.bestTime ? Math.max(0, 1 - (s.bestTime / 480000)) : 0;
+  // Avg time score
+  const avgTime = (s.completionTime && s.completions)
+    ? Math.max(0, 1 - ((s.completionTime / s.completions) / 600000))
+    : 0;
+
+  // Weighted composite — ELO is king but other stats add signal
+  const score =
+    c.eloRate         * 0.50 +
+    winRate * 2000    * 0.20 +
+    compRate * 2000   * 0.10 +
+    bestTime * 2000   * 0.10 +
+    avgTime * 2000    * 0.05 +
+    (1 - forfeitRate) * 2000 * 0.05;
+
+  return score;
+}
+
+function matchWinProb(scoreA, scoreB, sigma) {
+  // Logistic function: prob A beats B
+  const diff = (scoreA - scoreB) / (sigma * 1000);
+  return 1 / (1 + Math.exp(-diff));
+}
+
+function simulateOnce(r1Matches, sigma) {
+  // Returns array of round winners per match slot, and overall champion
+  // Build round structure
+  let currentRound = r1Matches.map(m => {
+    if (m.isBye) return m.p1; // auto-advance
+    return null; // to be decided
+  });
+
+  const matchSlots = r1Matches.map(m => ({
+    p1: m.p1, p2: m.p2, isBye: m.isBye
+  }));
+
+  // Resolve R1
+  for (let i = 0; i < matchSlots.length; i++) {
+    const m = matchSlots[i];
+    if (m.isBye) { currentRound[i] = m.p1; continue; }
+    const sA = playerScore(m.p1.username);
+    const sB = playerScore(m.p2.username);
+    const pA = matchWinProb(sA, sB, sigma);
+    currentRound[i] = Math.random() < pA ? m.p1 : m.p2;
+  }
+
+  // Simulate subsequent rounds
+  for (let round = 1; round < N_ROUNDS; round++) {
+    const nextRound = [];
+    for (let i = 0; i < currentRound.length; i += 2) {
+      const p1 = currentRound[i];
+      const p2 = currentRound[i + 1];
+      if (!p1 && !p2) { nextRound.push(null); continue; }
+      if (!p1) { nextRound.push(p2); continue; }
+      if (!p2) { nextRound.push(p1); continue; }
+      const sA = playerScore(p1.username);
+      const sB = playerScore(p2.username);
+      const pA = matchWinProb(sA, sB, sigma);
+      nextRound.push(Math.random() < pA ? p1 : p2);
+    }
+    currentRound = nextRound;
+  }
+
+  return currentRound[0]; // champion
+}
+
+function simulateRoundReach(r1Matches, sigma, nSims) {
+  // Returns: { username -> [r1Pct, r2Pct, ..., winPct] }
+  // r1Pct = % of sims they reached R1 (always 100 for entered players)
+  // We track how far each player gets in each sim
+
+  const reached = {}; // username -> array of N_ROUNDS+1 counts
+  const players = [];
+  const seen = new Set();
+  for (const m of r1Matches) {
+    for (const p of [m.p1, m.p2]) {
+      if (p && !seen.has(p.username)) {
+        seen.add(p.username);
+        players.push(p);
+        reached[p.username] = new Array(N_ROUNDS + 1).fill(0);
+      }
+    }
+  }
+
+  for (let sim = 0; sim < nSims; sim++) {
+    // Resolve round by round, tracking who reaches each round
+    let currentRound = r1Matches.map(m => {
+      if (m.isBye) return m.p1;
+      return null;
+    });
+
+    // R1 — everyone who is in the bracket reaches R1
+    for (let i = 0; i < r1Matches.length; i++) {
+      const m = r1Matches[i];
+      if (m.isBye) {
+        reached[m.p1.username][0]++;
+        currentRound[i] = m.p1;
+      } else {
+        reached[m.p1.username][0]++;
+        reached[m.p2.username][0]++;
+        const sA = playerScore(m.p1.username);
+        const sB = playerScore(m.p2.username);
+        const pA = matchWinProb(sA, sB, sigma);
+        currentRound[i] = Math.random() < pA ? m.p1 : m.p2;
+      }
+    }
+
+    // R2 through Final
+    for (let round = 1; round < N_ROUNDS; round++) {
+      const nextRound = [];
+      for (let i = 0; i < currentRound.length; i += 2) {
+        const p1 = currentRound[i];
+        const p2 = currentRound[i + 1];
+        if (!p1 && !p2) { nextRound.push(null); continue; }
+        if (!p1) { reached[p2.username][round]++; nextRound.push(p2); continue; }
+        if (!p2) { reached[p1.username][round]++; nextRound.push(p1); continue; }
+        reached[p1.username][round]++;
+        reached[p2.username][round]++;
+        const sA = playerScore(p1.username);
+        const sB = playerScore(p2.username);
+        const pA = matchWinProb(sA, sB, sigma);
+        nextRound.push(Math.random() < pA ? p1 : p2);
+      }
+      currentRound = nextRound;
+    }
+
+    // Champion
+    if (currentRound[0]) reached[currentRound[0].username][N_ROUNDS]++;
+  }
+
+  // Convert counts to percentages
+  const result = {};
+  for (const p of players) {
+    result[p.username] = reached[p.username].map(c => Math.round(c / nSims * 100));
+    result[p.username]._display = p.display;
+    result[p.username]._seed = p.seed;
+  }
+  return result;
+}
+
+// ── PREDICTIONS TAB ──
+let predictResults = null;
+
+function runPredictions() {
+  const sigma = parseFloat(document.getElementById('predict-variance').value);
+  const btn = document.getElementById('predict-run-btn');
+  const status = document.getElementById('predict-status');
+  btn.disabled = true;
+  btn.textContent = 'running…';
+  status.textContent = '';
+
+  // Use setTimeout to let UI update before heavy computation
+  setTimeout(() => {
+    const t0 = performance.now();
+    predictResults = simulateRoundReach(R1, sigma, 10000);
+    const ms = Math.round(performance.now() - t0);
+    status.textContent = `completed in ${ms}ms`;
+    btn.disabled = false;
+    btn.textContent = 'run 10,000 simulations';
+    renderPredictions();
+  }, 30);
+}
+
+function renderPredictions() {
+  if (!predictResults) return;
+  const out = document.getElementById('predict-output');
+
+  // Sort players by win probability descending
+  const players = Object.entries(predictResults)
+    .map(([u, arr]) => ({ u, arr, winPct: arr[N_ROUNDS], seed: arr._seed || 0 }))
+    .sort((a, b) => b.winPct - a.winPct || b.arr[N_ROUNDS - 1] - a.arr[N_ROUNDS - 1]);
+
+  const roundLabels = ['R1','R2','R3','R4','R5','R6','R7','R8','R9','Final','Win'];
+
+  let html = `<div style="overflow-x:auto;">
+<table style="border-collapse:collapse; font-size:11px; width:100%; min-width:900px;">
+<thead>
+<tr style="border-bottom:1px solid #2a2a2a; color:#555;">
+  <th style="text-align:left; padding:6px 8px; font-weight:400; position:sticky; left:0; background:#111; z-index:1;">player</th>
+  <th style="text-align:right; padding:6px 4px; font-weight:400; color:#888;">elo</th>
+  ${roundLabels.map((r,i) => `<th style="text-align:center; padding:6px 6px; font-weight:400; min-width:44px;">${r}</th>`).join('')}
+</tr>
+</thead>
+<tbody>`;
+
+  for (const { u, arr } of players) {
+    const c = getCache(u);
+    const eloStr = c?.eloRate ? `<span class="${eloClass(c.eloRate)}">${c.eloRate}</span>` : '<span style="color:#333">—</span>';
+    const flag = c?.country ? countryFlag(c.country) : '';
+    const display = predictResults[u]._display || u;
+    html += `<tr style="border-bottom:1px solid #1a1a1a;" onmouseover="this.style.background='#161616'" onmouseout="this.style.background=''">
+  <td style="padding:5px 8px; white-space:nowrap; position:sticky; left:0; background:inherit; z-index:1;">${flag} <span style="color:#ccc">${x(display)}</span> <span style="color:#444; font-size:10px;">#${predictResults[u]._seed}</span></td>
+  <td style="text-align:right; padding:5px 4px;">${eloStr}</td>
+  ${arr.map((pct, i) => {
+    if (pct === 0) return `<td style="text-align:center; padding:5px 6px; color:#2a2a2a;">—</td>`;
+    const intensity = Math.min(pct / 80, 1);
+    const g = Math.round(40 + intensity * 80);
+    const color = i === N_ROUNDS ? '#f5c842' : `rgb(30,${g+20},30)`;
+    const textColor = i === N_ROUNDS ? '#f5c842' : pct > 40 ? '#7dcc7d' : pct > 15 ? '#5a9a5a' : '#3a6a3a';
+    return `<td style="text-align:center; padding:5px 6px; background:${color}22; color:${textColor}; font-weight:${pct>50?'500':'400'};">${pct}%</td>`;
+  }).join('')}
+</tr>`;
+  }
+
+  html += `</tbody></table></div>`;
+  out.innerHTML = html;
+}
+
+// ── SIMULATE TAB ──
+function runSimulation() {
+  const sigma = parseFloat(document.getElementById('sim-variance').value);
+  const status = document.getElementById('sim-status');
+  status.textContent = 'simulating…';
+
+  setTimeout(() => {
+    const result = simulateSingleTournament(R1, sigma);
+    status.textContent = '';
+    renderSimulation(result);
+  }, 20);
+}
+
+function simulateSingleTournament(r1Matches, sigma) {
+  // Returns array of rounds: each round is array of {p1, p2, winner}
+  const rounds = [];
+  let currentRound = r1Matches.map(m => ({
+    p1: m.p1, p2: m.p2, isBye: m.isBye, winner: null
+  }));
+
+  // Resolve each round
+  for (let round = 0; round < N_ROUNDS; round++) {
+    const resolved = [];
+    for (const m of currentRound) {
+      if (!m.p1 && !m.p2) { resolved.push({...m, winner: null}); continue; }
+      if (m.isBye || !m.p2) { resolved.push({...m, winner: m.p1}); continue; }
+      if (!m.p1) { resolved.push({...m, winner: m.p2}); continue; }
+      const sA = playerScore(m.p1.username);
+      const sB = playerScore(m.p2.username);
+      const pA = matchWinProb(sA, sB, sigma);
+      resolved.push({...m, winner: Math.random() < pA ? m.p1 : m.p2, pA: Math.round(pA*100)});
+    }
+    rounds.push(resolved);
+
+    // Build next round pairings
+    if (round < N_ROUNDS - 1) {
+      const next = [];
+      for (let i = 0; i < resolved.length; i += 2) {
+        next.push({ p1: resolved[i].winner, p2: resolved[i+1]?.winner || null, isBye: false });
+      }
+      currentRound = next;
+    }
+  }
+  return rounds;
+}
+
+function renderSimulation(rounds) {
+  const out = document.getElementById('sim-output');
+  const champion = rounds[N_ROUNDS - 1][0]?.winner;
+
+  let html = '';
+
+  // Champion banner
+  if (champion) {
+    const c = getCache(champion.username);
+    const flag = c?.country ? countryFlag(c.country) : '';
+    const eloStr = c?.eloRate ? `<span class="${eloClass(c.eloRate)}">${c.eloRate}</span>` : '';
+    html += `<div style="margin-bottom:20px; padding:12px 16px; border:1px solid #3a3a1a; background:#1a1a0a; display:inline-block; min-width:260px;">
+  <div style="color:#555; font-size:10px; margin-bottom:4px;">tournament champion</div>
+  <div style="font-size:16px; color:#f5c842;">${flag} ${x(champion.display || champion.username)} ${eloStr}</div>
+</div>`;
+  }
+
+  // Show each round collapsibly — just top matches (upsets + finalists)
+  const roundNames = ['Round 1','Round 2','Round 3','Round 4','Round 5','Round 6','Round 7','Round 8','Round 9','Final'];
+
+  for (let r = 0; r < rounds.length; r++) {
+    const rMatches = rounds[r].filter(m => m.p1 && m.p2 && !m.isBye && m.winner);
+    if (rMatches.length === 0) continue;
+
+    // Find upsets: winner had lower win prob
+    const upsets = rMatches.filter(m => m.pA !== undefined && ((m.winner === m.p1 && m.pA < 40) || (m.winner === m.p2 && m.pA >= 60)));
+
+    html += `<div style="margin-bottom:16px;">
+<div style="color:#555; font-size:10px; letter-spacing:.08em; margin-bottom:6px; padding-bottom:4px; border-bottom:1px solid #1e1e1e;">
+  ${roundNames[r] || 'Round '+(r+1)} &nbsp;·&nbsp; ${rMatches.length} matches`;
+    if (upsets.length) html += ` &nbsp;·&nbsp; <span style="color:#c07a3a">${upsets.length} upset${upsets.length>1?'s':''}</span>`;
+    html += `</div><div style="display:flex; flex-wrap:wrap; gap:4px;">`;
+
+    // For R1 just show upsets + a count. For later rounds show all.
+    const toShow = r === 0 ? upsets : rMatches;
+    if (r === 0 && upsets.length === 0) {
+      html += `<div style="color:#333; font-size:11px;">no upsets — favourites won all matches</div>`;
+    }
+
+    for (const m of toShow) {
+      const isUpset = m.pA !== undefined && ((m.winner === m.p1 && m.pA < 40) || (m.winner === m.p2 && m.pA >= 60));
+      const loser = m.winner === m.p1 ? m.p2 : m.p1;
+      const winnerC = getCache(m.winner.username);
+      const loserC = getCache(loser?.username);
+      const wFlag = winnerC?.country ? countryFlag(winnerC.country) : '';
+      const lFlag = loserC?.country ? countryFlag(loserC.country) : '';
+      const favPct = m.winner === m.p1 ? m.pA : (100 - m.pA);
+      html += `<div style="background:#161616; border:1px solid ${isUpset?'#5a3a1a':'#1e1e1e'}; padding:5px 8px; font-size:11px; min-width:200px; max-width:280px; flex:1;">
+  <div style="color:#ccc;">${wFlag} <b style="color:${isUpset?'#c07a3a':'#7dcc7d'}">${x(m.winner.display||m.winner.username)}</b> <span style="color:#444; font-size:10px;">${favPct != null ? favPct+'% fav' : ''}</span></div>
+  <div style="color:#444; font-size:10px; margin-top:2px;">def. ${lFlag} ${x(loser?.display||loser?.username)}</div>
+</div>`;
+    }
+
+    if (r === 0 && rMatches.length > upsets.length) {
+      const favouriteWins = rMatches.length - upsets.length;
+      html += `<div style="color:#2a2a2a; font-size:11px; align-self:center; padding:4px 8px;">+${favouriteWins} favourite wins</div>`;
+    }
+
+    html += `</div></div>`;
+  }
+
+  out.innerHTML = html;
+}
+
+
 </script>
 </body>
 </html>
