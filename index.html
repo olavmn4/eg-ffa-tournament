@@ -386,18 +386,23 @@ body {
   <div id="predict-output"></div>
 </div>
 
-<div id="v-simulate" style="display:none; overflow:auto; padding:16px;">
-  <div style="margin-bottom:14px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-    <button onclick="runSimulation()" style="background:#1e1e1e; border:1px solid #333; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:12px; padding:6px 14px; cursor:pointer;">▶ run simulation</button>
-    <label style="color:#666; font-size:11px; margin-left:auto;">variance:</label>
+<div id="v-simulate" style="display:none; overflow:hidden; display:none; flex-direction:column;">
+  <div id="sim-topbar" style="padding:8px 16px; border-bottom:1px solid #1e1e1e; display:flex; align-items:center; gap:12px; flex-shrink:0; flex-wrap:wrap;">
+    <button onclick="runSimulation()" style="background:#1e1e1e; border:1px solid #333; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:12px; padding:5px 14px; cursor:pointer;">▶ run simulation</button>
+    <label style="color:#555; font-size:11px;">variance:</label>
     <select id="sim-variance" style="background:#1a1a1a; border:1px solid #2a2a2a; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 6px;">
-      <option value="0.15">low</option>
-      <option value="0.30" selected>medium</option>
-      <option value="0.55">high</option>
+      <option value="0.15">low — favourites dominate</option>
+      <option value="0.30" selected>medium — realistic upsets</option>
+      <option value="0.55">high — total chaos</option>
     </select>
-    <span id="sim-status" style="color:#555; font-size:11px;"></span>
+    <span id="sim-champion" style="color:#f5c842; font-size:12px; margin-left:8px;"></span>
+    <span id="sim-upsets" style="color:#c07a3a; font-size:11px;"></span>
+    <span id="sim-status" style="color:#555; font-size:11px; margin-left:auto;"></span>
   </div>
-  <div id="sim-output"></div>
+  <div id="sim-bracket-wrap" style="overflow:auto; flex:1; padding:16px;">
+    <div id="sim-placeholder" style="color:#333; font-size:12px; padding:40px 0;">click "run simulation" to generate a bracket</div>
+    <div id="sim-bk-outer" class="bk-outer" style="display:none;"></div>
+  </div>
 </div>
 
 <div id="modal">
@@ -802,6 +807,8 @@ function setViewHeights() {
   document.getElementById('v-bracket').style.maxHeight = h;
   document.getElementById('v-pickems').style.maxHeight = h;
   document.getElementById('v-list').style.maxHeight = h;
+  document.getElementById('v-predict').style.maxHeight = h;
+  document.getElementById('v-simulate').style.maxHeight = h;
 }
 
 function switchTab(id, btn) {
@@ -811,7 +818,7 @@ function switchTab(id, btn) {
   document.getElementById('v-bracket').style.display  = id==='bracket' ? 'block' : 'none';
   document.getElementById('v-pickems').style.display  = id==='pickems' ? 'block' : 'none';
   document.getElementById('v-predict').style.display  = id==='predict' ? 'block' : 'none';
-  document.getElementById('v-simulate').style.display = id==='simulate'? 'block' : 'none';
+  document.getElementById('v-simulate').style.display = id==='simulate'? 'flex' : 'none';
   if (id === 'bracket' && !bracketBuilt) buildBracket();
   if (id === 'pickems' && !pickemBuilt) buildPickems();
   setViewHeights();
@@ -1389,114 +1396,161 @@ function renderPredictions() {
 }
 
 // ── SIMULATE TAB ──
+// Stores sim results as rounds of {p1, p2, winner, pA, isBye}
+let simRounds = null;
+
 function runSimulation() {
   const sigma = parseFloat(document.getElementById('sim-variance').value);
   const status = document.getElementById('sim-status');
   status.textContent = 'simulating…';
-
   setTimeout(() => {
-    const result = simulateSingleTournament(R1, sigma);
+    simRounds = simulateSingleTournament(R1, sigma);
     status.textContent = '';
-    renderSimulation(result);
+    renderSimBracket(simRounds);
   }, 20);
 }
 
 function simulateSingleTournament(r1Matches, sigma) {
-  // Returns array of rounds: each round is array of {p1, p2, winner}
-  const rounds = [];
-  let currentRound = r1Matches.map(m => ({
-    p1: m.p1, p2: m.p2, isBye: m.isBye, winner: null
-  }));
+  // Round 0: resolve R1
+  const r0 = r1Matches.map(m => {
+    if (m.isBye || !m.p2) return { p1: m.p1, p2: m.p2, winner: m.p1, pA: 100, isBye: true };
+    const sA = playerScore(m.p1.username);
+    const sB = playerScore(m.p2.username);
+    const pA = matchWinProb(sA, sB, sigma);
+    const winner = Math.random() < pA ? m.p1 : m.p2;
+    return { p1: m.p1, p2: m.p2, winner, pA: Math.round(pA * 100), isBye: false };
+  });
 
-  // Resolve each round
-  for (let round = 0; round < N_ROUNDS; round++) {
-    const resolved = [];
-    for (const m of currentRound) {
-      if (!m.p1 && !m.p2) { resolved.push({...m, winner: null}); continue; }
-      if (m.isBye || !m.p2) { resolved.push({...m, winner: m.p1}); continue; }
-      if (!m.p1) { resolved.push({...m, winner: m.p2}); continue; }
-      const sA = playerScore(m.p1.username);
-      const sB = playerScore(m.p2.username);
+  const rounds = [r0];
+  for (let r = 1; r < N_ROUNDS; r++) {
+    const prev = rounds[r - 1];
+    const cur = [];
+    for (let i = 0; i < prev.length; i += 2) {
+      const p1 = prev[i]?.winner ?? null;
+      const p2 = prev[i + 1]?.winner ?? null;
+      if (!p1 && !p2) { cur.push({ p1, p2, winner: null, pA: 50, isBye: false }); continue; }
+      if (!p2) { cur.push({ p1, p2, winner: p1, pA: 100, isBye: true }); continue; }
+      if (!p1) { cur.push({ p1, p2, winner: p2, pA: 0, isBye: true }); continue; }
+      const sA = playerScore(p1.username);
+      const sB = playerScore(p2.username);
       const pA = matchWinProb(sA, sB, sigma);
-      resolved.push({...m, winner: Math.random() < pA ? m.p1 : m.p2, pA: Math.round(pA*100)});
+      const winner = Math.random() < pA ? p1 : p2;
+      cur.push({ p1, p2, winner, pA: Math.round(pA * 100), isBye: false });
     }
-    rounds.push(resolved);
-
-    // Build next round pairings
-    if (round < N_ROUNDS - 1) {
-      const next = [];
-      for (let i = 0; i < resolved.length; i += 2) {
-        next.push({ p1: resolved[i].winner, p2: resolved[i+1]?.winner || null, isBye: false });
-      }
-      currentRound = next;
-    }
+    rounds.push(cur);
   }
   return rounds;
 }
 
-function renderSimulation(rounds) {
-  const out = document.getElementById('sim-output');
+function renderSimBracket(rounds) {
+  // Update header info
   const champion = rounds[N_ROUNDS - 1][0]?.winner;
-
-  let html = '';
-
-  // Champion banner
+  const champEl = document.getElementById('sim-champion');
   if (champion) {
     const c = getCache(champion.username);
     const flag = c?.country ? countryFlag(c.country) : '';
-    const eloStr = c?.eloRate ? `<span class="${eloClass(c.eloRate)}">${c.eloRate}</span>` : '';
-    html += `<div style="margin-bottom:20px; padding:12px 16px; border:1px solid #3a3a1a; background:#1a1a0a; display:inline-block; min-width:260px;">
-  <div style="color:#555; font-size:10px; margin-bottom:4px;">tournament champion</div>
-  <div style="font-size:16px; color:#f5c842;">${flag} ${x(champion.display || champion.username)} ${eloStr}</div>
-</div>`;
+    const eStr = c?.eloRate ? ` · <span class="${eloClass(c.eloRate)}">${c.eloRate}</span>` : '';
+    champEl.innerHTML = `🏆 ${flag} ${x(champion.display || champion.username)}${eStr}`;
   }
 
-  // Show each round collapsibly — just top matches (upsets + finalists)
-  const roundNames = ['Round 1','Round 2','Round 3','Round 4','Round 5','Round 6','Round 7','Round 8','Round 9','Final'];
-
-  for (let r = 0; r < rounds.length; r++) {
-    const rMatches = rounds[r].filter(m => m.p1 && m.p2 && !m.isBye && m.winner);
-    if (rMatches.length === 0) continue;
-
-    // Find upsets: winner had lower win prob
-    const upsets = rMatches.filter(m => m.pA !== undefined && ((m.winner === m.p1 && m.pA < 40) || (m.winner === m.p2 && m.pA >= 60)));
-
-    html += `<div style="margin-bottom:16px;">
-<div style="color:#555; font-size:10px; letter-spacing:.08em; margin-bottom:6px; padding-bottom:4px; border-bottom:1px solid #1e1e1e;">
-  ${roundNames[r] || 'Round '+(r+1)} &nbsp;·&nbsp; ${rMatches.length} matches`;
-    if (upsets.length) html += ` &nbsp;·&nbsp; <span style="color:#c07a3a">${upsets.length} upset${upsets.length>1?'s':''}</span>`;
-    html += `</div><div style="display:flex; flex-wrap:wrap; gap:4px;">`;
-
-    // For R1 just show upsets + a count. For later rounds show all.
-    const toShow = r === 0 ? upsets : rMatches;
-    if (r === 0 && upsets.length === 0) {
-      html += `<div style="color:#333; font-size:11px;">no upsets — favourites won all matches</div>`;
+  // Count upsets across all rounds
+  let upsetCount = 0;
+  for (const rnd of rounds) {
+    for (const m of rnd) {
+      if (!m.isBye && m.winner && m.p1 && m.p2) {
+        const isUpset = (m.winner === m.p1 && m.pA < 40) || (m.winner === m.p2 && m.pA >= 60);
+        if (isUpset) upsetCount++;
+      }
     }
-
-    for (const m of toShow) {
-      const isUpset = m.pA !== undefined && ((m.winner === m.p1 && m.pA < 40) || (m.winner === m.p2 && m.pA >= 60));
-      const loser = m.winner === m.p1 ? m.p2 : m.p1;
-      const winnerC = getCache(m.winner.username);
-      const loserC = getCache(loser?.username);
-      const wFlag = winnerC?.country ? countryFlag(winnerC.country) : '';
-      const lFlag = loserC?.country ? countryFlag(loserC.country) : '';
-      const favPct = m.winner === m.p1 ? m.pA : (100 - m.pA);
-      html += `<div style="background:#161616; border:1px solid ${isUpset?'#5a3a1a':'#1e1e1e'}; padding:5px 8px; font-size:11px; min-width:200px; max-width:280px; flex:1;">
-  <div style="color:#ccc;">${wFlag} <b style="color:${isUpset?'#c07a3a':'#7dcc7d'}">${x(m.winner.display||m.winner.username)}</b> <span style="color:#444; font-size:10px;">${favPct != null ? favPct+'% fav' : ''}</span></div>
-  <div style="color:#444; font-size:10px; margin-top:2px;">def. ${lFlag} ${x(loser?.display||loser?.username)}</div>
-</div>`;
-    }
-
-    if (r === 0 && rMatches.length > upsets.length) {
-      const favouriteWins = rMatches.length - upsets.length;
-      html += `<div style="color:#2a2a2a; font-size:11px; align-self:center; padding:4px 8px;">+${favouriteWins} favourite wins</div>`;
-    }
-
-    html += `</div></div>`;
   }
+  document.getElementById('sim-upsets').textContent = upsetCount ? `${upsetCount} upsets` : '';
 
-  out.innerHTML = html;
+  // Build bracket DOM using same structure as rebuildBracket
+  const outer = document.getElementById('sim-bk-outer');
+  outer.innerHTML = '';
+  outer.style.display = '';
+  document.getElementById('sim-placeholder').style.display = 'none';
+
+  const names = ['R1','R2','R3','R4','R5','R6','R7','R8','Semi','Final'];
+  const SLOT_H = 58;
+
+  rounds.forEach((matches, ri) => {
+    const col = document.createElement('div');
+    col.className = 'bk-col';
+
+    const hd = document.createElement('div');
+    hd.className = 'bk-col-hd';
+    hd.textContent = names[ri] ?? 'R' + (ri + 1);
+    col.appendChild(hd);
+
+    const body = document.createElement('div');
+    body.className = 'bk-col-body';
+    const matchH = Math.pow(2, ri) * SLOT_H;
+
+    matches.forEach((m, mi) => {
+      const row = document.createElement('div');
+      row.className = 'bk-row';
+      row.style.height = matchH + 'px';
+
+      const card = document.createElement('div');
+      card.className = 'bk-match';
+
+      // Determine if this is an upset
+      const isUpset = !m.isBye && m.winner && m.p1 && m.p2 &&
+        ((m.winner === m.p1 && m.pA < 40) || (m.winner === m.p2 && m.pA >= 60));
+      if (isUpset) card.style.borderColor = '#5a3a1a';
+
+      // Winner gets a subtle highlight in their slot
+      card.appendChild(mkSimSlot(m.p1, m.winner === m.p1 && !m.isBye, isUpset && m.winner === m.p1));
+      card.appendChild(mkSimSlot(m.p2, m.winner === m.p2 && !m.isBye, isUpset && m.winner === m.p2));
+
+      // Click to show win prob tooltip
+      if (!m.isBye && m.p1 && m.p2) {
+        card.style.cursor = 'pointer';
+        card.title = `${m.p1.display || m.p1.username} ${m.pA}% · ${m.p2.display || m.p2.username} ${100 - m.pA}%`;
+        card.onclick = () => openMatchModal(m.p1.username, m.p2.username);
+      }
+
+      row.appendChild(card);
+
+      if (ri < rounds.length - 1) {
+        const conn = document.createElement('div');
+        conn.className = 'bk-conn';
+        const a = document.createElement('div');
+        const b = document.createElement('div');
+        if (mi % 2 === 0) { a.className = 'c-empty'; b.className = 'c-bottom'; }
+        else               { a.className = 'c-top';   b.className = 'c-empty'; }
+        conn.appendChild(a); conn.appendChild(b);
+        row.appendChild(conn);
+      }
+
+      body.appendChild(row);
+    });
+
+    col.appendChild(body);
+    outer.appendChild(col);
+  });
 }
+
+function mkSimSlot(p, isWinner, isUpset) {
+  const div = document.createElement('div');
+  div.className = 'bk-slot';
+  if (!p) {
+    div.innerHTML = `<span class="s-seed"></span><span class="s-name tbd">—</span>`;
+    return div;
+  }
+  if (isWinner)  div.style.background = isUpset ? '#1a1200' : '#0d1a0d';
+  if (!isWinner && p) div.style.opacity = '0.45';
+
+  const c = getCache(p.username);
+  const e = c?.eloRate ?? null;
+  const rank = c?.eloRank ?? null;
+  const flag = c?.country ? countryFlag(c.country) : '';
+  const rankStr = rank ? '#' + rank : '';
+  div.innerHTML = `<span class="s-seed">${rankStr}</span>${flag ? `<span class="s-flag">${flag}</span>` : ''}<span class="s-name">${x(p.username)}</span>${e !== null ? `<span class="s-elo ${eloClass(e)}">${e}</span>` : ''}`;
+  return div;
+}
+
 
 
 </script>
