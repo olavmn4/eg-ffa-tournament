@@ -400,11 +400,12 @@ body {
   <div id="predict-controls" style="margin-bottom:14px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
     <button id="predict-run-btn" onclick="runPredictions()" style="background:#1e1e1e; border:1px solid #333; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:12px; padding:6px 14px; cursor:pointer;">run 10,000 simulations</button>
     <span id="predict-status" style="color:#555; font-size:11px;"></span>
+    <button onclick="document.getElementById('info-modal').style.display='flex'" style="background:none; border:1px solid #2a2a2a; color:#555; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:4px 10px; cursor:pointer; margin-left:4px;">how it works</button>
     <label style="color:#666; font-size:11px; margin-left:auto;">variance:</label>
     <select id="predict-variance" style="background:#1a1a1a; border:1px solid #2a2a2a; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 6px;">
       <option value="0.15">low — favourites dominate</option>
       <option value="0.30" selected>medium — realistic upsets</option>
-      <option value="0.55">high — total chaos</option>
+      <option value="0.55">high — erratic results</option>
     </select>
   </div>
   <div id="predict-output"></div>
@@ -417,10 +418,11 @@ body {
     <select id="sim-variance" style="background:#1a1a1a; border:1px solid #2a2a2a; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 6px;">
       <option value="0.15">low — favourites dominate</option>
       <option value="0.30" selected>medium — realistic upsets</option>
-      <option value="0.55">high — total chaos</option>
+      <option value="0.55">high — erratic results</option>
     </select>
     <span id="sim-champion" style="color:#f5c842; font-size:12px; margin-left:8px;"></span>
     <span id="sim-upsets" style="color:#c07a3a; font-size:11px;"></span>
+    <button onclick="document.getElementById('info-modal').style.display='flex'" style="background:none; border:1px solid #2a2a2a; color:#555; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:4px 10px; cursor:pointer; margin-left:4px;">how it works</button>
     <span id="sim-status" style="color:#555; font-size:11px; margin-left:auto;"></span>
   </div>
   <div id="sim-bracket-wrap" style="overflow:auto; flex:1; padding:16px;">
@@ -1344,7 +1346,7 @@ function simulateRoundReach(r1Matches, sigma, nSims) {
   // Convert counts to percentages
   const result = {};
   for (const p of players) {
-    result[p.username] = reached[p.username].map(c => Math.round(c / nSims * 100));
+    result[p.username] = reached[p.username].map(c => Math.round(c / nSims * 1000) / 10);
     result[p.username]._display = p.display;
     result[p.username]._seed = p.seed;
   }
@@ -1378,46 +1380,92 @@ function renderPredictions() {
   if (!predictResults) return;
   const out = document.getElementById('predict-output');
 
-  // Sort players by win probability descending
+  // Sort column: null = default (win%), or index into arr (0-based, skipping R1)
+  const sortCol = window.predictSortCol ?? N_ROUNDS;
+
   const players = Object.entries(predictResults)
     .map(([u, arr]) => ({ u, arr, winPct: arr[N_ROUNDS], seed: arr._seed || 0 }))
-    .sort((a, b) => b.winPct - a.winPct || b.arr[N_ROUNDS - 1] - a.arr[N_ROUNDS - 1]);
+    .sort((a, b) => (b.arr[sortCol] ?? 0) - (a.arr[sortCol] ?? 0)
+                 || (b.arr[N_ROUNDS] ?? 0) - (a.arr[N_ROUNDS] ?? 0));
 
-  const roundLabels = ['R1','R2','R3','R4','R5','R6','R7','R8','R9','Final','Win'];
+  // Skip R1 (index 0) — everyone is 100%
+  // Round indices 1..N_ROUNDS correspond to R2..Win
+  const roundLabels = ['R2','R3','R4','R5','R6','R7','R8','R9','Final','Win'];
+  const arrOffset = 1; // predictResults arr[0]=R1, arr[1]=R2, etc.
 
-  let html = `<div style="overflow-x:auto;">
+  // Find max pct per column for scaling (using 1-based indices into arr)
+  const colMax = roundLabels.map((_, ci) => {
+    const ai = ci + arrOffset;
+    return Math.max(...players.map(p => p.arr[ai] || 0));
+  });
+
+  function thStyle(ci) {
+    const ai = ci + arrOffset;
+    const active = sortCol === ai;
+    return `text-align:center; padding:6px 10px; font-weight:400; color:${active?'#aaa':'#444'}; min-width:70px; letter-spacing:.04em; cursor:pointer; user-select:none;`;
+  }
+
+  let h = `<div style="overflow-x:auto;">
 <table style="border-collapse:collapse; font-size:11px; width:100%; min-width:900px;">
 <thead>
-<tr style="border-bottom:1px solid #2a2a2a; color:#555;">
-  <th style="text-align:left; padding:6px 8px; font-weight:400; position:sticky; left:0; background:#111; z-index:1;">player</th>
-  <th style="text-align:right; padding:6px 4px; font-weight:400; color:#888;">elo</th>
-  ${roundLabels.map((r,i) => `<th style="text-align:center; padding:6px 6px; font-weight:400; min-width:44px;">${r}</th>`).join('')}
+<tr style="border-bottom:1px solid #2a2a2a;">
+  <th style="text-align:left; padding:6px 8px; font-weight:400; color:#444; position:sticky; left:0; background:#111; z-index:1; min-width:160px;">player</th>
+  <th style="text-align:right; padding:6px 8px; font-weight:400; color:#444; min-width:50px;">elo</th>
+  ${roundLabels.map((r, ci) => {
+    const ai = ci + arrOffset;
+    const active = sortCol === ai;
+    const isWin = ci === roundLabels.length - 1;
+    return `<th style="${thStyle(ci)}" onclick="window.predictSortCol=${ai}; renderPredictions();">${r}${active ? ' ▾' : ''}</th>`;
+  }).join('')}
 </tr>
 </thead>
 <tbody>`;
 
   for (const { u, arr } of players) {
     const c = getCache(u);
-    const eloStr = c?.eloRate ? `<span class="${eloClass(c.eloRate)}">${c.eloRate}</span>` : '<span style="color:#333">—</span>';
+    const eloStr = c?.eloRate
+      ? `<span class="${eloClass(c.eloRate)}">${c.eloRate}</span>`
+      : '<span style="color:#2a2a2a">—</span>';
     const flag = c?.country ? countryFlag(c.country) : '';
     const display = predictResults[u]._display || u;
-    html += `<tr style="border-bottom:1px solid #1a1a1a;" onmouseover="this.style.background='#161616'" onmouseout="this.style.background=''">
-  <td style="padding:5px 8px; white-space:nowrap; position:sticky; left:0; background:inherit; z-index:1;">${flag} <span style="color:#ccc">${x(display)}</span> <span style="color:#444; font-size:10px;">#${predictResults[u]._seed}</span></td>
-  <td style="text-align:right; padding:5px 4px;">${eloStr}</td>
-  ${arr.map((pct, i) => {
-    if (pct === 0) return `<td style="text-align:center; padding:5px 6px; color:#2a2a2a;">—</td>`;
-    const intensity = Math.min(pct / 80, 1);
-    const g = Math.round(40 + intensity * 80);
-    const color = i === N_ROUNDS ? '#f5c842' : `rgb(30,${g+20},30)`;
-    const textColor = i === N_ROUNDS ? '#f5c842' : pct > 40 ? '#7dcc7d' : pct > 15 ? '#5a9a5a' : '#3a6a3a';
-    return `<td style="text-align:center; padding:5px 6px; background:${color}22; color:${textColor}; font-weight:${pct>50?'500':'400'};">${pct}%</td>`;
+
+    h += `<tr style="border-bottom:1px solid #181818;" onmouseover="this.style.background='#151515'" onmouseout="this.style.background=''">
+  <td style="padding:4px 8px; white-space:nowrap; position:sticky; left:0; background:inherit; z-index:1;">
+    ${flag ? `<span style="margin-right:4px">${flag}</span>` : ''}<span style="color:#bbb;">${x(display)}</span><span style="color:#333; font-size:10px; margin-left:6px;">#${predictResults[u]._seed}</span>
+  </td>
+  <td style="text-align:right; padding:4px 8px;">${eloStr}</td>
+  ${roundLabels.map((r, ci) => {
+    const ai = ci + arrOffset;
+    const pct = arr[ai] ?? 0;
+    const isWin = ci === roundLabels.length - 1;
+    if (pct === 0) return `<td style="text-align:center; padding:4px 10px; color:#252525;">—</td>`;
+    const ratio = colMax[ci] > 0 ? pct / colMax[ci] : 0;
+
+    let rv, gv, bv;
+    if (isWin)      { rv=180; gv=140; bv=20; }
+    else if (ci>=7) { rv=20;  gv=130; bv=160; }
+    else            { rv=20;  gv=110; bv=140; }
+
+    const bgAlpha  = (0.08 + ratio * 0.45).toFixed(2);
+    const txtAlpha = (0.45 + ratio * 0.55).toFixed(2);
+    const bgColor   = `rgba(${rv},${gv},${bv},${bgAlpha})`;
+    const textColor = isWin
+      ? `rgba(220,175,40,${txtAlpha})`
+      : `rgba(60,185,210,${txtAlpha})`;
+
+    // Show one decimal place
+    const display2 = pct % 1 === 0 ? pct + '.0%' : pct.toFixed(1) + '%';
+    return `<td style="text-align:center; padding:0;">
+      <div style="margin:2px 3px; padding:3px 6px; background:${bgColor}; color:${textColor}; font-weight:${pct>30?'500':'400'}; border-radius:2px; white-space:nowrap;">${display2}</div>
+    </td>`;
   }).join('')}
 </tr>`;
   }
 
-  html += `</tbody></table></div>`;
-  out.innerHTML = html;
+  h += `</tbody></table></div>`;
+  out.innerHTML = h;
 }
+
 
 // ── SIMULATE TAB ──
 // Stores sim results as rounds of {p1, p2, winner, pA, isBye}
@@ -1600,5 +1648,34 @@ function mkSimSlot(p, isWinner, isUpset) {
 
 
 </script>
+
+<div id="info-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:1000; align-items:center; justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#141414; border:1px solid #2a2a2a; max-width:560px; width:90%; max-height:80vh; overflow-y:auto; padding:24px 28px; font-size:12px; line-height:1.7; color:#999; position:relative;">
+    <button onclick="document.getElementById('info-modal').style.display='none'" style="position:absolute; top:12px; right:14px; background:none; border:none; color:#444; font-size:16px; cursor:pointer; font-family:'IBM Plex Mono',monospace;">✕</button>
+
+    <div style="color:#ccc; font-size:13px; font-weight:500; margin-bottom:16px; letter-spacing:.04em;">how predictions & simulation work</div>
+
+    <div style="color:#666; font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">player score</div>
+    <p style="margin:0 0 14px;">Each player is assigned a composite score built from their live ranked stats. ELO is the dominant signal — it captures overall skill — but the model also rewards consistency, mental fortitude, and raw speed:</p>
+    <table style="width:100%; border-collapse:collapse; margin-bottom:16px; font-size:11px;">
+      <tr style="border-bottom:1px solid #1e1e1e;"><td style="padding:4px 0; color:#bbb;">ELO rating</td><td style="text-align:right; color:#5bc8e8;">50%</td></tr>
+      <tr style="border-bottom:1px solid #1e1e1e;"><td style="padding:4px 0; color:#bbb;">Win rate</td><td style="text-align:right; color:#5bc8e8;">20%</td></tr>
+      <tr style="border-bottom:1px solid #1e1e1e;"><td style="padding:4px 0; color:#bbb;">Completion rate (non-forfeit)</td><td style="text-align:right; color:#5bc8e8;">10%</td></tr>
+      <tr style="border-bottom:1px solid #1e1e1e;"><td style="padding:4px 0; color:#bbb;">Best time (normalised)</td><td style="text-align:right; color:#5bc8e8;">10%</td></tr>
+      <tr style="border-bottom:1px solid #1e1e1e;"><td style="padding:4px 0; color:#bbb;">Average completion time</td><td style="text-align:right; color:#5bc8e8;">5%</td></tr>
+      <tr><td style="padding:4px 0; color:#bbb;">Low forfeit rate</td><td style="text-align:right; color:#5bc8e8;">5%</td></tr>
+    </table>
+    <p style="margin:0 0 14px; color:#555; font-size:11px;">Players with no ELO data are treated as heavy underdogs with a baseline score of 400, equivalent to a low-coal ranked player.</p>
+
+    <div style="color:#666; font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px; margin-top:4px;">match outcome</div>
+    <p style="margin:0 0 14px;">For each match, the win probability is calculated using a logistic (sigmoid) function on the score difference between the two players. The <b style="color:#bbb;">variance</b> setting controls the spread — low variance means the higher-scored player wins almost every time; high variance introduces more upsets by flattening the probability curve.</p>
+
+    <div style="color:#666; font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px; margin-top:4px;">predictions</div>
+    <p style="margin:0 0 14px;">The predictions tab runs <b style="color:#bbb;">10,000 full tournament simulations</b>. In each one, every match is resolved probabilistically — the favourite doesn't always win. After all 10,000 runs, each player's percentage for a given round is simply how often they reached that round across all simulations. This gives a distribution rather than a single outcome, and captures how variance compounds across 10 rounds.</p>
+
+    <div style="color:#666; font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px; margin-top:4px;">simulate tab</div>
+    <p style="margin:0 0 4px;">The simulate tab runs a <b style="color:#bbb;">single tournament</b> from start to finish. This is one sample from the distribution — a plausible outcome, not the most likely one. Upsets are highlighted in orange. You can re-run as many times as you like to explore different possible outcomes.</p>
+  </div>
+</div>
 </body>
 </html>
