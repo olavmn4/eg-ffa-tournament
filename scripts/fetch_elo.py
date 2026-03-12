@@ -1,17 +1,8 @@
-#!/usr/bin/env python3
-"""
-Fetches ELO data for all tournament players from api.mcsrranked.com
-Rate limit: 500 requests per 10 minutes = 50 req/min safely
-We use 40 req/min (1 request every 1.5s) to stay well under the limit.
-Saves results to elo_cache.json which is read by the website.
-"""
-
 import json
 import time
 import urllib.request
 import urllib.error
 import os
-import sys
 from datetime import datetime, timezone
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -19,7 +10,6 @@ USERNAMES_FILE = os.path.join(SCRIPT_DIR, 'usernames.json')
 ELO_CACHE_FILE = os.path.join(SCRIPT_DIR, '..', 'elo_cache.json')
 API_BASE = 'https://api.mcsrranked.com/users/'
 
-# 1.5s between requests = 40 req/min = 400 req/10min (well under 500 limit)
 DELAY_SECONDS = 1.5
 
 def fetch_player(username):
@@ -28,30 +18,62 @@ def fetch_player(username):
         req = urllib.request.Request(url, headers={'User-Agent': 'EG-FFA-Tournament/1.0'})
         with urllib.request.urlopen(req, timeout=10) as resp:
             data = json.loads(resp.read().decode())
-            player_data = data.get('data', {}) or {}
-            elo = player_data.get('eloRate') or player_data.get('elo')
-            rank = player_data.get('eloRank')
-            return {'elo': elo, 'rank': rank, 'error': False}
+            d = data.get('data') or {}
+
+            season  = (d.get('statistics') or {}).get('season') or {}
+            total   = (d.get('statistics') or {}).get('total')  or {}
+            sr      = d.get('seasonResult') or {}
+
+            return {
+                'error': False,
+                'nickname':      d.get('nickname'),
+                'uuid':          d.get('uuid'),
+                'country':       d.get('country'),
+                'eloRate':       d.get('eloRate'),
+                'eloRank':       d.get('eloRank'),
+                'seasonHighest': sr.get('highest'),
+                'seasonLowest':  sr.get('lowest'),
+                'phasePoint':    (sr.get('last') or {}).get('phasePoint'),
+                'season': {
+                    'wins':          (season.get('wins')               or {}).get('ranked'),
+                    'loses':         (season.get('loses')              or {}).get('ranked'),
+                    'played':        (season.get('playedMatches')      or {}).get('ranked'),
+                    'forfeits':      (season.get('forfeits')           or {}).get('ranked'),
+                    'completions':   (season.get('completions')        or {}).get('ranked'),
+                    'bestTime':      (season.get('bestTime')           or {}).get('ranked'),
+                    'highestStreak': (season.get('highestWinStreak')   or {}).get('ranked'),
+                    'currentStreak': (season.get('currentWinStreak')   or {}).get('ranked'),
+                },
+                'total': {
+                    'wins':          (total.get('wins')                or {}).get('ranked'),
+                    'loses':         (total.get('loses')               or {}).get('ranked'),
+                    'played':        (total.get('playedMatches')       or {}).get('ranked'),
+                    'bestTime':      (total.get('bestTime')            or {}).get('ranked'),
+                    'highestStreak': (total.get('highestWinStreak')    or {}).get('ranked'),
+                },
+                'lastOnline': (d.get('timestamp') or {}).get('lastOnline'),
+                'lastRanked': (d.get('timestamp') or {}).get('lastRanked'),
+            }
+
     except urllib.error.HTTPError as e:
         if e.code == 429:
             print(f"  [RATE LIMITED] Waiting 30s before retrying {username}...")
             time.sleep(30)
-            return fetch_player(username)  # retry once
+            return fetch_player(username)
         print(f"  [HTTP {e.code}] {username}")
-        return {'elo': None, 'rank': None, 'error': True}
+        return {'error': True}
     except Exception as e:
         print(f"  [ERROR] {username}: {e}")
-        return {'elo': None, 'rank': None, 'error': True}
+        return {'error': True}
 
 def main():
     with open(USERNAMES_FILE) as f:
         usernames = json.load(f)
 
     total = len(usernames)
-    print(f"Fetching ELO for {total} players at {DELAY_SECONDS}s intervals...")
+    print(f"Fetching data for {total} players at {DELAY_SECONDS}s intervals...")
     print(f"Estimated time: ~{total * DELAY_SECONDS / 60:.1f} minutes")
 
-    # Load existing cache so we don't lose data on partial runs
     existing = {}
     if os.path.exists(ELO_CACHE_FILE):
         try:
@@ -71,12 +93,10 @@ def main():
         if result['error']:
             errors += 1
 
-        # Progress every 50 players
         if (i + 1) % 50 == 0 or (i + 1) == total:
             loaded = sum(1 for v in results.values() if not v['error'])
             print(f"  Progress: {i+1}/{total} | Loaded: {loaded} | Errors: {errors}")
 
-        # Save incrementally every 100 players so partial runs aren't wasted
         if (i + 1) % 100 == 0:
             save_cache(results)
 
@@ -86,7 +106,6 @@ def main():
     save_cache(results)
     loaded = sum(1 for v in results.values() if not v['error'])
     print(f"\nDone! {loaded}/{total} players loaded, {errors} errors")
-    print(f"Cache saved to: {os.path.abspath(ELO_CACHE_FILE)}")
 
 def save_cache(results):
     out = {
