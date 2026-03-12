@@ -128,6 +128,7 @@ body {
 
 /* ── BRACKET ── */
 #v-bracket { display: none; overflow: auto; padding: 16px; max-height: calc(100vh - 80px); }
+#v-pickems { display: none; overflow: auto; max-height: calc(100vh - 80px); }
 
 .bk-outer {
   display: flex;
@@ -298,7 +299,7 @@ body {
 
 <div id="topbar">
   <h1>EG FFA Tournament</h1>
-  <div class="meta">956 players &nbsp;·&nbsp; <span id="elo-count">—</span> ranked players</div>
+  <div class="meta">956 players &nbsp;·&nbsp; <span id="elo-count">—</span> elo loaded</div>
   <div id="elo-updated">—</div>
   <input id="search" type="text" placeholder="search..." oninput="onSearch(this.value)">
 </div>
@@ -963,7 +964,7 @@ function buildPickems() {
     });
   }
 
-  render();
+  try { render(); } catch(e) { console.error("pickems render error:", e); document.getElementById("pk-outer").innerHTML = '<p style="color:#c05a5a;padding:16px">Error rendering pickems: ' + e.message + '</p>'; }
 }
 
 // Clear picks for any matches downstream of a given matchId
