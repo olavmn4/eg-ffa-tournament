@@ -313,13 +313,8 @@ body {
 .pk-slot .s-name { flex:1; font-size:13px; color:#aaa; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .pk-slot .s-name.tbd { color:#333; font-style:italic; }
 .pk-slot .s-elo  { font-size:11px; flex-shrink:0; }
-/* hover path highlight */
-#pk-outer.hovering .pk-slot  { opacity:0.2; }
-#pk-outer.hovering .pk-slot.path-player { opacity:1; }
-#pk-outer.hovering .pk-match { border-color:#181818; background:#111; }
-#pk-outer.hovering .pk-match.path-match { border-color:#3a5a2a; background:#141414; }
-#pk-outer.hovering .pk-conn .c-top,
-#pk-outer.hovering .pk-conn .c-bottom { border-color:#1a1a1a; }
+/* hover path highlight — outline only, no dimming */
+#pk-outer.hovering .pk-match.path-match { border-color:#4a7a3a; }
 #pk-outer.hovering .pk-conn.path-lit .c-top    { border-right-color:#4a7a3a; border-bottom-color:#4a7a3a; }
 #pk-outer.hovering .pk-conn.path-lit .c-bottom { border-right-color:#4a7a3a; border-top-color:#4a7a3a; }
 </style>
@@ -370,7 +365,7 @@ body {
       <span id="pk-progress" style="font-size:11px;color:#555"></span>
       <button class="srt" onclick="resetPickems()" style="margin-left:auto;color:#c05a5a">reset all</button>
     </div>
-    <div id="pk-outer" style="display:flex;overflow-x:auto;padding:16px 8px 24px;gap:18px;"></div>
+    <div id="pk-outer" style="overflow-x:auto;padding:16px 8px 24px;"></div>
   </div>
 
 </div>
