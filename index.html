@@ -204,36 +204,50 @@ body {
 #modal {
   display: none;
   position: fixed; inset: 0; z-index: 500;
-  background: rgba(0,0,0,.7);
+  background: rgba(0,0,0,.75);
   align-items: center; justify-content: center;
 }
 #modal-box {
   background: #161616;
   border: 1px solid #2a2a2a;
-  width: 360px;
-  max-width: 95vw;
-  max-height: 90vh;
+  width: 700px;
+  max-width: 97vw;
+  max-height: 92vh;
   overflow-y: auto;
 }
 #modal-header {
-  padding: 14px 16px 10px;
+  padding: 12px 16px;
   border-bottom: 1px solid #222;
   display: flex;
-  align-items: baseline;
-  gap: 10px;
+  align-items: center;
+  gap: 8px;
 }
-#modal-title { font-size: 15px; font-weight: 600; color: #fff; }
-#modal-sub   { font-size: 11px; color: #555; flex: 1; }
-#modal-elo   { font-size: 18px; font-weight: 600; color: #7dc95e; }
-#modal-rank  { font-size: 11px; color: #555; }
+#modal-vs    { font-size: 11px; color: #333; padding: 0 4px; }
 #modal-close {
   background: none; border: none; color: #555;
   font-size: 18px; cursor: pointer; padding: 0 0 0 10px;
   font-family: 'IBM Plex Mono', monospace;
-  line-height: 1;
+  line-height: 1; margin-left: auto;
 }
 #modal-close:hover { color: #999; }
-#modal-body { padding: 12px 16px 16px; }
+#modal-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.mc-col {
+  padding: 14px 16px;
+}
+.mc-col:first-child { border-right: 1px solid #1e1e1e; }
+.mc-name {
+  font-size: 15px; font-weight: 600; color: #fff;
+  margin-bottom: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.mc-meta { font-size: 11px; color: #555; margin-bottom: 10px; }
+.mc-elo  { font-size: 22px; font-weight: 600; color: #7dc95e; display: inline; }
+.mc-rank { font-size: 11px; color: #555; margin-left: 6px; }
+.mc-elo-row { margin-bottom: 12px; }
 .ms-section { margin-bottom: 14px; }
 .ms-head {
   font-size: 10px; color: #444; letter-spacing: .08em;
@@ -241,8 +255,10 @@ body {
 }
 .ms-table { width: 100%; border-collapse: collapse; }
 .ms-table td { padding: 3px 0; font-size: 12px; }
-.ml { color: #555; width: 50%; }
+.ml { color: #555; width: 55%; }
 .mv { color: #ccc; font-weight: 500; }
+.mv.better { color: #7dc95e; }
+.mv.worse  { color: #c05a5a; }
 .pc-wr { font-size: 11px; color: #888; }
 </style>
 </head>
@@ -290,10 +306,9 @@ body {
 <div id="modal">
   <div id="modal-box">
     <div id="modal-header">
-      <span id="modal-title"></span>
-      <span id="modal-sub"></span>
-      <span id="modal-elo"></span>
-      <span id="modal-rank"></span>
+      <span id="modal-p1-name" style="font-size:13px;font-weight:600;color:#fff"></span>
+      <span id="modal-vs">vs</span>
+      <span id="modal-p2-name" style="font-size:13px;font-weight:600;color:#fff"></span>
       <button id="modal-close" onclick="closeModal()">×</button>
     </div>
     <div id="modal-body"></div>
@@ -344,74 +359,110 @@ const PLAYERS = (() => {
 })();
 
 // ── MODAL ──
-function openModal(username) {
-  const c = getCache(username);
-  const p = PLAYERS.find(p => p.username === username);
-  if (!p) return;
+function openMatchModal(u1, u2) {
+  const c1 = getCache(u1), c2 = u2 ? getCache(u2) : null;
 
   const fmt = ms => {
     if (!ms) return '—';
     const t = Math.floor(ms / 1000);
     const m = Math.floor(t / 60), s = t % 60;
-    return m + ':' + String(s).padStart(2,'0');
+    return m + ':' + String(s).padStart(2, '0');
   };
 
   const winRate = (w, l) => {
-    if (w == null || l == null) return '—';
+    if (w == null || l == null) return null;
     const total = w + l;
-    return total ? Math.round(w / total * 100) + '%' : '—';
+    return total ? Math.round(w / total * 100) : null;
   };
 
-  const row = (label, val) => val != null && val !== '—'
-    ? `<tr><td class="ml">${label}</td><td class="mv">${val}</td></tr>` : '';
+  // For a stat, returns 'better', 'worse', or '' relative to the other player
+  // higherBetter: true if higher value wins
+  const cmp = (v1, v2, higherBetter) => {
+    if (v1 == null || v2 == null) return ['', ''];
+    if (v1 === v2) return ['', ''];
+    const p1better = higherBetter ? v1 > v2 : v1 < v2;
+    return p1better ? ['better', 'worse'] : ['worse', 'better'];
+  };
 
-  const s = c?.season || {};
-  const t = c?.total  || {};
+  // Build one player column
+  const col = (c, isLeft) => {
+    if (!c) return `<div class="mc-col"><div class="mc-name" style="color:#333">BYE</div></div>`;
+    const s = c.season || {}, t = c.total || {};
+    const flag = c.country ? countryFlag(c.country) : '';
+    const wr_s = winRate(s.wins, s.loses);
+    const wr_t = winRate(t.wins, t.loses);
 
-  document.getElementById('modal-title').textContent = username;
-  document.getElementById('modal-sub').textContent =
-    (c?.nickname !== username ? c?.nickname + ' · ' : '') +
-    (c?.country ? c.country.toUpperCase() : '');
-  document.getElementById('modal-elo').textContent = c?.eloRate ?? '—';
-  document.getElementById('modal-rank').textContent = c?.eloRank ? '#' + c.eloRank : '';
+    // Get opponent cache for comparison
+    const opp = isLeft ? c2 : c1;
+    const os = opp?.season || {}, ot = opp?.total || {};
+    const owr_s = winRate(os.wins, os.loses);
+    const owr_t = winRate(ot.wins, ot.loses);
 
-  document.getElementById('modal-body').innerHTML = `
-    <div class="ms-section">
-      <div class="ms-head">this season</div>
-      <table class="ms-table">
-        ${row('elo', c?.eloRate)}
-        ${row('rank', c?.eloRank ? '#' + c.eloRank : null)}
-        ${row('peak elo', c?.seasonHighest)}
-        ${row('win rate', winRate(s.wins, s.loses))}
-        ${row('record', s.wins != null ? s.wins + 'W / ' + s.loses + 'L' : null)}
-        ${row('played', s.played)}
-        ${row('forfeits', s.forfeits)}
-        ${row('completions', s.completions)}
-        ${row('best time', fmt(s.bestTime))}
-        ${row('best streak', s.highestStreak)}
-        ${row('phase pts', c?.phasePoint)}
-      </table>
-    </div>
-    <div class="ms-section">
-      <div class="ms-head">all time</div>
-      <table class="ms-table">
-        ${row('record', t.wins != null ? t.wins + 'W / ' + t.loses + 'L' : null)}
-        ${row('win rate', winRate(t.wins, t.loses))}
-        ${row('played', t.played)}
-        ${row('best time', fmt(t.bestTime))}
-        ${row('best streak', t.highestStreak)}
-      </table>
-    </div>
-  `;
+    const statRow = (label, val, oppVal, higherBetter, display) => {
+      if (val == null) return '';
+      const [cls] = cmp(val, oppVal, higherBetter);
+      const shown = display ?? val;
+      return `<tr><td class="ml">${label}</td><td class="mv ${cls}">${shown}</td></tr>`;
+    };
 
+    return `<div class="mc-col">
+      <div class="mc-name">${flag ? flag + ' ' : ''}${x(c.nickname ?? '')}</div>
+      <div class="mc-meta">${c.country ? c.country.toUpperCase() : ''}</div>
+      <div class="mc-elo-row">
+        <span class="mc-elo">${c.eloRate ?? '—'}</span>
+        ${c.eloRank ? `<span class="mc-rank">#${c.eloRank}</span>` : ''}
+      </div>
+      <div class="ms-section">
+        <div class="ms-head">this season</div>
+        <table class="ms-table">
+          ${statRow('peak elo',   c.seasonHighest,  opp?.seasonHighest,  true)}
+          ${statRow('win rate',   wr_s,  owr_s,  true,  wr_s != null ? wr_s + '%' : null)}
+          ${statRow('record',     null,  null,   true,  s.wins != null ? s.wins + 'W / ' + s.loses + 'L' : null)}
+          ${statRow('played',     s.played,   os.played,   false)}
+          ${statRow('forfeits',   s.forfeits, os.forfeits, false)}
+          ${statRow('completions',s.completions,os.completions,true)}
+          ${statRow('best time',  s.bestTime, os.bestTime, false, fmt(s.bestTime))}
+          ${statRow('best streak',s.highestStreak,os.highestStreak,true)}
+          ${statRow('phase pts',  c.phasePoint, opp?.phasePoint, true)}
+        </table>
+      </div>
+      <div class="ms-section">
+        <div class="ms-head">all time</div>
+        <table class="ms-table">
+          ${statRow('win rate',   wr_t,  owr_t,  true,  wr_t != null ? wr_t + '%' : null)}
+          ${statRow('record',     null,  null,   true,  t.wins != null ? t.wins + 'W / ' + t.loses + 'L' : null)}
+          ${statRow('played',     t.played,  ot.played,  false)}
+          ${statRow('best time',  t.bestTime,ot.bestTime, false, fmt(t.bestTime))}
+          ${statRow('best streak',t.highestStreak,ot.highestStreak,true)}
+        </table>
+      </div>
+    </div>`;
+  };
+
+  document.getElementById('modal-p1-name').textContent = u1;
+  document.getElementById('modal-p2-name').textContent = u2 ?? 'BYE';
+  document.getElementById('modal-body').innerHTML = col(c1, true) + col(c2, false);
   document.getElementById('modal').style.display = 'flex';
+}
+
+// Keep openModal as alias for clicking from player list (opens vs BYE if no opponent found)
+function openModal(username) {
+  // Find if this player has a match partner
+  const match = R1.find(m =>
+    (m.p1?.username === username || m.p2?.username === username)
+  );
+  if (match) {
+    const opp = match.p1?.username === username ? match.p2?.username : match.p1?.username;
+    openMatchModal(username, opp ?? null);
+  } else {
+    openMatchModal(username, null);
+  }
 }
 
 function closeModal() {
   document.getElementById('modal').style.display = 'none';
 }
 
-// close on backdrop click
 document.addEventListener('click', e => {
   if (e.target.id === 'modal') closeModal();
 });
@@ -572,7 +623,7 @@ function rebuildBracket() {
       const users = [m.p1?.username, m.p2?.username].filter(Boolean);
       card.dataset.u = users.join(',');
       if (hlUser && users.includes(hlUser)) card.classList.add('hl');
-      card.onclick = () => { if (users[0]) openModal(users[0]); };
+      card.onclick = () => { if (users[0]) openMatchModal(users[0], users[1] ?? null); };
       card.appendChild(mkSlot(m.p1, m.hasBye && !m.p2));
       card.appendChild(mkSlot(m.p2, false));
       row.appendChild(card);
