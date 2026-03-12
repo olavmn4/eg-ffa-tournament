@@ -119,7 +119,7 @@ body {
 
 .pc-seed { color: #3a3a3a; font-size: 10px; min-width: 30px; text-align: right; }
 .pc-user { flex: 1; color: #ccc; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pc-elo  { font-size: 12px; font-weight: 600; color: #7dc95e; white-space: nowrap; }
+.pc-elo  { font-size: 12px; font-weight: 600; white-space: nowrap; }
 .pc-elo.none { color: #333; font-weight: 400; }
 .pc-bye  { font-size: 10px; color: #555; border: 1px solid #2a2a2a; padding: 1px 5px; flex-shrink: 0; }
 .pc-flag { font-size: 14px; flex-shrink: 0; line-height: 1; }
@@ -185,7 +185,15 @@ body {
 .bk-slot .s-seed { font-size: 10px; color: #303030; min-width: 24px; text-align: right; flex-shrink: 0; }
 .bk-slot .s-name { flex: 1; font-size: 13px; color: #aaa; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bk-slot .s-name.tbd { color: #2e2e2e; font-style: italic; }
-.bk-slot .s-elo  { font-size: 11px; color: #7dc95e; flex-shrink: 0; }
+.bk-slot .s-elo  { font-size: 11px; flex-shrink: 0; }
+
+/* ELO rank tier colors */
+.elo-coal      { color: #777; }
+.elo-iron      { color: #b0b8c0; }
+.elo-gold      { color: #f5c842; }
+.elo-emerald   { color: #5dcc6a; }
+.elo-diamond   { color: #5bc8e8; }
+.elo-netherite { color: #c97aff; }
 
 /* connector */
 .bk-conn {
@@ -245,7 +253,7 @@ body {
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .mc-meta { font-size: 11px; color: #555; margin-bottom: 10px; }
-.mc-elo  { font-size: 22px; font-weight: 600; color: #7dc95e; display: inline; }
+.mc-elo  { font-size: 22px; font-weight: 600; display: inline; }
 .mc-rank { font-size: 11px; color: #555; margin-left: 6px; }
 .mc-elo-row { margin-bottom: 12px; }
 .ms-section { margin-bottom: 14px; }
@@ -406,10 +414,10 @@ function openMatchModal(u1, u2) {
     };
 
     return `<div class="mc-col">
-      <div class="mc-name">${flag ? flag + ' ' : ''}${x(c.nickname ?? '')}</div>
-      <div class="mc-meta">${c.country ? c.country.toUpperCase() : ''}</div>
+      <div class="mc-name"><span style="display:inline-block;width:1.4em;text-align:center">${flag || ''}</span>${x(c.nickname ?? '')}</div>
+      <div class="mc-meta">${c.country ? c.country.toUpperCase() : ''}&nbsp;</div>
       <div class="mc-elo-row">
-        <span class="mc-elo">${c.eloRate ?? '—'}</span>
+        <span class="mc-elo ${eloClass(c.eloRate)}">${c.eloRate ?? '—'}</span>
         ${c.eloRank ? `<span class="mc-rank">#${c.eloRank}</span>` : ''}
       </div>
       <div class="ms-section">
@@ -418,7 +426,7 @@ function openMatchModal(u1, u2) {
           ${statRow('peak elo',   c.seasonHighest,  opp?.seasonHighest,  true)}
           ${statRow('win rate',   wr_s,  owr_s,  true,  wr_s != null ? wr_s + '%' : null)}
           ${statRow('record',     null,  null,   true,  s.wins != null ? s.wins + 'W / ' + s.loses + 'L' : null)}
-          ${statRow('played',     s.played,   os.played,   false)}
+          ${statRow('played',     s.played,   os.played,   true)}
           ${statRow('forfeits',   s.forfeits, os.forfeits, false)}
           ${statRow('completions',s.completions,os.completions,true)}
           ${statRow('best time',  s.bestTime, os.bestTime, false, fmt(s.bestTime))}
@@ -431,7 +439,7 @@ function openMatchModal(u1, u2) {
         <table class="ms-table">
           ${statRow('win rate',   wr_t,  owr_t,  true,  wr_t != null ? wr_t + '%' : null)}
           ${statRow('record',     null,  null,   true,  t.wins != null ? t.wins + 'W / ' + t.loses + 'L' : null)}
-          ${statRow('played',     t.played,  ot.played,  false)}
+          ${statRow('played',     t.played,  ot.played,  true)}
           ${statRow('best time',  t.bestTime,ot.bestTime, false, fmt(t.bestTime))}
           ${statRow('best streak',t.highestStreak,ot.highestStreak,true)}
         </table>
@@ -505,7 +513,7 @@ function renderList() {
       <span class="pc-user">${x(p.username)}</span>
       ${p.autoAdvance ? '<span class="pc-bye">bye</span>' : ''}
       ${rank}
-      <span class="pc-elo${e===null?' none':''}">${e!==null?e:'—'}</span>
+      <span class="pc-elo${e===null?' none':' '+eloClass(e)}">${e!==null?e:'—'}</span>
     </div>`;
   }).join('');
 }
@@ -662,7 +670,7 @@ function mkSlot(p, isBye) {
   const rank = c?.eloRank ?? null;
   const flag = c?.country ? countryFlag(c.country) : '';
   const rankStr = rank ? '#' + rank : '';
-  div.innerHTML = `<span class="s-seed">${rankStr}</span>${flag?`<span class="s-flag">${flag}</span>`:''}<span class="s-name">${x(p.username)}</span>${e!==null?`<span class="s-elo">${e}</span>`:''}`;
+  div.innerHTML = `<span class="s-seed">${rankStr}</span>${flag?`<span class="s-flag">${flag}</span>`:''}<span class="s-name">${x(p.username)}</span>${e!==null?`<span class="s-elo ${eloClass(e)}">${e}</span>`:''}`;
   return div;
 }
 
@@ -672,6 +680,16 @@ function countryFlag(code) {
   return code.toUpperCase().split('').map(c =>
     String.fromCodePoint(0x1F1E6 - 65 + c.charCodeAt(0))
   ).join('');
+}
+
+function eloClass(eloRate) {
+  if (eloRate == null) return 'elo-coal';
+  if (eloRate >= 2000) return 'elo-netherite';
+  if (eloRate >= 1500) return 'elo-diamond';
+  if (eloRate >= 1200) return 'elo-emerald';
+  if (eloRate >=  900) return 'elo-gold';
+  if (eloRate >=  600) return 'elo-iron';
+  return 'elo-coal';
 }
 
 function switchTab(id, btn) {
