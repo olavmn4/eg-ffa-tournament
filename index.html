@@ -147,6 +147,30 @@ body {
   text-transform: uppercase;
   width: 208px;
 }
+#sim-bk-outer .bk-col-hd {
+  cursor: pointer;
+  user-select: none;
+}
+#sim-bk-outer .bk-col-hd:hover { color: #777; }
+#sim-bk-outer .bk-col.collapsed {
+  width: 28px;
+  min-width: 28px;
+  flex-shrink: 0;
+}
+#sim-bk-outer .bk-col.collapsed .bk-col-hd {
+  width: 28px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  padding: 12px 0;
+  border-right: 1px solid #222;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+}
 
 .bk-col-body {
   display: flex;
@@ -1404,6 +1428,7 @@ function runSimulation() {
   const status = document.getElementById('sim-status');
   status.textContent = 'simulating…';
   setTimeout(() => {
+    simCollapsed.clear();
     simRounds = simulateSingleTournament(R1, sigma);
     status.textContent = '';
     renderSimBracket(simRounds);
@@ -1442,6 +1467,9 @@ function simulateSingleTournament(r1Matches, sigma) {
   return rounds;
 }
 
+// Track which rounds are collapsed: Set of round indices
+const simCollapsed = new Set();
+
 function renderSimBracket(rounds) {
   // Update header info
   const champion = rounds[N_ROUNDS - 1][0]?.winner;
@@ -1465,7 +1493,6 @@ function renderSimBracket(rounds) {
   }
   document.getElementById('sim-upsets').textContent = upsetCount ? `${upsetCount} upsets` : '';
 
-  // Build bracket DOM using same structure as rebuildBracket
   const outer = document.getElementById('sim-bk-outer');
   outer.innerHTML = '';
   outer.style.display = '';
@@ -1474,60 +1501,79 @@ function renderSimBracket(rounds) {
   const names = ['R1','R2','R3','R4','R5','R6','R7','R8','Semi','Final'];
   const SLOT_H = 58;
 
+  // Calculate visual depth offset: collapsed rounds don't count toward card height
+  // visDepth[ri] = how many uncollapsed rounds precede round ri
+  function visDepth(ri) {
+    let d = 0;
+    for (let i = 0; i < ri; i++) if (!simCollapsed.has(i)) d++;
+    return d;
+  }
+
   rounds.forEach((matches, ri) => {
+    const collapsed = simCollapsed.has(ri);
+
     const col = document.createElement('div');
-    col.className = 'bk-col';
+    col.className = 'bk-col' + (collapsed ? ' collapsed' : '');
 
     const hd = document.createElement('div');
     hd.className = 'bk-col-hd';
     hd.textContent = names[ri] ?? 'R' + (ri + 1);
+    hd.title = 'click to collapse/expand';
+    hd.onclick = () => {
+      if (simCollapsed.has(ri)) simCollapsed.delete(ri);
+      else simCollapsed.add(ri);
+      renderSimBracket(rounds); // full re-render so heights update
+    };
     col.appendChild(hd);
 
-    const body = document.createElement('div');
-    body.className = 'bk-col-body';
-    const matchH = Math.pow(2, ri) * SLOT_H;
+    if (!collapsed) {
+      const body = document.createElement('div');
+      body.className = 'bk-col-body';
+      // Card height based on visual depth — uncollapsed rounds only
+      const matchH = Math.pow(2, visDepth(ri)) * SLOT_H;
 
-    matches.forEach((m, mi) => {
-      const row = document.createElement('div');
-      row.className = 'bk-row';
-      row.style.height = matchH + 'px';
+      matches.forEach((m, mi) => {
+        const row = document.createElement('div');
+        row.className = 'bk-row';
+        row.style.height = matchH + 'px';
 
-      const card = document.createElement('div');
-      card.className = 'bk-match';
+        const card = document.createElement('div');
+        card.className = 'bk-match';
 
-      // Determine if this is an upset
-      const isUpset = !m.isBye && m.winner && m.p1 && m.p2 &&
-        ((m.winner === m.p1 && m.pA < 40) || (m.winner === m.p2 && m.pA >= 60));
-      if (isUpset) card.style.borderColor = '#5a3a1a';
+        const isUpset = !m.isBye && m.winner && m.p1 && m.p2 &&
+          ((m.winner === m.p1 && m.pA < 40) || (m.winner === m.p2 && m.pA >= 60));
+        if (isUpset) card.style.borderColor = '#5a3a1a';
 
-      // Winner gets a subtle highlight in their slot
-      card.appendChild(mkSimSlot(m.p1, m.winner === m.p1 && !m.isBye, isUpset && m.winner === m.p1));
-      card.appendChild(mkSimSlot(m.p2, m.winner === m.p2 && !m.isBye, isUpset && m.winner === m.p2));
+        card.appendChild(mkSimSlot(m.p1, m.winner === m.p1 && !m.isBye, isUpset && m.winner === m.p1));
+        card.appendChild(mkSimSlot(m.p2, m.winner === m.p2 && !m.isBye, isUpset && m.winner === m.p2));
 
-      // Click to show win prob tooltip
-      if (!m.isBye && m.p1 && m.p2) {
-        card.style.cursor = 'pointer';
-        card.title = `${m.p1.display || m.p1.username} ${m.pA}% · ${m.p2.display || m.p2.username} ${100 - m.pA}%`;
-        card.onclick = () => openMatchModal(m.p1.username, m.p2.username);
-      }
+        if (!m.isBye && m.p1 && m.p2) {
+          card.style.cursor = 'pointer';
+          card.title = `${m.p1.display || m.p1.username} ${m.pA}% · ${m.p2.display || m.p2.username} ${100 - m.pA}%`;
+          card.onclick = () => openMatchModal(m.p1.username, m.p2.username);
+        }
 
-      row.appendChild(card);
+        row.appendChild(card);
 
-      if (ri < rounds.length - 1) {
-        const conn = document.createElement('div');
-        conn.className = 'bk-conn';
-        const a = document.createElement('div');
-        const b = document.createElement('div');
-        if (mi % 2 === 0) { a.className = 'c-empty'; b.className = 'c-bottom'; }
-        else               { a.className = 'c-top';   b.className = 'c-empty'; }
-        conn.appendChild(a); conn.appendChild(b);
-        row.appendChild(conn);
-      }
+        // Only show connector if next round is also visible
+        const nextVisible = ri < rounds.length - 1 && !simCollapsed.has(ri + 1);
+        if (nextVisible) {
+          const conn = document.createElement('div');
+          conn.className = 'bk-conn';
+          const a = document.createElement('div');
+          const b = document.createElement('div');
+          if (mi % 2 === 0) { a.className = 'c-empty'; b.className = 'c-bottom'; }
+          else               { a.className = 'c-top';   b.className = 'c-empty'; }
+          conn.appendChild(a); conn.appendChild(b);
+          row.appendChild(conn);
+        }
 
-      body.appendChild(row);
-    });
+        body.appendChild(row);
+      });
 
-    col.appendChild(body);
+      col.appendChild(body);
+    }
+
     outer.appendChild(col);
   });
 }
