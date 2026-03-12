@@ -198,15 +198,15 @@ body {
 
 /* connector */
 .bk-conn {
-  width: 16px;
-  min-width: 16px;
+  width: 18px;
+  min-width: 18px;
   align-self: stretch;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
 }
-.c-top    { flex: 1; border-right: 1px solid #222; border-bottom: 1px solid #222; }
-.c-bottom { flex: 1; border-right: 1px solid #222; border-top: 1px solid #222; }
+.c-top    { flex: 1; box-shadow: inset -9px 0 0 -8px #222; border-bottom: 1px solid #222; }
+.c-bottom { flex: 1; box-shadow: inset -9px 0 0 -8px #222; border-top: 1px solid #222; }
 .c-empty  { flex: 1; }
 
 /* ── MODAL ── */
@@ -286,16 +286,16 @@ body {
 }
 .pk-match:hover { border-color:#2e2e2e; }
 .pk-conn {
-  width:16px; min-width:16px;
+  width:18px; min-width:18px;
   align-self:stretch; flex-shrink:0;
   display:flex; flex-direction:column;
   transition: opacity .15s;
 }
-.pk-conn .c-top    { flex:1; border-right:1px solid #222; border-bottom:1px solid #222; transition:border-color .15s; }
-.pk-conn .c-bottom { flex:1; border-right:1px solid #222; border-top:1px solid #222;    transition:border-color .15s; }
+.pk-conn .c-top    { flex:1; box-shadow:inset -9px 0 0 -8px #222; border-bottom:1px solid #222; transition:border-color .15s; }
+.pk-conn .c-bottom { flex:1; box-shadow:inset -9px 0 0 -8px #222; border-top:1px solid #222; transition:border-color .15s; }
 .pk-conn .c-empty  { flex:1; }
-.pk-conn.path-lit .c-top    { border-right-color:#4a7a3a; border-bottom-color:#4a7a3a; }
-.pk-conn.path-lit .c-bottom { border-right-color:#4a7a3a; border-top-color:#4a7a3a; }
+.pk-conn.path-lit .c-top    { box-shadow:inset -9px 0 0 -8px #4a7a3a; border-bottom-color:#4a7a3a; }
+.pk-conn.path-lit .c-bottom { box-shadow:inset -9px 0 0 -8px #4a7a3a; border-top-color:#4a7a3a; }
 .pk-slot {
   display:flex; align-items:center; gap:5px; padding:4px 8px;
   height:28px; overflow:hidden; border-bottom:1px solid #1a1a1a;
@@ -715,9 +715,9 @@ function rebuildBracket() {
         const a = document.createElement('div');
         const b = document.createElement('div');
         if (mi % 2 === 0) {
-          a.className = 'c-top'; b.className = 'c-empty';
-        } else {
           a.className = 'c-empty'; b.className = 'c-bottom';
+        } else {
+          a.className = 'c-top'; b.className = 'c-empty';
         }
         conn.appendChild(a); conn.appendChild(b);
         row.appendChild(conn);
@@ -995,9 +995,9 @@ function buildPickems() {
           const a = document.createElement('div');
           const b = document.createElement('div');
           if (mi % 2 === 0) {
-            a.className = 'c-top'; b.className = 'c-empty';
-          } else {
             a.className = 'c-empty'; b.className = 'c-bottom';
+          } else {
+            a.className = 'c-top'; b.className = 'c-empty';
           }
           conn.appendChild(a); conn.appendChild(b);
           row.appendChild(conn);
