@@ -138,19 +138,19 @@ body {
 .bk-col { display: flex; flex-direction: column; }
 
 .bk-col-hd {
-  font-size: 10px;
+  font-size: 11px;
   color: #444;
   text-align: center;
   padding: 4px 0 8px;
   letter-spacing: .06em;
   text-transform: uppercase;
-  width: 158px;
+  width: 208px;
 }
 
 .bk-col-body {
   display: flex;
   flex-direction: column;
-  width: 158px;
+  width: 208px;
 }
 
 .bk-row {
@@ -160,8 +160,8 @@ body {
 }
 
 .bk-match {
-  width: 140px;
-  min-width: 140px;
+  width: 190px;
+  min-width: 190px;
   border: 1px solid #1e1e1e;
   background: #141414;
   flex-shrink: 0;
@@ -174,18 +174,18 @@ body {
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 3px 6px;
-  height: 22px;
+  padding: 4px 8px;
+  height: 28px;
   overflow: hidden;
   border-bottom: 1px solid #1a1a1a;
 }
 .bk-slot:last-child { border-bottom: none; }
 .bk-slot.bye { opacity: .25; }
 
-.bk-slot .s-seed { font-size: 9px; color: #303030; min-width: 20px; text-align: right; flex-shrink: 0; }
-.bk-slot .s-name { flex: 1; font-size: 11px; color: #aaa; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bk-slot .s-seed { font-size: 10px; color: #303030; min-width: 24px; text-align: right; flex-shrink: 0; }
+.bk-slot .s-name { flex: 1; font-size: 13px; color: #aaa; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bk-slot .s-name.tbd { color: #2e2e2e; font-style: italic; }
-.bk-slot .s-elo  { font-size: 10px; color: #7dc95e; flex-shrink: 0; }
+.bk-slot .s-elo  { font-size: 11px; color: #7dc95e; flex-shrink: 0; }
 
 /* connector */
 .bk-conn {
@@ -267,7 +267,6 @@ body {
       <label>sort:</label>
       <button class="srt on" onclick="setSort('seed',this)">seed</button>
       <button class="srt"    onclick="setSort('elo',this)">elo ↓</button>
-      <button class="srt"    onclick="setSort('rank',this)">rank ↑</button>
       <button class="srt"    onclick="setSort('name',this)">name</button>
       <button class="srt"    onclick="setSort('winrate',this)">win rate ↓</button>
       <button class="srt"    onclick="setSort('besttime',this)">best time ↑</button>
@@ -281,7 +280,6 @@ body {
       <button class="srt on" onclick="setBracketSort('default',this)">bracket order</button>
       <button class="srt"    onclick="setBracketSort('avg_elo',this)">avg elo ↓</button>
       <button class="srt"    onclick="setBracketSort('discrepancy',this)">elo gap ↓</button>
-      <button class="srt"    onclick="setBracketSort('upset',this)">upset potential</button>
       <button class="srt"    onclick="setBracketSort('top_elo',this)">top elo ↓</button>
     </div>
     <div class="bk-outer" id="bk-outer"></div>
@@ -549,7 +547,7 @@ function rebuildBracket() {
   }
   const rounds = buildRounds(r1Display, 10);
   const names = ['R1','R2','R3','R4','R5','R6','R7','R8','Semi','Final'];
-  const SLOT_H = 46;
+  const SLOT_H = 58;
 
   rounds.forEach((matches, ri) => {
     const col = document.createElement('div');
