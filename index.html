@@ -127,7 +127,7 @@ body {
 .bk-slot .s-flag { font-size: 10px; flex-shrink: 0; line-height: 1; }
 
 /* ── BRACKET ── */
-#v-bracket { display: none; overflow: auto; padding: 16px; }
+#v-bracket { display: none; overflow: hidden; display: none; flex-direction: column; }
 #v-pickems { display: none; overflow: auto; }
 
 .bk-outer {
@@ -408,14 +408,25 @@ body {
   </div>
 
   <div id="v-bracket">
-    <div class="list-controls" style="margin-bottom:12px;">
+    <div class="list-controls" style="margin-bottom:0; flex-wrap:wrap; gap:8px; position:relative;">
       <label>sort matches:</label>
       <button class="srt on" onclick="setBracketSort('default',this)">bracket order</button>
       <button class="srt"    onclick="setBracketSort('avg_elo',this)">avg elo ↓</button>
       <button class="srt"    onclick="setBracketSort('discrepancy',this)">elo gap ↓</button>
       <button class="srt"    onclick="setBracketSort('top_elo',this)">top elo ↓</button>
+      <div style="margin-left:auto; display:flex; align-items:center; gap:6px; position:relative;">
+        <label style="color:#444; font-size:11px;">bracket luck:</label>
+        <input id="luck-search" type="text" placeholder="search player…" autocomplete="off"
+          style="background:#1a1a1a; border:1px solid #2a2a2a; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 8px; width:160px; outline:none;"
+          oninput="luckSearchInput(this.value)" onfocus="luckSearchInput(this.value)" onclick="event.stopPropagation()">
+        <div id="luck-search-dropdown" style="display:none; position:absolute; top:100%; right:24px; margin-top:2px; background:#1a1a1a; border:1px solid #2a2a2a; z-index:200; max-height:200px; overflow-y:auto; min-width:200px;"></div>
+        <button onclick="clearLuckPanel()" id="luck-clear-btn" style="display:none; background:none; border:none; color:#444; font-family:'IBM Plex Mono',monospace; font-size:13px; cursor:pointer; padding:0 2px;" title="clear">✕</button>
+      </div>
     </div>
-    <div class="bk-outer" id="bk-outer"></div>
+    <div id="luck-panel" style="display:none; border-bottom:1px solid #1e1e1e;"></div>
+    <div style="overflow:auto; padding:16px;">
+      <div class="bk-outer" id="bk-outer"></div>
+    </div>
   </div>
 
   <div id="v-pickems" style="display:none">
@@ -873,6 +884,7 @@ function setViewHeights() {
   const used = document.getElementById('topbar').offsetHeight
               + document.getElementById('tabs').offsetHeight;
   const h = (window.innerHeight - used - 2) + 'px';
+  document.getElementById('v-bracket').style.height = h;
   document.getElementById('v-bracket').style.maxHeight = h;
   document.getElementById('v-pickems').style.maxHeight = h;
   document.getElementById('v-list').style.maxHeight = h;
@@ -884,7 +896,7 @@ function switchTab(id, btn) {
   document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
   btn.classList.add('on');
   document.getElementById('v-list').style.display     = id==='list'    ? 'block' : 'none';
-  document.getElementById('v-bracket').style.display  = id==='bracket' ? 'block' : 'none';
+  document.getElementById('v-bracket').style.display  = id==='bracket' ? 'flex' : 'none';
   document.getElementById('v-pickems').style.display  = id==='pickems' ? 'block' : 'none';
   document.getElementById('v-predict').style.display  = id==='predict' ? 'block' : 'none';
   document.getElementById('v-simulate').style.display = id==='simulate'? 'flex' : 'none';
@@ -1819,7 +1831,277 @@ function mkSimSlot(p, isWinner, isUpset) {
   div.innerHTML = `<span class="s-seed">${rankStr}</span>${flag ? `<span class="s-flag">${flag}</span>` : ''}<span class="s-name">${x(p.username)}</span>${e !== null ? `<span class="s-elo ${eloClass(e)}">${e}</span>` : ''}`;
   return div;
 }
+// ── BRACKET LUCK ──────────────────────────────────────────────────────────
 
+// Build a flat bracket tree from R1 — returns map of matchId -> match node
+// Each node: { id, p1, p2, isBye, round, matchIdx, feedA, feedB }
+function buildBracketTree() {
+  const tree = {};
+  // Round 0
+  R1.forEach((m, i) => {
+    const id = `r0-${i}`;
+    tree[id] = { id, p1: m.p1, p2: m.p2, isBye: m.isBye || !m.p2, round: 0, matchIdx: i, feedA: null, feedB: null };
+  });
+  // Rounds 1-9
+  let prevIds = R1.map((_, i) => `r0-${i}`);
+  for (let r = 1; r < 10; r++) {
+    const curIds = [];
+    for (let i = 0; i < prevIds.length; i += 2) {
+      const id = `r${r}-${Math.floor(i/2)}`;
+      tree[id] = { id, p1: null, p2: null, isBye: false, round: r, matchIdx: Math.floor(i/2), feedA: prevIds[i], feedB: prevIds[i+1] };
+      curIds.push(id);
+    }
+    prevIds = curIds;
+  }
+  return tree;
+}
+
+// Find all players in a subtree rooted at matchId (both sides)
+function subtreePlayers(matchId, tree) {
+  const players = [];
+  const visit = (id) => {
+    if (!id || !tree[id]) return;
+    const node = tree[id];
+    if (node.round === 0) {
+      if (node.p1) players.push(node.p1);
+      if (node.p2) players.push(node.p2);
+    } else {
+      visit(node.feedA);
+      visit(node.feedB);
+    }
+  };
+  visit(matchId);
+  return players;
+}
+
+// Find the match path for a given username through the bracket tree
+// Returns array of { round, matchId, opponentPool } for each round
+function findPlayerPath(username, tree) {
+  // Find R1 match
+  let curId = null;
+  for (const [id, node] of Object.entries(tree)) {
+    if (node.round === 0) {
+      if (node.p1?.username === username || node.p2?.username === username) {
+        curId = id; break;
+      }
+    }
+  }
+  if (!curId) return null;
+
+  const path = [];
+  for (let r = 0; r < 10; r++) {
+    const node = tree[curId];
+    // The "other side" of the bracket at this round
+    const parentId = Object.values(tree).find(n => n.feedA === curId || n.feedB === curId)?.id ?? null;
+    let oppSideId = null;
+    if (parentId && tree[parentId]) {
+      oppSideId = tree[parentId].feedA === curId ? tree[parentId].feedB : tree[parentId].feedA;
+    }
+    const opponentPool = oppSideId ? subtreePlayers(oppSideId, tree) : [];
+    path.push({ round: r, matchId: curId, opponentPool });
+    if (!parentId) break;
+    curId = parentId;
+  }
+  return path;
+}
+
+// Compute "most likely opponent" at a given round from a pool
+// Uses playerScore to pick the strongest likely survivor
+function likelyOpponent(pool, sigma) {
+  if (!pool.length) return null;
+  // Sort by playerScore descending
+  return [...pool].sort((a, b) => playerScore(b.username) - playerScore(a.username))[0];
+}
+
+// Average ELO of a pool (players with ELO data only)
+function poolAvgElo(pool) {
+  const elos = pool.map(p => elo(p.username)).filter(e => e !== null);
+  if (!elos.length) return null;
+  return Math.round(elos.reduce((a, b) => a + b, 0) / elos.length);
+}
+
+// Compute bracket luck analysis for a player
+function analyzeBracketLuck(username) {
+  const tree = buildBracketTree();
+  const path = findPlayerPath(username, tree);
+  if (!path) return null;
+
+  const sigma = 0.25;
+  const myScore = playerScore(username);
+  const myElo = elo(username);
+
+  // All players in the field
+  const allPlayers = [];
+  const seen = new Set();
+  for (const m of R1) {
+    for (const p of [m.p1, m.p2]) {
+      if (p && !seen.has(p.username)) { seen.add(p.username); allPlayers.push(p); }
+    }
+  }
+  const fieldAvgElo = poolAvgElo(allPlayers);
+
+  // For each round, compute:
+  // - likely opponent (top scored from opponent pool)
+  // - player's win probability vs that opponent
+  // - average ELO of the opponent pool
+  const rounds = [];
+  let cumulativeWinProb = 1.0;
+
+  for (const step of path) {
+    const pool = step.opponentPool;
+    if (!pool.length) break;
+
+    const topOpp = likelyOpponent(pool, sigma);
+    const oppScore = topOpp ? playerScore(topOpp.username) : 400;
+    const winProb = matchWinProb(myScore, oppScore, sigma);
+    const poolAvg = poolAvgElo(pool);
+    const poolSize = pool.length;
+
+    cumulativeWinProb *= winProb;
+
+    rounds.push({
+      round: step.round,
+      pool,
+      topOpp,
+      winProb: Math.round(winProb * 1000) / 10,
+      poolAvgElo: poolAvg,
+      poolSize,
+      cumulativeWinProb: Math.round(cumulativeWinProb * 1000) / 10,
+    });
+  }
+
+  // Luck score: compare actual path-to-win probability vs expected for random bracket
+  // Run 500 random draws: shuffle all players into bracket, compute same player's path odds
+  const N_LUCK_SIMS = 500;
+  let sumExpected = 0;
+  const otherPlayers = allPlayers.filter(p => p.username !== username);
+
+  for (let s = 0; s < N_LUCK_SIMS; s++) {
+    // Shuffle others into a fake R1 bracket of same size
+    const shuffled = [...otherPlayers].sort(() => Math.random() - 0.5);
+    // Build a simple path: pick a random position, generate opponents from random groups
+    let prob = 1.0;
+    let groupSize = 1;
+    for (let r = 0; r < 9; r++) {
+      groupSize *= 2;
+      const slice = shuffled.slice(0, groupSize);
+      const topRandom = slice.sort((a, b) => playerScore(b.username) - playerScore(a.username))[0];
+      if (topRandom) {
+        prob *= matchWinProb(myScore, playerScore(topRandom.username), sigma);
+      }
+    }
+    sumExpected += prob;
+  }
+  const expectedWinProb = sumExpected / N_LUCK_SIMS;
+  const actualWinProb = cumulativeWinProb / 100;
+  const luckRatio = expectedWinProb > 0 ? actualWinProb / expectedWinProb : 1;
+
+  let luckLabel, luckColor;
+  if      (luckRatio > 1.3)  { luckLabel = 'very favourable draw'; luckColor = '#5dcc6a'; }
+  else if (luckRatio > 1.1)  { luckLabel = 'favourable draw';      luckColor = '#7dc95e'; }
+  else if (luckRatio > 0.9)  { luckLabel = 'neutral draw';         luckColor = '#888'; }
+  else if (luckRatio > 0.7)  { luckLabel = 'tough draw';           luckColor = '#c07a3a'; }
+  else                        { luckLabel = 'very tough draw';      luckColor = '#c05a5a'; }
+
+  return { rounds, fieldAvgElo, luckLabel, luckColor, luckRatio, actualWinProb, expectedWinProb };
+}
+
+function renderLuckPanel(username) {
+  const panel = document.getElementById('luck-panel');
+  const analysis = analyzeBracketLuck(username);
+  if (!analysis) { panel.style.display = 'none'; return; }
+
+  const { rounds, fieldAvgElo, luckLabel, luckColor, luckRatio, actualWinProb, expectedWinProb } = analysis;
+  const roundNames = ['R1','R2','R3','R4','R5','R6','R7','R8','Semi','Final'];
+  const myC = getCache(username);
+  const myEloVal = myC?.eloRate ?? null;
+  const myFlag = myC?.country ? countryFlag(myC.country) : '';
+
+  let html = `<div style="padding:14px 16px 12px; background:#0e0e0e; display:flex; flex-direction:column; gap:12px;">`;
+
+  // Header row
+  html += `<div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+    <span style="color:#888; font-size:11px;">${myFlag} <span style="color:#ddd; font-weight:500;">${x(username)}</span>${myEloVal ? ` <span class="${eloClass(myEloVal)}" style="margin-left:4px;">${myEloVal}</span>` : ''}</span>
+    <span style="font-size:11px; padding:2px 8px; border:1px solid ${luckColor}; color:${luckColor};">${luckLabel}</span>
+    <span style="color:#333; font-size:10px;">path-to-win: <span style="color:#666;">${(actualWinProb*100).toFixed(2)}%</span> · expected: <span style="color:#555;">${(expectedWinProb*100).toFixed(2)}%</span></span>
+    <span style="color:#333; font-size:10px; margin-left:auto;">field avg elo: <span style="color:#555;">${fieldAvgElo ?? '—'}</span></span>
+  </div>`;
+
+  // Round path cards
+  html += `<div style="display:flex; gap:8px; overflow-x:auto; padding-bottom:4px;">`;
+
+  for (let i = 0; i < Math.min(rounds.length, 9); i++) {
+    const rnd = rounds[i];
+    const opp = rnd.topOpp;
+    const oppC = opp ? getCache(opp.username) : null;
+    const oppElo = oppC?.eloRate ?? null;
+    const oppFlag = oppC?.country ? countryFlag(oppC.country) : '';
+    const winPct = rnd.winProb;
+    const winColor = winPct >= 70 ? '#5dcc6a' : winPct >= 50 ? '#888' : winPct >= 35 ? '#c07a3a' : '#c05a5a';
+    const poolVsField = rnd.poolAvgElo && fieldAvgElo
+      ? rnd.poolAvgElo - fieldAvgElo
+      : null;
+    const diffStr = poolVsField !== null
+      ? (poolVsField > 0 ? `+${poolVsField}` : `${poolVsField}`)
+      : null;
+    const diffColor = poolVsField === null ? '#444' : poolVsField > 30 ? '#c05a5a' : poolVsField < -30 ? '#5dcc6a' : '#666';
+
+    html += `<div style="flex-shrink:0; width:130px; background:#141414; border:1px solid #1e1e1e; padding:8px 10px;">
+      <div style="color:#444; font-size:10px; letter-spacing:.06em; margin-bottom:6px;">${roundNames[i] ?? 'R'+(i+1)}</div>
+      <div style="color:#bbb; font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:2px;">${oppFlag} ${opp ? x(opp.display || opp.username) : '—'}</div>
+      ${oppElo ? `<div class="${eloClass(oppElo)}" style="font-size:11px; margin-bottom:6px;">${oppElo}</div>` : `<div style="font-size:11px; color:#333; margin-bottom:6px;">no elo</div>`}
+      <div style="font-size:13px; font-weight:600; color:${winColor};">${winPct}%</div>
+      <div style="font-size:10px; color:#333; margin-top:1px;">win prob</div>
+      ${diffStr ? `<div style="font-size:10px; color:${diffColor}; margin-top:5px; border-top:1px solid #1a1a1a; padding-top:4px;">region avg ${diffStr} vs field</div>` : ''}
+    </div>`;
+  }
+
+  html += `</div></div>`;
+  panel.innerHTML = html;
+  panel.style.display = 'block';
+}
+
+// Search input handler
+function luckSearchInput(val) {
+  const dd = document.getElementById('luck-search-dropdown');
+  if (!val.trim()) { dd.style.display = 'none'; return; }
+  const q = val.toLowerCase();
+  const matches = PLAYERS.filter(p =>
+    p.username.toLowerCase().includes(q) || String(p.display).toLowerCase().includes(q)
+  ).slice(0, 12);
+  if (!matches.length) { dd.style.display = 'none'; return; }
+  dd.innerHTML = matches.map(p => {
+    const c = getCache(p.username);
+    const e = c?.eloRate;
+    return `<div onclick="selectLuckPlayer('${x(p.username)}')"
+      style="padding:5px 10px; cursor:pointer; font-size:11px; border-bottom:1px solid #222; display:flex; justify-content:space-between; align-items:center;"
+      onmouseover="this.style.background='#222'" onmouseout="this.style.background=''">
+      <span style="color:#ccc;">${x(p.display || p.username)}</span>
+      ${e ? `<span class="${eloClass(e)}" style="font-size:10px;">${e}</span>` : ''}
+    </div>`;
+  }).join('');
+  dd.style.display = 'block';
+}
+
+function selectLuckPlayer(username) {
+  document.getElementById('luck-search').value = username;
+  document.getElementById('luck-search-dropdown').style.display = 'none';
+  document.getElementById('luck-clear-btn').style.display = 'inline';
+  renderLuckPanel(username);
+}
+
+function clearLuckPanel() {
+  document.getElementById('luck-search').value = '';
+  document.getElementById('luck-search-dropdown').style.display = 'none';
+  document.getElementById('luck-clear-btn').style.display = 'none';
+  document.getElementById('luck-panel').style.display = 'none';
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', () => {
+  const dd = document.getElementById('luck-search-dropdown');
+  if (dd) dd.style.display = 'none';
+});
 
 
 </script>
