@@ -349,6 +349,7 @@ body {
   <h1>EG FFA Tournament</h1>
   <div class="meta">956 players &nbsp;·&nbsp; <span id="elo-count">—</span> ranked players</div>
   <div id="elo-updated">—</div>
+  <span style="color:#2a2a2a; font-size:11px; margin-left:4px;">@Prolav</span>
   <input id="search" type="text" placeholder="search..." oninput="onSearch(this.value)">
 </div>
 
@@ -403,9 +404,9 @@ body {
     <button onclick="document.getElementById('info-modal').style.display='flex'" style="background:none; border:1px solid #2a2a2a; color:#555; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:4px 10px; cursor:pointer; margin-left:4px;">how it works</button>
     <label style="color:#666; font-size:11px; margin-left:auto;">variance:</label>
     <select id="predict-variance" style="background:#1a1a1a; border:1px solid #2a2a2a; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 6px;">
-      <option value="0.15">low — favourites dominate</option>
-      <option value="0.30" selected>medium — realistic upsets</option>
-      <option value="0.55">high — erratic results</option>
+      <option value="0.08">low — favourites dominate</option>
+      <option value="0.25" selected>medium — realistic upsets</option>
+      <option value="0.80">high — erratic results</option>
     </select>
   </div>
   <div id="predict-output"></div>
@@ -416,9 +417,9 @@ body {
     <button onclick="runSimulation()" style="background:#1e1e1e; border:1px solid #333; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:12px; padding:5px 14px; cursor:pointer;">▶ run simulation</button>
     <label style="color:#555; font-size:11px;">variance:</label>
     <select id="sim-variance" style="background:#1a1a1a; border:1px solid #2a2a2a; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 6px;">
-      <option value="0.15">low — favourites dominate</option>
-      <option value="0.30" selected>medium — realistic upsets</option>
-      <option value="0.55">high — erratic results</option>
+      <option value="0.08">low — favourites dominate</option>
+      <option value="0.25" selected>medium — realistic upsets</option>
+      <option value="0.80">high — erratic results</option>
     </select>
     <span id="sim-champion" style="color:#f5c842; font-size:12px; margin-left:8px;"></span>
     <span id="sim-upsets" style="color:#c07a3a; font-size:11px;"></span>
@@ -1534,7 +1535,7 @@ function renderSimBracket(rounds) {
   for (const rnd of rounds) {
     for (const m of rnd) {
       if (!m.isBye && m.winner && m.p1 && m.p2) {
-        const isUpset = (m.winner === m.p1 && m.pA < 40) || (m.winner === m.p2 && m.pA >= 60);
+        const isUpset = (m.winner === m.p1 && m.pA < 35) || (m.winner === m.p2 && m.pA > 65);
         if (isUpset) upsetCount++;
       }
     }
@@ -1589,7 +1590,7 @@ function renderSimBracket(rounds) {
         card.className = 'bk-match';
 
         const isUpset = !m.isBye && m.winner && m.p1 && m.p2 &&
-          ((m.winner === m.p1 && m.pA < 40) || (m.winner === m.p2 && m.pA >= 60));
+          ((m.winner === m.p1 && m.pA < 35) || (m.winner === m.p2 && m.pA > 65));
         if (isUpset) card.style.borderColor = '#5a3a1a';
 
         card.appendChild(mkSimSlot(m.p1, m.winner === m.p1 && !m.isBye, isUpset && m.winner === m.p1));
@@ -1656,7 +1657,7 @@ function mkSimSlot(p, isWinner, isUpset) {
     <div style="color:#ccc; font-size:13px; font-weight:500; margin-bottom:16px; letter-spacing:.04em;">how predictions & simulation work</div>
 
     <div style="color:#666; font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">player score</div>
-    <p style="margin:0 0 14px;">Each player is assigned a composite score built from their live ranked stats. ELO is the dominant signal — it captures overall skill — but the model also rewards consistency, mental fortitude, and raw speed:</p>
+    <p style="margin:0 0 14px;">Each player is assigned a composite score built from their live ranked stats. ELO is the dominant signal — it captures overall skill — but the model also rewards consistency, low forfeit-rates, and fast completions:</p>
     <table style="width:100%; border-collapse:collapse; margin-bottom:16px; font-size:11px;">
       <tr style="border-bottom:1px solid #1e1e1e;"><td style="padding:4px 0; color:#bbb;">ELO rating</td><td style="text-align:right; color:#5bc8e8;">50%</td></tr>
       <tr style="border-bottom:1px solid #1e1e1e;"><td style="padding:4px 0; color:#bbb;">Win rate</td><td style="text-align:right; color:#5bc8e8;">20%</td></tr>
