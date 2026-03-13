@@ -414,6 +414,7 @@ body {
     <button id="predict-run-btn" onclick="runPredictions()" style="background:#1e1e1e; border:1px solid #333; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:12px; padding:6px 14px; cursor:pointer;">run 10,000 simulations</button>
     <span id="predict-status" style="color:#555; font-size:11px;"></span>
     <button onclick="document.getElementById('info-modal').style.display='flex'" style="background:none; border:1px solid #2a2a2a; color:#555; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:4px 10px; cursor:pointer; margin-left:4px;">how it works</button>
+    <button id="predict-mode-btn" onclick="togglePredictMode()" style="background:none; border:1px solid #2a2a2a; color:#555; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:4px 10px; cursor:pointer;">show counts</button>
     <label style="color:#666; font-size:11px; margin-left:auto;">variance:</label>
     <select id="predict-variance" style="background:#1a1a1a; border:1px solid #2a2a2a; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 6px;">
       <option value="0.08">low — favourites dominate</option>
@@ -452,6 +453,7 @@ body {
       <span id="modal-p2-name" style="font-size:13px;font-weight:600;color:#fff"></span>
       <button id="modal-close" onclick="closeModal()">×</button>
     </div>
+    <div id="modal-winprob" style="display:none;"></div>
     <div id="modal-body"></div>
   </div>
 </div>
@@ -605,6 +607,8 @@ function openModal(username) {
 
 function closeModal() {
   document.getElementById('modal').style.display = 'none';
+  const wp = document.getElementById('modal-winprob');
+  wp.style.display = 'none'; wp.innerHTML = '';
 }
 
 document.addEventListener('click', e => {
@@ -1223,45 +1227,35 @@ function openPkMatchInfo(p1, p2) {
   // Calculate win probability using medium variance (0.25)
   const sA = playerScore(u1), sB = playerScore(u2);
   const pA = matchWinProb(sA, sB, 0.25);
-  const pB = 1 - pA;
   const pctA = Math.round(pA * 1000) / 10;
-  const pctB = Math.round(pB * 1000) / 10;
+  const pctB = Math.round((1 - pA) * 1000) / 10;
 
-  const c1 = getCache(u1), c2 = getCache(u2);
-  const flag1 = c1?.country ? countryFlag(c1.country) : '';
-  const flag2 = c2?.country ? countryFlag(c2.country) : '';
-  const ec1 = eloClass(c1?.eloRate);
-  const ec2 = eloClass(c2?.eloRate);
-
-  // Win probability bar
-  const winProbHtml = `
-    <div style="padding:10px 16px 14px; border-bottom:1px solid #1e1e1e;">
-      <div style="color:#444; font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px;">win probability (medium variance)</div>
-      <div style="display:flex; align-items:center; gap:8px; font-size:11px;">
-        <span style="color:#bbb; min-width:60px; text-align:right; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${x(u1)}</span>
-        <div style="flex:1; height:6px; background:#1a1a1a; border-radius:3px; overflow:hidden; position:relative;">
-          <div style="position:absolute; left:0; top:0; height:100%; width:${pctA}%; background:${pctA>=pctB?'#3a6a3a':'#4a2a2a'}; border-radius:3px; transition:width .3s;"></div>
-        </div>
-        <span style="min-width:38px; text-align:left; color:${pctA>=pctB?'#5dcc6a':'#cc5d5d'}; font-weight:500;">${pctA}%</span>
-      </div>
-      <div style="display:flex; align-items:center; gap:8px; font-size:11px; margin-top:5px;">
-        <span style="color:#bbb; min-width:60px; text-align:right; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${x(u2)}</span>
-        <div style="flex:1; height:6px; background:#1a1a1a; border-radius:3px; overflow:hidden; position:relative;">
-          <div style="position:absolute; left:0; top:0; height:100%; width:${pctB}%; background:${pctB>pctA?'#3a6a3a':'#4a2a2a'}; border-radius:3px; transition:width .3s;"></div>
-        </div>
-        <span style="min-width:38px; text-align:left; color:${pctB>pctA?'#5dcc6a':'#cc5d5d'}; font-weight:500;">${pctB}%</span>
-      </div>
-    </div>`;
-
-  // Reuse the existing modal but inject win prob above the stats
+  // Open the standard comparison modal first
   openMatchModal(u1, u2);
 
-  // After openMatchModal sets innerHTML, prepend the win prob section
-  requestAnimationFrame(() => {
-    const body = document.getElementById('modal-body');
-    if (body) body.insertAdjacentHTML('afterbegin', winProbHtml);
-  });
+  // Then populate the winprob div
+  const wp = document.getElementById('modal-winprob');
+  wp.style.display = 'block';
+  wp.innerHTML = `
+    <div style="padding:10px 16px 12px; border-bottom:1px solid #1e1e1e; background:#121212;">
+      <div style="color:#3a3a3a; font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px;">win probability (medium variance)</div>
+      <div style="display:flex; align-items:center; gap:10px; font-size:11px; margin-bottom:5px;">
+        <span style="color:#888; width:90px; text-align:right; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex-shrink:0;">${x(u1)}</span>
+        <div style="flex:1; height:5px; background:#1a1a1a; border-radius:3px; overflow:hidden;">
+          <div style="height:100%; width:${pctA}%; background:${pctA>=pctB?'#2d5a2d':'#5a2d2d'}; border-radius:3px;"></div>
+        </div>
+        <span style="width:36px; color:${pctA>=pctB?'#5dcc6a':'#cc5d5d'}; font-weight:500;">${pctA}%</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; font-size:11px;">
+        <span style="color:#888; width:90px; text-align:right; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex-shrink:0;">${x(u2)}</span>
+        <div style="flex:1; height:5px; background:#1a1a1a; border-radius:3px; overflow:hidden;">
+          <div style="height:100%; width:${pctB}%; background:${pctB>pctA?'#2d5a2d':'#5a2d2d'}; border-radius:3px;"></div>
+        </div>
+        <span style="width:36px; color:${pctB>pctA?'#5dcc6a':'#cc5d5d'}; font-weight:500;">${pctB}%</span>
+      </div>
+    </div>`;
 }
+
 
 renderList();
 loadElo();
@@ -1425,6 +1419,16 @@ function simulateRoundReach(r1Matches, sigma, nSims) {
 // ── PREDICTIONS TAB ──
 let predictResults = null;
 
+let predictMode = 'pct'; // 'pct' or 'count'
+const N_SIMS = 10000;
+
+function togglePredictMode() {
+  predictMode = predictMode === 'pct' ? 'count' : 'pct';
+  document.getElementById('predict-mode-btn').textContent =
+    predictMode === 'pct' ? 'show counts' : 'show %';
+  renderPredictions();
+}
+
 function runPredictions() {
   const sigma = parseFloat(document.getElementById('predict-variance').value);
   const btn = document.getElementById('predict-run-btn');
@@ -1522,8 +1526,9 @@ function renderPredictions() {
       ? `rgba(220,175,40,${txtAlpha})`
       : `rgba(60,185,210,${txtAlpha})`;
 
-    // Show one decimal place
-    const display2 = pct % 1 === 0 ? pct + '.0%' : pct.toFixed(1) + '%';
+    const display2 = predictMode === 'count'
+      ? Math.round(pct * N_SIMS / 100).toLocaleString()
+      : (pct % 1 === 0 ? pct + '.0%' : pct.toFixed(1) + '%');
     return `<td style="text-align:center; padding:0;">
       <div style="margin:2px 3px; padding:3px 6px; background:${bgColor}; color:${textColor}; font-weight:${pct>30?'500':'400'}; border-radius:2px; white-space:nowrap;">${display2}</div>
     </td>`;
