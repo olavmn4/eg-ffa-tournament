@@ -307,8 +307,20 @@ body {
   width:190px; min-width:190px;
   border:1px solid #1e1e1e; background:#141414; flex-shrink:0;
   transition: border-color .15s;
+  position: relative;
 }
 .pk-match:hover { border-color:#2e2e2e; }
+.pk-info-btn {
+  position:absolute; top:50%; right:-13px; transform:translateY(-50%);
+  width:12px; height:24px;
+  background:#161616; border:1px solid #222; border-left:none;
+  color:#2a2a2a; font-size:8px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  z-index:2; font-family:'IBM Plex Mono',monospace;
+  transition:color .15s, border-color .15s;
+  border-radius:0 2px 2px 0;
+}
+.pk-info-btn:hover { color:#777; border-color:#3a3a3a; background:#1e1e1e; }
 .pk-conn {
   width:18px; min-width:18px;
   align-self:stretch; flex-shrink:0;
@@ -1060,6 +1072,16 @@ function buildPickems() {
         card.appendChild(pkMakeSlotEl(p1, m.id, isLocked, picks, onPick));
         card.appendChild(pkMakeSlotEl(p2, m.id, false,    picks, onPick));
 
+        // Info button — only when both players are known
+        if (p1 && p2 && !hasBye) {
+          const btn = document.createElement('button');
+          btn.className = 'pk-info-btn';
+          btn.innerHTML = '&#9776;';
+          btn.title = 'compare players';
+          btn.onclick = (e) => { e.stopPropagation(); openPkMatchInfo(p1, p2); };
+          card.appendChild(btn);
+        }
+
         if (currentPick) card.classList.add('has-pick');
 
         row.appendChild(card);
@@ -1193,6 +1215,52 @@ function resetPickems() {
   localStorage.removeItem(PK_KEY);
   pickemBuilt = false;
   buildPickems();
+}
+
+function openPkMatchInfo(p1, p2) {
+  const u1 = p1.username, u2 = p2.username;
+
+  // Calculate win probability using medium variance (0.25)
+  const sA = playerScore(u1), sB = playerScore(u2);
+  const pA = matchWinProb(sA, sB, 0.25);
+  const pB = 1 - pA;
+  const pctA = Math.round(pA * 1000) / 10;
+  const pctB = Math.round(pB * 1000) / 10;
+
+  const c1 = getCache(u1), c2 = getCache(u2);
+  const flag1 = c1?.country ? countryFlag(c1.country) : '';
+  const flag2 = c2?.country ? countryFlag(c2.country) : '';
+  const ec1 = eloClass(c1?.eloRate);
+  const ec2 = eloClass(c2?.eloRate);
+
+  // Win probability bar
+  const winProbHtml = `
+    <div style="padding:10px 16px 14px; border-bottom:1px solid #1e1e1e;">
+      <div style="color:#444; font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px;">win probability (medium variance)</div>
+      <div style="display:flex; align-items:center; gap:8px; font-size:11px;">
+        <span style="color:#bbb; min-width:60px; text-align:right; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${x(u1)}</span>
+        <div style="flex:1; height:6px; background:#1a1a1a; border-radius:3px; overflow:hidden; position:relative;">
+          <div style="position:absolute; left:0; top:0; height:100%; width:${pctA}%; background:${pctA>=pctB?'#3a6a3a':'#4a2a2a'}; border-radius:3px; transition:width .3s;"></div>
+        </div>
+        <span style="min-width:38px; text-align:left; color:${pctA>=pctB?'#5dcc6a':'#cc5d5d'}; font-weight:500;">${pctA}%</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; font-size:11px; margin-top:5px;">
+        <span style="color:#bbb; min-width:60px; text-align:right; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${x(u2)}</span>
+        <div style="flex:1; height:6px; background:#1a1a1a; border-radius:3px; overflow:hidden; position:relative;">
+          <div style="position:absolute; left:0; top:0; height:100%; width:${pctB}%; background:${pctB>pctA?'#3a6a3a':'#4a2a2a'}; border-radius:3px; transition:width .3s;"></div>
+        </div>
+        <span style="min-width:38px; text-align:left; color:${pctB>pctA?'#5dcc6a':'#cc5d5d'}; font-weight:500;">${pctB}%</span>
+      </div>
+    </div>`;
+
+  // Reuse the existing modal but inject win prob above the stats
+  openMatchModal(u1, u2);
+
+  // After openMatchModal sets innerHTML, prepend the win prob section
+  requestAnimationFrame(() => {
+    const body = document.getElementById('modal-body');
+    if (body) body.insertAdjacentHTML('afterbegin', winProbHtml);
+  });
 }
 
 renderList();
@@ -1657,7 +1725,7 @@ function mkSimSlot(p, isWinner, isUpset) {
     <div style="color:#ccc; font-size:13px; font-weight:500; margin-bottom:16px; letter-spacing:.04em;">how predictions & simulation work</div>
 
     <div style="color:#666; font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">player score</div>
-    <p style="margin:0 0 14px;">Each player is assigned a composite score built from their live ranked stats. ELO is the dominant signal — it captures overall skill — but the model also rewards consistency, low forfeit-rates, and fast completions:</p>
+    <p style="margin:0 0 14px;">Each player is assigned a composite score built from their live ranked stats. ELO is the dominant signal — it captures overall skill — but the model also rewards consistency, not forfeiting, and top speed:</p>
     <table style="width:100%; border-collapse:collapse; margin-bottom:16px; font-size:11px;">
       <tr style="border-bottom:1px solid #1e1e1e;"><td style="padding:4px 0; color:#bbb;">ELO rating</td><td style="text-align:right; color:#5bc8e8;">50%</td></tr>
       <tr style="border-bottom:1px solid #1e1e1e;"><td style="padding:4px 0; color:#bbb;">Win rate</td><td style="text-align:right; color:#5bc8e8;">20%</td></tr>
