@@ -300,8 +300,27 @@ body {
   font-size:11px; color:#444; text-align:center;
   padding:4px 0 8px; letter-spacing:.06em;
   text-transform:uppercase; width:208px;
+  cursor:pointer; user-select:none;
 }
+.pk-col-hd:hover { color:#777; }
 .pk-col-body { display:flex; flex-direction:column; width:208px; }
+.pk-col.collapsed {
+  width:28px; min-width:28px; flex-shrink:0;
+}
+.pk-col.collapsed .pk-col-hd {
+  width:28px;
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  transform:rotate(180deg);
+  padding:12px 0;
+  border-right:1px solid #222;
+  height:100%;
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#333;
+}
 .pk-row { display:flex; align-items:center; flex-shrink:0; }
 .pk-match {
   width:190px; min-width:190px;
@@ -939,6 +958,14 @@ function pkResolveSlots(picks, rounds) {
   return slots;
 }
 
+const pkCollapsed = new Set();
+
+function pkVisDepth(ri) {
+  let d = 0;
+  for (let i = 0; i < ri; i++) if (!pkCollapsed.has(i)) d++;
+  return d;
+}
+
 function buildPickems() {
   pickemBuilt = true;
   const outer = document.getElementById('pk-outer');
@@ -1021,95 +1048,107 @@ function buildPickems() {
     document.getElementById('pk-progress').textContent = `${made} / ${total} picks made`;
 
     rounds.forEach((matches, ri) => {
+      const collapsed = pkCollapsed.has(ri);
+
       const col = document.createElement('div');
-      col.className = 'pk-col';
+      col.className = 'pk-col' + (collapsed ? ' collapsed' : '');
 
       const hd = document.createElement('div');
       hd.className = 'pk-col-hd';
       hd.textContent = names[ri] ?? `R${ri+1}`;
+      hd.title = 'click to collapse/expand';
+      hd.onclick = () => {
+        if (pkCollapsed.has(ri)) pkCollapsed.delete(ri);
+        else pkCollapsed.add(ri);
+        render();
+      };
       col.appendChild(hd);
 
-      const body = document.createElement('div');
-      body.className = 'pk-col-body';
-      const matchH = Math.pow(2, ri) * SLOT_H;
+      if (!collapsed) {
+        const body = document.createElement('div');
+        body.className = 'pk-col-body';
+        const matchH = Math.pow(2, pkVisDepth(ri)) * SLOT_H;
 
-      matches.forEach((m, mi) => {
-        const row = document.createElement('div');
-        row.className = 'pk-row';
-        row.style.height = matchH + 'px';
+        matches.forEach((m, mi) => {
+          const row = document.createElement('div');
+          row.className = 'pk-row';
+          row.style.height = matchH + 'px';
 
-        const card = document.createElement('div');
-        card.className = 'pk-match';
-        matchRefs[m.id] = card;
+          const card = document.createElement('div');
+          card.className = 'pk-match';
+          matchRefs[m.id] = card;
 
-        let p1, p2, hasBye;
-        if (ri === 0) {
-          p1 = m.p1; p2 = m.p2; hasBye = m.hasBye;
-        } else {
-          const s = slots[m.id] ?? {};
-          p1 = s.p1 ?? null; p2 = s.p2 ?? null; hasBye = false;
-        }
-
-        const isLocked = hasBye;
-        const currentPick = picks[m.id] ?? null;
-
-        // Auto-pick byes
-        if (hasBye && p1 && !picks[m.id]) {
-          picks[m.id] = p1.username;
-          pkSave(picks);
-        }
-
-        const onPick = (matchId, username, alreadyPicked) => {
-          const p = pkLoad();
-          if (alreadyPicked) {
-            delete p[matchId];
-            clearDownstream(matchId, rounds, p);
+          let p1, p2, hasBye;
+          if (ri === 0) {
+            p1 = m.p1; p2 = m.p2; hasBye = m.hasBye;
           } else {
-            const prevPick = p[matchId];
-            if (prevPick && prevPick !== username) clearDownstream(matchId, rounds, p);
-            p[matchId] = username;
+            const s = slots[m.id] ?? {};
+            p1 = s.p1 ?? null; p2 = s.p2 ?? null; hasBye = false;
           }
-          pkSave(p);
-          render();
-        };
 
-        card.appendChild(pkMakeSlotEl(p1, m.id, isLocked, picks, onPick));
-        card.appendChild(pkMakeSlotEl(p2, m.id, false,    picks, onPick));
+          const isLocked = hasBye;
+          const currentPick = picks[m.id] ?? null;
 
-        // Info button — only when both players are known
-        if (p1 && p2 && !hasBye) {
-          const btn = document.createElement('button');
-          btn.className = 'pk-info-btn';
-          btn.innerHTML = '&#9776;';
-          btn.title = 'compare players';
-          btn.onclick = (e) => { e.stopPropagation(); openPkMatchInfo(p1, p2); };
-          card.appendChild(btn);
-        }
-
-        if (currentPick) card.classList.add('has-pick');
-
-        row.appendChild(card);
-
-        // Connector — exact same logic as rebuildBracket
-        if (ri < rounds.length - 1) {
-          const conn = document.createElement('div');
-          conn.className = 'pk-conn';
-          const a = document.createElement('div');
-          const b = document.createElement('div');
-          if (mi % 2 === 0) {
-            a.className = 'c-empty'; b.className = 'c-bottom';
-          } else {
-            a.className = 'c-top'; b.className = 'c-empty';
+          // Auto-pick byes
+          if (hasBye && p1 && !picks[m.id]) {
+            picks[m.id] = p1.username;
+            pkSave(picks);
           }
-          conn.appendChild(a); conn.appendChild(b);
-          row.appendChild(conn);
-          connRefs[m.id] = conn; // store for hover
-        }
 
-        body.appendChild(row);
-      });
+          const onPick = (matchId, username, alreadyPicked) => {
+            const p = pkLoad();
+            if (alreadyPicked) {
+              delete p[matchId];
+              clearDownstream(matchId, rounds, p);
+            } else {
+              const prevPick = p[matchId];
+              if (prevPick && prevPick !== username) clearDownstream(matchId, rounds, p);
+              p[matchId] = username;
+            }
+            pkSave(p);
+            render();
+          };
 
-      col.appendChild(body);
+          card.appendChild(pkMakeSlotEl(p1, m.id, isLocked, picks, onPick));
+          card.appendChild(pkMakeSlotEl(p2, m.id, false,    picks, onPick));
+
+          // Info button — only when both players are known
+          if (p1 && p2 && !hasBye) {
+            const btn = document.createElement('button');
+            btn.className = 'pk-info-btn';
+            btn.innerHTML = '&#9776;';
+            btn.title = 'compare players';
+            btn.onclick = (e) => { e.stopPropagation(); openPkMatchInfo(p1, p2); };
+            card.appendChild(btn);
+          }
+
+          if (currentPick) card.classList.add('has-pick');
+
+          row.appendChild(card);
+
+          // Connector — only if next round is also visible
+          const nextVisible = ri < rounds.length - 1 && !pkCollapsed.has(ri + 1);
+          if (nextVisible) {
+            const conn = document.createElement('div');
+            conn.className = 'pk-conn';
+            const a = document.createElement('div');
+            const b = document.createElement('div');
+            if (mi % 2 === 0) {
+              a.className = 'c-empty'; b.className = 'c-bottom';
+            } else {
+              a.className = 'c-top'; b.className = 'c-empty';
+            }
+            conn.appendChild(a); conn.appendChild(b);
+            row.appendChild(conn);
+            connRefs[m.id] = conn; // store for hover
+          }
+
+          body.appendChild(row);
+        });
+
+        col.appendChild(body);
+      }
+
       outer.appendChild(col);
     });
   }
@@ -1217,6 +1256,7 @@ function clearDownstream(matchId, rounds, picks) {
 function resetPickems() {
   if (!confirm('Reset all your picks?')) return;
   localStorage.removeItem(PK_KEY);
+  pkCollapsed.clear();
   pickemBuilt = false;
   buildPickems();
 }
