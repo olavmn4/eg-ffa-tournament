@@ -2177,7 +2177,9 @@ function bracketDiffScore(username) {
   const path = findPlayerPath(username, tree);
   if (!path) { _bdCache[username] = 0; return 0; }
   const elos = [];
-  for (let r = 0; r <= 4 && r < path.length; r++) {
+  // Non-bye: collect R1-R5 (5 rounds). Bye: R1 is empty so collect R2-R5 (4 rounds).
+  for (let r = 0; r <= 5 && r < path.length; r++) {
+    if (!path[r].pool.length) continue;
     const top = [...path[r].pool].sort((a,b) => playerScore(b.username) - playerScore(a.username))[0];
     if (top) { const e = elo(top.username); if (e !== null) elos.push(e); }
   }
