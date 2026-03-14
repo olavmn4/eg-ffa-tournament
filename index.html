@@ -439,7 +439,7 @@ body {
       <button class="srt"    onclick="setBracketSort('discrepancy',this)">elo gap ↓</button>
       <button class="srt"    onclick="setBracketSort('top_elo',this)">top elo ↓</button>
       <div style="margin-left:auto; display:flex; align-items:center; gap:6px; position:relative;">
-        <label style="color:#444; font-size:11px;">most likely bracket progression:</label>
+        <label style="color:#444; font-size:11px;">bracket luck:</label>
         <input id="luck-search" type="text" placeholder="search player…" autocomplete="off"
           style="background:#1a1a1a; border:1px solid #2a2a2a; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 8px; width:160px; outline:none;"
           oninput="luckSearchInput(this.value)" onfocus="luckSearchInput(this.value)" onclick="event.stopPropagation()">
@@ -706,6 +706,7 @@ function renderList() {
     return at(a) - at(b);
   });
 
+  const isBracketDiff = sortMode === 'bracket_diff';
   document.getElementById('pgrid').innerHTML = list.map(p => {
     const e = elo(p.username);
     const c = getCache(p.username);
@@ -714,13 +715,21 @@ function renderList() {
       : null;
     const flag = c?.country ? countryFlag(c.country) : '';
     const rank = c?.eloRank ? '<span class="pc-rank">#' + c.eloRank + '</span>' : '';
-    return `<div class="pc${hlUser===p.username?' hl':''}" onclick="openModal('${x(p.username)}')">
+    const clickFn = isBracketDiff
+      ? `openBracketLuckFromList('${x(p.username)}')`
+      : `openModal('${x(p.username)}')`;
+    const bdScore = isBracketDiff ? bracketDiffScore(p.username) : null;
+    const bdHtml = bdScore
+      ? `<span style="font-size:10px; color:#c07a3a; margin-left:4px;" title="avg ELO of likely R1-R5 opponents">\u2248${bdScore}</span>`
+      : '';
+    return `<div class="pc${hlUser===p.username?' hl':''}" onclick="${clickFn}">
       <span class="pc-seed">#${p.seed}</span>
       ${flag ? `<span class="pc-flag">${flag}</span>` : ''}
       <span class="pc-user">${x(p.username)}</span>
       ${p.autoAdvance ? '<span class="pc-bye">bye</span>' : ''}
       ${rank}
       <span class="pc-elo${e===null?' none':' '+eloClass(e)}">${e!==null?e:'—'}</span>
+      ${bdHtml}
     </div>`;
   }).join('');
 }
@@ -2168,7 +2177,7 @@ function bracketDiffScore(username) {
   const path = findPlayerPath(username, tree);
   if (!path) { _bdCache[username] = 0; return 0; }
   const elos = [];
-  for (let r = 0; r <= 3 && r < path.length; r++) {
+  for (let r = 0; r <= 4 && r < path.length; r++) {
     const top = [...path[r].pool].sort((a,b) => playerScore(b.username) - playerScore(a.username))[0];
     if (top) { const e = elo(top.username); if (e !== null) elos.push(e); }
   }
@@ -2182,7 +2191,7 @@ function bracketDiffScore(username) {
 const HELP_CONTENT = {
   list: { title: 'players tab', tips: [
     ['search bar', 'Filter by username, display name, or seed number.'],
-    ['sort buttons', 'Sort by ELO, win rate, best time, average time, name, seed, or bracket difficulty (avg ELO of likely R1-R4 opponents).'],
+    ['sort buttons', 'Sort by ELO, win rate, best time, average time, name, seed, or bracket difficulty (avg ELO of likely R1-R5 opponents).'],
     ['click a player card', 'Opens a head-to-head comparison modal with full stats for both players.'],
   ]},
   bracket: { title: 'bracket tab', tips: [
@@ -2244,6 +2253,22 @@ function openHelpModal() {
     }, 3000);
   }, 1500);
 })();
+
+
+// ── BRACKET LUCK FROM PLAYER LIST ────────────────────────────────────────
+function openBracketLuckFromList(username) {
+  // Switch to bracket tab
+  const bracketBtn = document.querySelector('.tab[onclick*="bracket"]');
+  switchTab('bracket', bracketBtn);
+  // Populate the luck search and render panel
+  document.getElementById('luck-search').value = username;
+  document.getElementById('luck-clear-btn').style.display = 'inline';
+  renderLuckPanel(username);
+  // Scroll luck panel into view
+  setTimeout(() => {
+    document.getElementById('luck-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 50);
+}
 
 
 
