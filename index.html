@@ -59,6 +59,10 @@ body {
   border-bottom: 1px solid #2a2a2a;
   padding: 0 16px;
   display: flex;
+  position: sticky;
+  top: 49px;
+  z-index: 90;
+  background: #111;
 }
 
 .tab {
@@ -84,6 +88,10 @@ body {
   gap: 6px;
   align-items: center;
   border-bottom: 1px solid #1e1e1e;
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  background: #111;
 }
 .list-controls label { color: #444; font-size: 11px; margin-right: 4px; }
 
@@ -146,6 +154,10 @@ body {
   letter-spacing: .06em;
   text-transform: uppercase;
   width: 208px;
+  position: sticky;
+  top: 0;
+  background: #111;
+  z-index: 10;
 }
 #sim-bk-outer .bk-col-hd {
   cursor: pointer;
@@ -301,6 +313,10 @@ body {
   padding:4px 0 8px; letter-spacing:.06em;
   text-transform:uppercase; width:208px;
   cursor:pointer; user-select:none;
+  position: sticky;
+  top: 0;
+  background: #111;
+  z-index: 10;
 }
 .pk-col-hd:hover { color:#777; }
 .pk-col-body { display:flex; flex-direction:column; width:208px; }
@@ -382,6 +398,13 @@ body {
   <div id="elo-updated">—</div>
   <span style="color:#2a2a2a; font-size:11px; margin-left:4px;">@Prolav</span>
   <input id="search" type="text" placeholder="search..." oninput="onSearch(this.value)">
+  <div style="position:relative; display:inline-block; margin-left:4px;">
+    <button id="help-btn" onclick="openHelpModal()" style="background:none;border:1px solid #333;color:#666;font-family:'IBM Plex Mono',monospace;font-size:12px;cursor:pointer;padding:2px 8px;" title="features guide">?</button>
+    <div id="help-tooltip" style="display:none; position:absolute; top:calc(100% + 8px); right:0; background:#1a1a1a; border:1px solid #333; color:#aaa; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:6px 10px; white-space:nowrap; z-index:500; pointer-events:none;">
+      <div style="position:absolute; top:-5px; right:10px; width:8px; height:8px; background:#1a1a1a; border-left:1px solid #333; border-top:1px solid #333; transform:rotate(45deg);"></div>
+      tips &amp; features guide
+    </div>
+  </div>
 </div>
 
 <div id="tabs">
@@ -403,19 +426,20 @@ body {
       <button class="srt"    onclick="setSort('avgtime',this)">avg time ↑</button>
       <button class="srt"    onclick="setSort('name',this)">name</button>
       <button class="srt"    onclick="setSort('seed',this)">seed</button>
+      <button class="srt"    onclick="setSort('bracket_diff',this)">bracket difficulty ↓</button>
     </div>
     <div id="pgrid"></div>
   </div>
 
   <div id="v-bracket">
-    <div class="list-controls" style="margin-bottom:0; flex-wrap:wrap; gap:8px; position:relative;">
+    <div class="list-controls" style="flex-wrap:wrap; gap:8px; position:relative; top:auto;">
       <label>sort matches:</label>
       <button class="srt on" onclick="setBracketSort('default',this)">bracket order</button>
       <button class="srt"    onclick="setBracketSort('avg_elo',this)">avg elo ↓</button>
       <button class="srt"    onclick="setBracketSort('discrepancy',this)">elo gap ↓</button>
       <button class="srt"    onclick="setBracketSort('top_elo',this)">top elo ↓</button>
       <div style="margin-left:auto; display:flex; align-items:center; gap:6px; position:relative;">
-        <label style="color:#444; font-size:11px;">bracket luck:</label>
+        <label style="color:#444; font-size:11px;">most likely bracket progression:</label>
         <input id="luck-search" type="text" placeholder="search player…" autocomplete="off"
           style="background:#1a1a1a; border:1px solid #2a2a2a; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 8px; width:160px; outline:none;"
           oninput="luckSearchInput(this.value)" onfocus="luckSearchInput(this.value)" onclick="event.stopPropagation()">
@@ -446,8 +470,8 @@ body {
 
 </div>
 
-<div id="v-predict" style="display:none; overflow:auto; padding:16px;">
-  <div id="predict-controls" style="margin-bottom:14px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+<div id="v-predict" style="display:none; flex-direction:column; overflow:hidden;">
+  <div id="predict-controls" style="padding:10px 16px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; background:#111; border-bottom:1px solid #1e1e1e; flex-shrink:0;">
     <button id="predict-run-btn" onclick="runPredictions()" style="background:#1e1e1e; border:1px solid #333; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:12px; padding:6px 14px; cursor:pointer;">run 10,000 simulations</button>
     <span id="predict-status" style="color:#555; font-size:11px;"></span>
     <button onclick="document.getElementById('info-modal').style.display='flex'" style="background:none; border:1px solid #2a2a2a; color:#555; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:4px 10px; cursor:pointer; margin-left:4px;">how it works</button>
@@ -459,11 +483,11 @@ body {
       <option value="0.80">high — erratic results</option>
     </select>
   </div>
-  <div id="predict-output"></div>
+  <div style="overflow:auto; flex:1; padding:16px;"><div id="predict-output"></div></div>
 </div>
 
-<div id="v-simulate" style="display:none; overflow:hidden; display:none; flex-direction:column;">
-  <div id="sim-topbar" style="padding:8px 16px; border-bottom:1px solid #1e1e1e; display:flex; align-items:center; gap:12px; flex-shrink:0; flex-wrap:wrap;">
+<div id="v-simulate" style="display:none; overflow:hidden; flex-direction:column;">
+  <div id="sim-topbar" style="padding:8px 16px; border-bottom:1px solid #1e1e1e; display:flex; align-items:center; gap:12px; flex-shrink:0; flex-wrap:wrap; background:#111;">
     <button onclick="runSimulation()" style="background:#1e1e1e; border:1px solid #333; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:12px; padding:5px 14px; cursor:pointer;">▶ run simulation</button>
     <label style="color:#555; font-size:11px;">variance:</label>
     <select id="sim-variance" style="background:#1a1a1a; border:1px solid #2a2a2a; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 6px;">
@@ -653,6 +677,7 @@ document.addEventListener('click', e => {
 });
 
 // ── LIST ──
+let currentTab = 'list';
 let sortMode = 'elo', searchQ = '', hlUser = null;
 
 function renderList() {
@@ -667,6 +692,7 @@ function renderList() {
   if (sortMode === 'rank')    list = [...list].sort((a,b) => (getCache(a.username)?.eloRank??99999) - (getCache(b.username)?.eloRank??99999));
   if (sortMode === 'name')    list = [...list].sort((a,b) => a.username.localeCompare(b.username));
   if (sortMode === 'seed')    list = [...list].sort((a,b) => a.seed - b.seed);
+  if (sortMode === 'bracket_diff') list = [...list].sort((a,b) => bracketDiffScore(b.username) - bracketDiffScore(a.username));
   if (sortMode === 'winrate') list = [...list].sort((a,b) => {
     const wr = p => { const c = getCache(p.username); if (!c?.season?.wins) return -1; return c.season.wins / (c.season.wins + c.season.loses); };
     return wr(b) - wr(a);
@@ -881,6 +907,9 @@ function eloClass(eloRate) {
 }
 
 function setViewHeights() {
+  // Keep tabs sticky just below topbar
+  const tbH = document.getElementById('topbar').offsetHeight;
+  document.getElementById('tabs').style.top = tbH + 'px';
   const used = document.getElementById('topbar').offsetHeight
               + document.getElementById('tabs').offsetHeight;
   const h = (window.innerHeight - used - 2) + 'px';
@@ -888,17 +917,20 @@ function setViewHeights() {
   document.getElementById('v-bracket').style.maxHeight = h;
   document.getElementById('v-pickems').style.maxHeight = h;
   document.getElementById('v-list').style.maxHeight = h;
+  document.getElementById('v-predict').style.height = h;
   document.getElementById('v-predict').style.maxHeight = h;
+  document.getElementById('v-simulate').style.height = h;
   document.getElementById('v-simulate').style.maxHeight = h;
 }
 
 function switchTab(id, btn) {
+  currentTab = id;
   document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
   btn.classList.add('on');
   document.getElementById('v-list').style.display     = id==='list'    ? 'block' : 'none';
   document.getElementById('v-bracket').style.display  = id==='bracket' ? 'flex' : 'none';
   document.getElementById('v-pickems').style.display  = id==='pickems' ? 'block' : 'none';
-  document.getElementById('v-predict').style.display  = id==='predict' ? 'block' : 'none';
+  document.getElementById('v-predict').style.display  = id==='predict' ? 'flex' : 'none';
   document.getElementById('v-simulate').style.display = id==='simulate'? 'flex' : 'none';
   if (id === 'bracket' && !bracketBuilt) buildBracket();
   if (id === 'pickems' && !pickemBuilt) buildPickems();
@@ -1592,7 +1624,7 @@ function renderPredictions() {
 
   let h = `<div style="overflow-x:auto;">
 <table style="border-collapse:collapse; font-size:11px; width:100%; min-width:900px;">
-<thead>
+<thead style="position:sticky; top:0; z-index:20; background:#111;">
 <tr style="border-bottom:1px solid #2a2a2a;">
   <th style="text-align:left; padding:6px 8px; font-weight:400; color:#444; position:sticky; left:0; background:#111; z-index:1; min-width:160px;">player</th>
   <th style="text-align:right; padding:6px 8px; font-weight:400; color:#444; min-width:50px;">elo</th>
@@ -1663,7 +1695,6 @@ function runSimulation() {
   const status = document.getElementById('sim-status');
   status.textContent = 'simulating…';
   setTimeout(() => {
-    simCollapsed.clear();
     simRounds = simulateSingleTournament(R1, sigma);
     status.textContent = '';
     renderSimBracket(simRounds);
@@ -1677,8 +1708,9 @@ function simulateSingleTournament(r1Matches, sigma) {
     const sA = playerScore(m.p1.username);
     const sB = playerScore(m.p2.username);
     const pA = matchWinProb(sA, sB, sigma);
+    const basePa = matchWinProb(sA, sB, 0.25);
     const winner = Math.random() < pA ? m.p1 : m.p2;
-    return { p1: m.p1, p2: m.p2, winner, pA: Math.round(pA * 100), isBye: false };
+    return { p1: m.p1, p2: m.p2, winner, pA: Math.round(pA * 100), basePa: Math.round(basePa * 100), isBye: false };
   });
 
   const rounds = [r0];
@@ -1694,8 +1726,9 @@ function simulateSingleTournament(r1Matches, sigma) {
       const sA = playerScore(p1.username);
       const sB = playerScore(p2.username);
       const pA = matchWinProb(sA, sB, sigma);
+      const basePa = matchWinProb(sA, sB, 0.25);
       const winner = Math.random() < pA ? p1 : p2;
-      cur.push({ p1, p2, winner, pA: Math.round(pA * 100), isBye: false });
+      cur.push({ p1, p2, winner, pA: Math.round(pA * 100), basePa: Math.round(basePa * 100), isBye: false });
     }
     rounds.push(cur);
   }
@@ -1716,12 +1749,13 @@ function renderSimBracket(rounds) {
     champEl.innerHTML = `🏆 ${flag} ${x(champion.display || champion.username)}${eStr}`;
   }
 
-  // Count upsets across all rounds
+  // Count upsets: lower-scored player won, using fixed medium-sigma threshold
   let upsetCount = 0;
   for (const rnd of rounds) {
     for (const m of rnd) {
       if (!m.isBye && m.winner && m.p1 && m.p2) {
-        const isUpset = (m.winner === m.p1 && m.pA < 35) || (m.winner === m.p2 && m.pA > 65);
+        const bp = matchWinProb(playerScore(m.p1.username), playerScore(m.p2.username), 0.25) * 100;
+        const isUpset = (m.winner === m.p1 && bp < 35) || (m.winner === m.p2 && bp > 65);
         if (isUpset) upsetCount++;
       }
     }
@@ -1775,8 +1809,11 @@ function renderSimBracket(rounds) {
         const card = document.createElement('div');
         card.className = 'bk-match';
 
+        const bp2 = !m.isBye && m.p1 && m.p2
+          ? matchWinProb(playerScore(m.p1.username), playerScore(m.p2.username), 0.25) * 100
+          : 50;
         const isUpset = !m.isBye && m.winner && m.p1 && m.p2 &&
-          ((m.winner === m.p1 && m.pA < 35) || (m.winner === m.p2 && m.pA > 65));
+          ((m.winner === m.p1 && bp2 < 35) || (m.winner === m.p2 && bp2 > 65));
         if (isUpset) card.style.borderColor = '#5a3a1a';
 
         card.appendChild(mkSimSlot(m.p1, m.winner === m.p1 && !m.isBye, isUpset && m.winner === m.p1));
@@ -2121,6 +2158,95 @@ document.addEventListener('click', () => {
 
 
 
+// ── BRACKET DIFFICULTY SORT ───────────────────────────────────────────────
+
+const _bdCache = {};
+
+function bracketDiffScore(username) {
+  if (_bdCache[username] !== undefined) return _bdCache[username];
+  const tree = buildBracketTree();
+  const path = findPlayerPath(username, tree);
+  if (!path) { _bdCache[username] = 0; return 0; }
+  const elos = [];
+  for (let r = 0; r <= 3 && r < path.length; r++) {
+    const top = [...path[r].pool].sort((a,b) => playerScore(b.username) - playerScore(a.username))[0];
+    if (top) { const e = elo(top.username); if (e !== null) elos.push(e); }
+  }
+  const score = elos.length ? Math.round(elos.reduce((a,b) => a+b, 0) / elos.length) : 0;
+  _bdCache[username] = score;
+  return score;
+}
+
+// ── HELP MODAL ────────────────────────────────────────────────────────────
+
+const HELP_CONTENT = {
+  list: { title: 'players tab', tips: [
+    ['search bar', 'Filter by username, display name, or seed number.'],
+    ['sort buttons', 'Sort by ELO, win rate, best time, average time, name, seed, or bracket difficulty (avg ELO of likely R1-R4 opponents).'],
+    ['click a player card', 'Opens a head-to-head comparison modal with full stats for both players.'],
+  ]},
+  bracket: { title: 'bracket tab', tips: [
+    ['sort matches', 'Reorder R1 matches by bracket position, avg ELO, ELO gap, or top ELO.'],
+    ['bracket luck search', 'Search any player to see their predicted path — likely opponents each round, chance of facing each, and win probability.'],
+    ['click a match card', 'Opens a head-to-head comparison for those two players.'],
+    ['click a player name', 'Highlights that player across the bracket.'],
+  ]},
+  pickems: { title: 'pickems tab', tips: [
+    ['pick a winner', 'Click any player to advance them. Changing an earlier pick clears downstream picks automatically.'],
+    ['hover a pick (R2+)', 'Highlights the full path through the bracket in green.'],
+    ['info button on cards', 'The small button on match cards shows win probability and head-to-head stats.'],
+    ['auto-pick', 'Fills R1 (or R1+R2) picks using ELO and stats. Skips already-made picks.'],
+    ['collapse columns', 'Click any round header to collapse it to a thin strip.'],
+    ['reset all', 'Clears all picks (asks for confirmation).'],
+  ]},
+  predict: { title: 'predictions tab', tips: [
+    ['run simulations', 'Runs 10,000 tournaments using a logistic ELO model.'],
+    ['variance selector', 'Low = favourites dominate. High = chaotic upsets.'],
+    ['sort columns', 'Click any round header in the table to sort by it.'],
+    ['show counts / show %', 'Toggle between percentages and raw counts out of 10,000.'],
+  ]},
+  simulate: { title: 'simulate tab', tips: [
+    ['run tournament', 'Simulates one full tournament. Re-run for different outcomes.'],
+    ['gold player', 'The champion of that simulation run.'],
+    ['orange borders', 'An upset occurred — the lower-rated player won.'],
+    ['collapse columns', 'Click any round header to collapse it to a thin strip.'],
+  ]},
+};
+
+function openHelpModal() {
+  const content = HELP_CONTENT[currentTab] || HELP_CONTENT.list;
+  let inner = `<h2 style="margin:0 0 16px; font-size:13px; color:#ccc; font-weight:500;">${content.title} — tips</h2>`;
+  inner += `<table style="width:100%; border-collapse:collapse;">`;
+  for (const [label, desc] of content.tips) {
+    inner += `<tr>
+      <td style="padding:5px 12px 5px 0; color:#555; white-space:nowrap; vertical-align:top; font-size:11px;">${label}</td>
+      <td style="padding:5px 0; color:#888; font-size:11px;">${desc}</td>
+    </tr>`;
+  }
+  inner += `</table>`;
+  inner += `<div style="margin-top:14px; padding-top:10px; border-top:1px solid #1e1e1e; color:#333; font-size:10px;">updates based on which tab you are viewing</div>`;
+  document.getElementById('help-modal-content').innerHTML = inner;
+  document.getElementById('help-modal').style.display = 'flex';
+}
+
+
+// ── HELP TOOLTIP (show once) ──────────────────────────────────────────────
+(function() {
+  const tt = document.getElementById('help-tooltip');
+  if (!tt) return;
+  setTimeout(() => {
+    tt.style.display = 'block';
+    tt.style.opacity = '1';
+    tt.style.transition = 'opacity 0.8s';
+    setTimeout(() => {
+      tt.style.opacity = '0';
+      setTimeout(() => { tt.style.display = 'none'; }, 800);
+    }, 3000);
+  }, 1500);
+})();
+
+
+
 </script>
 <div id="info-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:1000; align-items:center; justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
   <div style="background:#141414; border:1px solid #2a2a2a; max-width:560px; width:90%; max-height:80vh; overflow-y:auto; padding:24px 28px; font-size:12px; line-height:1.7; color:#999; position:relative;">
@@ -2148,6 +2274,12 @@ document.addEventListener('click', () => {
 
     <div style="color:#666; font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px; margin-top:4px;">simulate tab</div>
     <p style="margin:0 0 4px;">The simulate tab runs a <b style="color:#bbb;">single tournament</b> from start to finish. This is one sample from the distribution — a plausible outcome, not the most likely one. Upsets are highlighted in orange. You can re-run as many times as you like to explore different possible outcomes.</p>
+  </div>
+</div>
+<div id="help-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:2000; align-items:center; justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#141414; border:1px solid #2a2a2a; max-width:560px; width:92%; max-height:80vh; overflow-y:auto; padding:24px 28px; position:relative;">
+    <button onclick="document.getElementById('help-modal').style.display='none'" style="position:absolute; top:12px; right:14px; background:none; border:none; color:#444; font-size:16px; cursor:pointer; font-family:'IBM Plex Mono',monospace;">&#x2715;</button>
+    <div id="help-modal-content"></div>
   </div>
 </div>
 </body>
