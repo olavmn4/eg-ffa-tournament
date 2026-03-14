@@ -1463,7 +1463,7 @@
     "manual": true,
     "source": "r2_bracket"
   },
-  "_updated": "2026-03-14T16:18:06.807130+00:00",
+  "_updated": "2026-03-14T16:32:53.037130+00:00",
   "r1-1": {
     "winner": "oDaksh",
     "loser": "crazelol",
@@ -2648,5 +2648,1529 @@
     "manual": true,
     "source": "manual_entry",
     "forfeited": false
+  },
+  "r2-0": {
+    "winner": "oDaksh",
+    "loser": "FazeBlaze",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-1": {
+    "winner": "silverrruns",
+    "loser": "IronHammer269",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-2": {
+    "winner": "Olivjeee",
+    "loser": "whisperingraven_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-3": {
+    "winner": "Sycamo",
+    "loser": "fovolli",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-4": {
+    "winner": "Contraption8or",
+    "loser": "dnaiel_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-5": {
+    "winner": "Kelawesome",
+    "loser": "GL0riousKingGojo",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-6": {
+    "winner": "dolqhin",
+    "loser": "Melizsa",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-7": {
+    "winner": "meowmeow888",
+    "loser": "Center_mass",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-8": {
+    "winner": "legoboy1243_",
+    "loser": "Fancyfied",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-9": {
+    "winner": "landvis",
+    "loser": "Stuffwithsimon",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-10": {
+    "winner": "Braixen_",
+    "loser": "andysh1sells",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-11": {
+    "winner": "te2et",
+    "loser": "Povio",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-12": {
+    "winner": "maitrecraft1234",
+    "loser": "Ultramongo",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-13": {
+    "winner": "Doog4321",
+    "loser": "Uranic",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-14": {
+    "winner": "Pjoes",
+    "loser": "Zound_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-15": {
+    "winner": "Renitky_",
+    "loser": "dddeergirl",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-16": {
+    "winner": "clairofangirl",
+    "loser": "ooVers",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-17": {
+    "winner": "HufterL",
+    "loser": "derakous",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-18": {
+    "winner": "catpats",
+    "loser": "Senkunal",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-19": {
+    "winner": "Pancakeman143",
+    "loser": "TheRedpool",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-20": {
+    "winner": "remora__",
+    "loser": "MasTroneP",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-21": {
+    "winner": "MaybeSoul",
+    "loser": "jakkeboy3651",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-22": {
+    "winner": "SheepyWeepy6883",
+    "loser": "tabsmag",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-23": {
+    "winner": "VampishWheat",
+    "loser": "CoyRhyme",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-24": {
+    "winner": "yubbawubba8",
+    "loser": "Sinid13",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-25": {
+    "winner": "Duk4n_",
+    "loser": "arxll",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-26": {
+    "winner": "_Joshuaar",
+    "loser": "Rezy_The_cupcake",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-27": {
+    "winner": "Piissii",
+    "loser": "vankumbu",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-28": {
+    "winner": "HDMICables",
+    "loser": "elo_terminator",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-29": {
+    "winner": "qafo_",
+    "loser": "lilypyonn",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-30": {
+    "winner": "_zupi",
+    "loser": "roobley",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-31": {
+    "winner": "Unknwonc",
+    "loser": "AeroAstroid",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-32": {
+    "winner": "raheemm",
+    "loser": "Sensiboomer",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-33": {
+    "winner": "NeoR_",
+    "loser": "Logs808",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-34": {
+    "winner": "21MashedPotatoes",
+    "loser": "dandannyboy",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-35": {
+    "winner": "nolettuceplz",
+    "loser": "A_md",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-36": {
+    "winner": "voyager63",
+    "loser": "Chinxop",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-37": {
+    "winner": "_KrakerS",
+    "loser": "phxc",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-38": {
+    "winner": "lctaco",
+    "loser": "PepperLIVE",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-39": {
+    "winner": "beavery",
+    "loser": "NokeyDokey",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-40": {
+    "winner": "Dxw3950",
+    "loser": "AlfieDxniels",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-41": {
+    "winner": "fnhvr",
+    "loser": "fytratey",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-42": {
+    "winner": "HailZeus",
+    "loser": "ser0ses",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-43": {
+    "winner": "LOOK_HERO",
+    "loser": "marmarounos",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-44": {
+    "winner": "JackoWacko62",
+    "loser": "CONTRIMENCEPTOR",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-45": {
+    "winner": "pxb_",
+    "loser": "PaketniyMaster",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-46": {
+    "winner": "Invst",
+    "loser": "Seapeekay",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-47": {
+    "winner": "Oliver_meh",
+    "loser": "lunarcinna",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-48": {
+    "winner": "expellfar",
+    "loser": "Drowe",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-49": {
+    "winner": "rdmncy",
+    "loser": "creeperskilldogs",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-50": {
+    "winner": "Darthloll",
+    "loser": "Clueless147",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-51": {
+    "winner": "DotALotTroller",
+    "loser": "Minepro_80",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-52": {
+    "winner": "pplazzz",
+    "loser": "AveryCello",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-53": {
+    "winner": "Pluszix202",
+    "loser": "LeBabouin30",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-54": {
+    "winner": "IronicMatt",
+    "loser": "277r",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-55": {
+    "winner": "TapL",
+    "loser": "3tenacity",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-56": {
+    "winner": "BaccaDeww",
+    "loser": "MangoMittens",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-57": {
+    "winner": "mellanade",
+    "loser": "Miltonias",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-58": {
+    "winner": "infume",
+    "loser": "Aldood0920",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-59": {
+    "winner": "tommorerow",
+    "loser": "ekbb2",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-60": {
+    "winner": "ulsah1n",
+    "loser": "ethwit",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-61": {
+    "winner": "TuCarta",
+    "loser": "roscomnadzor",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-62": {
+    "winner": "Ice_Wyve",
+    "loser": "SheepAreFine",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-63": {
+    "winner": "hilolbob",
+    "loser": "drx6",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-64": {
+    "winner": "SocratesDisciple",
+    "loser": "piglin_backshots",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-65": {
+    "winner": "Ranik_",
+    "loser": "Plenttz",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-66": {
+    "winner": "bing_pigs",
+    "loser": "Leeskie_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-68": {
+    "winner": "webwormy",
+    "loser": "aquari5",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-69": {
+    "winner": "Meli_GG",
+    "loser": "RecallOcean",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-70": {
+    "winner": "klazyt",
+    "loser": "AutomateoAR",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-71": {
+    "winner": "srcd",
+    "loser": "leiriell",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-72": {
+    "winner": "Farbwechsler",
+    "loser": "Talfy",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-73": {
+    "winner": "Zaintew",
+    "loser": "ilovemay72",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-74": {
+    "winner": "DARVY__X1",
+    "loser": "Leexz",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-75": {
+    "winner": "kW1st",
+    "loser": "T0astyBoot",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-76": {
+    "winner": "fe666",
+    "loser": "offlinelotus",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-77": {
+    "winner": "Casssual",
+    "loser": "Jasgamer409",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-78": {
+    "winner": "Cookieaddicts",
+    "loser": "35pi",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-79": {
+    "winner": "CrispLake",
+    "loser": "Perspectpeiae",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-80": {
+    "winner": "kingbugcatcher",
+    "loser": "PotatoBRB",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-81": {
+    "winner": "Helloxyz",
+    "loser": "Tharve",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-82": {
+    "winner": "_Frier3n_",
+    "loser": "Gdasher",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-83": {
+    "winner": "Jos_13",
+    "loser": "Genkii27",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-84": {
+    "winner": "Ancoboyy",
+    "loser": "Vorpal1",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-85": {
+    "winner": "pandaendoz",
+    "loser": "BigSoub",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-86": {
+    "winner": "comfypeepo",
+    "loser": "Heeheemiester68",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-87": {
+    "winner": "jpliketaco",
+    "loser": "MinosChampion",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-88": {
+    "winner": "AllAdvancements",
+    "loser": "marcyselo_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-89": {
+    "winner": "DaWildWombat",
+    "loser": "IdealTV",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-90": {
+    "winner": "okCobalt",
+    "loser": "mangrovejack",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-91": {
+    "winner": "EpicSnek",
+    "loser": "SpectralThief",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-92": {
+    "winner": "graysandwich",
+    "loser": "riveralx",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-93": {
+    "winner": "BlazeMind",
+    "loser": "xLourx",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-95": {
+    "winner": "IBringSuffering",
+    "loser": "Cyphered",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-96": {
+    "winner": "cheeseonfries",
+    "loser": "gertpoizz05",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-97": {
+    "winner": "MrAaz",
+    "loser": "Pub1ius_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-98": {
+    "winner": "JebFromGameHouse",
+    "loser": "confyowo",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-99": {
+    "winner": "oChqos",
+    "loser": "The_Zakster",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-100": {
+    "winner": "Voidol",
+    "loser": "Sh1nzu",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-101": {
+    "winner": "therowdie",
+    "loser": "HDM3",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-102": {
+    "winner": "steez",
+    "loser": "CKLeo_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-103": {
+    "winner": "raylucks",
+    "loser": "crazyguy1908",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-104": {
+    "winner": "Caqen",
+    "loser": "PizzaTre",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-105": {
+    "winner": "Fritjofson",
+    "loser": "Jedispace1",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-106": {
+    "winner": "karmeq",
+    "loser": "sk_im",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-107": {
+    "winner": "kvlike_",
+    "loser": "Crifzer",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-108": {
+    "winner": "Jedispace2",
+    "loser": "vaedish",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-109": {
+    "winner": "violet_veil",
+    "loser": "WaterSwordsman",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-110": {
+    "winner": "benemies",
+    "loser": "GradientGray",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-111": {
+    "winner": "hackingnoises",
+    "loser": "araglus",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-112": {
+    "winner": "v_strid",
+    "loser": "2welt",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-113": {
+    "winner": "7rowl",
+    "loser": "rindylomb",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-114": {
+    "winner": "Frolde",
+    "loser": "Vullord",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-115": {
+    "winner": "FrizzClips",
+    "loser": "eriklul",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-116": {
+    "winner": "CallMeBlumi",
+    "loser": "blindtravel",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-117": {
+    "winner": "CyberOG",
+    "loser": "rhodium45_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-118": {
+    "winner": "yjako",
+    "loser": "fireball67_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-119": {
+    "winner": "d_gq",
+    "loser": "Horranzo",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-120": {
+    "winner": "Byugoi",
+    "loser": "King_WolfLIVE",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-121": {
+    "winner": "atrejoe2004",
+    "loser": "Tobetoflipb",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-122": {
+    "winner": "oLudio",
+    "loser": "KorutoColt",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-123": {
+    "winner": "mukvl",
+    "loser": "Nata50SK",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-126": {
+    "winner": "12braincells",
+    "loser": "rekrap2",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-131": {
+    "winner": "rouxzzcfop",
+    "loser": "_Makke",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-133": {
+    "winner": "Burawoy",
+    "loser": "lottsy_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-136": {
+    "winner": "goopli",
+    "loser": "WiiSuper",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-137": {
+    "winner": "Stratum7",
+    "loser": "CxrtxR",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-140": {
+    "winner": "TUDORULE",
+    "loser": "Cooobb",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-141": {
+    "winner": "kohout135",
+    "loser": "starruns",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-146": {
+    "winner": "Haxagon",
+    "loser": "loodlow",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-147": {
+    "winner": "Sinjinplays",
+    "loser": "RiverTurtle_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-148": {
+    "winner": "Dowqe",
+    "loser": "samioh",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-149": {
+    "winner": "ivyosun",
+    "loser": "thenewcity",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-151": {
+    "winner": "skylewl",
+    "loser": "thatguyDZI",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-156": {
+    "winner": "Brightlmom",
+    "loser": "gamer_nl",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-157": {
+    "winner": "IIsALlama",
+    "loser": "TheRemekkPlays",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-158": {
+    "winner": "PiggyPlague302",
+    "loser": "Thatguy_Pat",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-160": {
+    "winner": "Slime_Guy_",
+    "loser": "MuhammadPro5741",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-161": {
+    "winner": "thecamo6",
+    "loser": "JackFromHell1",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-162": {
+    "winner": "PatrickTN_",
+    "loser": "vampyro111",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-163": {
+    "winner": "Czelco",
+    "loser": "ImTooAwesome",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-165": {
+    "winner": "Pieiscool123",
+    "loser": "Comfa",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-168": {
+    "winner": "furk1e",
+    "loser": "90Tom",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-170": {
+    "winner": "nyachloe",
+    "loser": "poposor",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-172": {
+    "winner": "RemakeRes",
+    "loser": "Krake",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-174": {
+    "winner": "damlet",
+    "loser": "Malleum",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-175": {
+    "winner": "johnMYER",
+    "loser": "Lumion_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-180": {
+    "winner": "nEmerald",
+    "loser": "Redos_s",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-181": {
+    "winner": "tebor",
+    "loser": "okrzej_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-183": {
+    "winner": "_Hypn0tic",
+    "loser": "GrahamRR",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-185": {
+    "winner": "awsome3",
+    "loser": "Raptoroftheend",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-186": {
+    "winner": "TyPier",
+    "loser": "VentiBeast",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-189": {
+    "winner": "Nacay",
+    "loser": "teddyexe",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-191": {
+    "winner": "Zonax",
+    "loser": "A1rlesss",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-195": {
+    "winner": "mrc_y",
+    "loser": "Jpg777777",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-196": {
+    "winner": "21mustard",
+    "loser": "Kierros",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-200": {
+    "winner": "Adaik",
+    "loser": "yesh1l",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-202": {
+    "winner": "knifelyy",
+    "loser": "dwaqee1",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-204": {
+    "winner": "outrag",
+    "loser": "eimiie",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-205": {
+    "winner": "suravil",
+    "loser": "M84U",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-206": {
+    "winner": "jackuroo",
+    "loser": "Archipelego",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-209": {
+    "winner": "KEBABCOO",
+    "loser": "CrisOnTop",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-211": {
+    "winner": "idkghost_",
+    "loser": "snorlaxirl_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-212": {
+    "winner": "megafalcons",
+    "loser": "PickPig",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-213": {
+    "winner": "_Weeoo",
+    "loser": "Goreay",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-216": {
+    "winner": "seseg",
+    "loser": "spyQT",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-218": {
+    "winner": "Dasumato",
+    "loser": "BroWo9",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-67": {
+    "winner": "Voitto1",
+    "loser": "tetobo",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-94": {
+    "winner": "AzHEHE",
+    "loser": "Smelt824",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-124": {
+    "winner": "okCobalt",
+    "loser": "mangrovejack",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-125": {
+    "winner": "EpicSnek",
+    "loser": "SpectralThief",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-127": {
+    "winner": "BlazeMind",
+    "loser": "xLourx",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-129": {
+    "winner": "IBringSuffering",
+    "loser": "Cyphered",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-130": {
+    "winner": "cheeseonfries",
+    "loser": "gertpoizz05",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-132": {
+    "winner": "JebFromGameHouse",
+    "loser": "confyowo",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-134": {
+    "winner": "Voidol",
+    "loser": "Sh1nzu",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-135": {
+    "winner": "therowdie",
+    "loser": "HDM3",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-138": {
+    "winner": "Caqen",
+    "loser": "PizzaTre",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-139": {
+    "winner": "Fritjofson",
+    "loser": "Jedispace1",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-142": {
+    "winner": "Jedispace2",
+    "loser": "vaedish",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-143": {
+    "winner": "violet_veil",
+    "loser": "WaterSwordsman",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-144": {
+    "winner": "benemies",
+    "loser": "GradientGray",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-145": {
+    "winner": "hackingnoises",
+    "loser": "araglus",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-150": {
+    "winner": "CallMeBlumi",
+    "loser": "blindtravel",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-152": {
+    "winner": "yjako",
+    "loser": "fireball67_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-153": {
+    "winner": "d_gq",
+    "loser": "Horranzo",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-154": {
+    "winner": "Byugoi",
+    "loser": "King_WolfLIVE",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-155": {
+    "winner": "atrejoe2004",
+    "loser": "Tobetoflipb",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-159": {
+    "winner": "Enryu_43",
+    "loser": "bewwox",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-164": {
+    "winner": "Karlo585",
+    "loser": "Luxvored",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-166": {
+    "winner": "Pinne",
+    "loser": "_Makke",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-167": {
+    "winner": "LuLz___",
+    "loser": "lottsy_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-169": {
+    "winner": "Eyal_ROYALE",
+    "loser": "rcd__11",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-171": {
+    "winner": "goopli",
+    "loser": "CxrtxR",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-173": {
+    "winner": "arnexlol",
+    "loser": "usefulsister24",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-176": {
+    "winner": "kohout135",
+    "loser": "McSammich",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-177": {
+    "winner": "AutomattPLUS",
+    "loser": "SpectrumThing",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-178": {
+    "winner": "ANJOUU",
+    "loser": "eipherr",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-179": {
+    "winner": "yeopgihoney",
+    "loser": "Lathilla",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-182": {
+    "winner": "Sinjinplays",
+    "loser": "samioh",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-184": {
+    "winner": "ivyosun",
+    "loser": "kubik2",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-187": {
+    "winner": "CGQ_",
+    "loser": "FIrstGuy",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-188": {
+    "winner": "Gho",
+    "loser": "defek13",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-190": {
+    "winner": "Brightlmom",
+    "loser": "RedLunatic",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-192": {
+    "winner": "PiggyPlague302",
+    "loser": "TheRemekkPlays",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-193": {
+    "winner": "sryyyyyyyyyyyyyy",
+    "loser": "Thatguy_Pat",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-194": {
+    "winner": "Specnr",
+    "loser": "MuhammadPro5741",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-197": {
+    "winner": "PatrickTN_",
+    "loser": "ImTooAwesome",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-198": {
+    "winner": "Czelco",
+    "loser": "Ailurro",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-199": {
+    "winner": "Pieiscool123",
+    "loser": "YippeeKaiDay",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-201": {
+    "winner": "U1tr0",
+    "loser": "sanjinhu",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-203": {
+    "winner": "Prince_01",
+    "loser": "90Tom",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-207": {
+    "winner": "Rrcks51",
+    "loser": "Krake",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-208": {
+    "winner": "galaxy1010_w",
+    "loser": "Malleum",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-210": {
+    "winner": "johnMYER",
+    "loser": "N0tJim",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-214": {
+    "winner": "brenana__",
+    "loser": "Redos_s",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-215": {
+    "winner": "nEmerald",
+    "loser": "okrzej_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-217": {
+    "winner": "_Hypn0tic",
+    "loser": "connietheycookie",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-219": {
+    "winner": "Daniel_H212",
+    "loser": "Raptoroftheend",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-220": {
+    "winner": "awsome3",
+    "loser": "VentiBeast",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-221": {
+    "winner": "TyPier",
+    "loser": "Solder",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-222": {
+    "winner": "Erikfzf",
+    "loser": "_Trl_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-223": {
+    "winner": "madobrick",
+    "loser": "teddyexe",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-224": {
+    "winner": "Nacay",
+    "loser": "Doqvii",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-225": {
+    "winner": "Zonax",
+    "loser": "ExAtom",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-226": {
+    "winner": "Rahmations",
+    "loser": "A1rlesss",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-227": {
+    "winner": "MrBudgiee",
+    "loser": "oWinny",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-228": {
+    "winner": "dwoh",
+    "loser": "Jppsh",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-230": {
+    "winner": "mrc_y",
+    "loser": "Jpg777777",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-231": {
+    "winner": "21mustard",
+    "loser": "Kierros",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-233": {
+    "winner": "Tompas_",
+    "loser": "Meowfasa",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-234": {
+    "winner": "JadeCut",
+    "loser": "romuu__",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-235": {
+    "winner": "fruitberries",
+    "loser": "yesh1l",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-236": {
+    "winner": "Adaik",
+    "loser": "WockaWocka",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-237": {
+    "winner": "knifelyy",
+    "loser": "atbili",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-238": {
+    "winner": "carinanebula25",
+    "loser": "dwaqee1",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-239": {
+    "winner": "romuxii",
+    "loser": "eimiie",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-240": {
+    "winner": "outrag",
+    "loser": "M84U",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-241": {
+    "winner": "suravil",
+    "loser": "Archipelego",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-242": {
+    "winner": "jackuroo",
+    "loser": "DJathome",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-243": {
+    "winner": "SIGMACARLOMAN",
+    "loser": "swoss_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-244": {
+    "winner": "xBlitzy1",
+    "loser": "CrisOnTop",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-245": {
+    "winner": "KEBABCOO",
+    "loser": "Deago_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-246": {
+    "winner": "idkghost_",
+    "loser": "Shalomanon",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-247": {
+    "winner": "megafalcons",
+    "loser": "snorlaxirl_",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-248": {
+    "winner": "_Weeoo",
+    "loser": "PickPig",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-249": {
+    "winner": "michawsomereborn",
+    "loser": "Goreay",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-250": {
+    "winner": "nsla",
+    "loser": "wooftuah",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-251": {
+    "winner": "seseg",
+    "loser": "SquidBites",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-252": {
+    "winner": "Spiget",
+    "loser": "spyQT",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-253": {
+    "winner": "7rc3",
+    "loser": "BroWo9",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-254": {
+    "winner": "Dasumato",
+    "loser": "JZia",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-255": {
+    "winner": "UnderWolf",
+    "loser": "uglylosergirl",
+    "manual": true,
+    "source": "r3_bracket"
+  },
+  "r2-128": {
+    "winner": "snowdeerjulie",
+    "loser": "macaronilopo",
+    "manual": true,
+    "source": "manual_entry"
   }
 }
