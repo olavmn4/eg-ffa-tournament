@@ -2417,63 +2417,50 @@ function renderBuzz() {
 
   let html = '';
 
-  // ── MATCHES TO WATCH ──────────────────────────────────────────────────
+  // ── MATCHES TO WATCH — sorted by highest avg ELO ─────────────────────
   if (nextRound <= 10) {
     const upcoming = bracketRounds[nextRound - 1] ?? [];
     const rname = roundNames[nextRound - 1] ?? ('R' + nextRound);
 
-    // Score each upcoming match
     const scoredMatches = upcoming
       .filter(m => m.p1 && m.p2 && !m.hasBye)
       .map(m => {
-        const s1 = playerScore(m.p1.username);
-        const s2 = playerScore(m.p2.username);
         const e1 = elo(m.p1.username) ?? 0;
         const e2 = elo(m.p2.username) ?? 0;
         const avgElo = (e1 + e2) / 2;
-        const winProb = matchWinProb(s1, s2, 0.25);
-        // Closeness: closer to 50% = more interesting
-        const closeness = 1 - Math.abs(winProb - 0.5) * 2;
-        // Quality: higher avg elo = better match
-        const quality = avgElo / 2000;
-        // Interest score: blend closeness + quality
-        const interest = closeness * 0.6 + quality * 0.4;
-        return { m, s1, s2, e1, e2, winProb, avgElo, closeness, interest };
+        const winProb = matchWinProb(playerScore(m.p1.username), playerScore(m.p2.username), 0.25);
+        return { m, e1, e2, avgElo, winProb };
       })
-      .sort((a, b) => b.interest - a.interest);
+      .sort((a, b) => b.avgElo - a.avgElo)
+      .slice(0, 10);
 
     html += `<div style="margin-bottom:28px;">
       <div style="font-size:11px; color:#444; letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px;">${rname} — matches to watch</div>`;
 
-    const topMatches = scoredMatches.slice(0, 10);
-    if (!topMatches.length) {
+    if (!scoredMatches.length) {
       html += '<p style="color:#333; font-size:12px;">No upcoming matchups found yet.</p>';
     } else {
       html += '<div style="display:flex; flex-direction:column; gap:4px;">';
-      topMatches.forEach(({ m, e1, e2, winProb, closeness }) => {
+      scoredMatches.forEach(({ m, e1, e2, winProb }) => {
         const c1 = getCache(m.p1.username);
         const c2 = getCache(m.p2.username);
         const f1 = c1?.country ? countryFlag(c1.country) : '';
         const f2 = c2?.country ? countryFlag(c2.country) : '';
         const pct1 = Math.round(winProb * 100);
         const pct2 = 100 - pct1;
-        // Label
-        let label = '';
-        if (closeness > 0.85) label = '<span style="color:#c07a3a; font-size:10px; margin-left:6px;">coin flip</span>';
-        else if (e1 > 1500 && e2 > 1500) label = '<span style="color:#5bc8e8; font-size:10px; margin-left:6px;">high quality</span>';
-        else if (closeness > 0.6 && Math.max(e1,e2) > 1200) label = '<span style="color:#7dc95e; font-size:10px; margin-left:6px;">upset watch</span>';
 
         html += `<div style="background:#141414; border:1px solid #1e1e1e; padding:8px 12px; display:flex; align-items:center; gap:8px; cursor:pointer;"
           onclick="openMatchModal('${x(m.p1.username)}','${x(m.p2.username)}')"
           onmouseover="this.style.background='#1a1a1a'" onmouseout="this.style.background='#141414'">
-          <span style="color:#aaa; font-size:12px; flex:1;">${f1} <span class="${eloClass(e1)||''}">${x(m.p1.display||m.p1.username)}</span></span>
-          <span style="font-size:10px; color:#555;">${pct1}%</span>
-          <div style="width:80px; height:4px; background:#1e1e1e; border-radius:2px; overflow:hidden;">
+          <span style="color:#aaa; font-size:12px; min-width:120px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${f1} ${x(m.p1.display||m.p1.username)}</span>
+          ${e1 ? `<span class="${eloClass(e1)}" style="font-size:10px; min-width:30px;">${e1}</span>` : '<span style="font-size:10px; color:#333; min-width:30px;">—</span>'}
+          <span style="font-size:10px; color:#555; min-width:24px; text-align:right;">${pct1}%</span>
+          <div style="width:60px; height:4px; background:#1e1e1e; border-radius:2px; overflow:hidden; flex-shrink:0;">
             <div style="width:${pct1}%; height:100%; background:#444;"></div>
           </div>
-          <span style="font-size:10px; color:#555;">${pct2}%</span>
-          <span style="color:#aaa; font-size:12px; flex:1; text-align:right;"><span class="${eloClass(e2)||''}">${x(m.p2.display||m.p2.username)}</span> ${f2}</span>
-          ${label}
+          <span style="font-size:10px; color:#555; min-width:24px;">${pct2}%</span>
+          ${e2 ? `<span class="${eloClass(e2)}" style="font-size:10px; min-width:30px; text-align:right;">${e2}</span>` : '<span style="font-size:10px; color:#333; min-width:30px;">—</span>'}
+          <span style="color:#aaa; font-size:12px; min-width:120px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:right;">${x(m.p2.display||m.p2.username)} ${f2}</span>
         </div>`;
       });
       html += '</div>';
@@ -2484,7 +2471,6 @@ function renderBuzz() {
   // ── BIGGEST UPSETS ────────────────────────────────────────────────────
   html += `<div style="font-size:11px; color:#444; letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px;">biggest upsets by round</div>`;
 
-  // Build a lookup: username -> player object from R1 data
   const playerLookup = {};
   for (const m of R1) {
     for (const p of [m.p1, m.p2]) {
@@ -2496,22 +2482,25 @@ function renderBuzz() {
     const rname = roundNames[r - 1] ?? ('R' + r);
     const matches = byRound[r];
 
-    // Score each match as an upset
     const upsets = matches
       .map(val => {
         const wp = playerLookup[val.winner.toLowerCase()];
         const lp = playerLookup[val.loser.toLowerCase()];
         if (!wp || !lp) return null;
-        const sw = playerScore(wp.username);
-        const sl = playerScore(lp.username);
-        // Winner's probability (they were the underdog if < 50%)
-        const winnerProb = matchWinProb(sw, sl, 0.25);
-        if (winnerProb >= 0.5) return null; // not an upset
-        return { wp, lp, winnerProb: Math.round(winnerProb * 100), val };
+        const cw = getCache(wp.username);
+        const cl = getCache(lp.username);
+        const ew = cw?.eloRate ?? null;
+        const el_ = cl?.eloRate ?? null;
+        // Skip if either player has no ELO
+        if (!ew || !el_) return null;
+        const winnerProb = matchWinProb(playerScore(wp.username), playerScore(lp.username), 0.25);
+        if (winnerProb >= 0.5) return null;
+        const eloDiff = el_ - ew; // positive = winner had lower ELO
+        return { wp, lp, winnerProb: Math.round(winnerProb * 100), ew, el_, eloDiff, val };
       })
       .filter(Boolean)
       .sort((a, b) => a.winnerProb - b.winnerProb)
-      .slice(0, 5);
+      .slice(0, 10);
 
     if (!upsets.length) {
       html += `<div style="margin-bottom:20px;">
@@ -2525,25 +2514,25 @@ function renderBuzz() {
       <div style="font-size:11px; color:#333; margin-bottom:6px;">${rname}</div>
       <div style="display:flex; flex-direction:column; gap:3px;">`;
 
-    upsets.forEach(({ wp, lp, winnerProb, val }) => {
+    upsets.forEach(({ wp, lp, winnerProb, ew, el_, eloDiff, val }) => {
       const cw = getCache(wp.username);
       const cl = getCache(lp.username);
       const fw = cw?.country ? countryFlag(cw.country) : '';
       const fl = cl?.country ? countryFlag(cl.country) : '';
-      const ew = cw?.eloRate ?? null;
-      const el_ = cl?.eloRate ?? null;
       const timeStr = val.time_ms ? ` · ${Math.floor(val.time_ms/60000)}:${String(Math.floor((val.time_ms%60000)/1000)).padStart(2,'0')}` : '';
       const forfeitStr = val.forfeited ? ' <span style="color:#444; font-size:10px;">[forfeit]</span>' : '';
+      const diffStr = eloDiff > 0 ? `+${eloDiff}` : `${eloDiff}`;
 
       html += `<div style="background:#141414; border:1px solid #1e1e1e; padding:7px 12px; display:flex; align-items:center; gap:8px; cursor:pointer;"
         onclick="openMatchModal('${x(wp.username)}','${x(lp.username)}')"
         onmouseover="this.style.background='#1a1a1a'" onmouseout="this.style.background='#141414'">
         <span style="font-size:10px; color:#c05a5a; min-width:32px; font-weight:600;">${winnerProb}%</span>
         <span style="font-size:12px; color:#7dc95e;">${fw} ${x(wp.display||wp.username)}</span>
-        ${ew ? `<span class="${eloClass(ew)}" style="font-size:10px;">${ew}</span>` : ''}
+        <span class="${eloClass(ew)}" style="font-size:10px;">${ew}</span>
         <span style="color:#333; font-size:11px;">beat</span>
         <span style="font-size:12px; color:#666;">${fl} ${x(lp.display||lp.username)}</span>
-        ${el_ ? `<span class="${eloClass(el_)}" style="font-size:10px;">${el_}</span>` : ''}
+        <span class="${eloClass(el_)}" style="font-size:10px;">${el_}</span>
+        <span style="font-size:10px; color:#555; margin-left:2px;">(${diffStr})</span>
         <span style="color:#333; font-size:10px; margin-left:auto;">${timeStr}${forfeitStr}</span>
       </div>`;
     });
