@@ -5657,7 +5657,7 @@
     "manual": true,
     "source": "manual_entry"
   },
-  "_updated": "2026-03-14T21:21:04.752285+00:00",
+  "_updated": "2026-03-14T21:26:30.013878+00:00",
   "r7-3": {
     "winner": "DARVY__X1",
     "loser": "Cookieaddicts",
@@ -5709,6 +5709,12 @@
   "r8-3": {
     "winner": "outrag",
     "loser": "Erikfzf",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r9-0": {
+    "winner": "DARVY__X1",
+    "loser": "HDMICables",
     "manual": true,
     "source": "manual_entry"
   }
