@@ -2477,6 +2477,7 @@ function renderBuzz() {
       const ew = cw?.eloRate ?? null;
       const el_ = cl?.eloRate ?? null;
       if (!ew || !el_) return null;
+      if (val.walkover) return null; // exclude no-shows/walkovers
       const winnerProb = matchWinProb(playerScore(wp.username), playerScore(lp.username), 0.25);
       if (winnerProb >= 0.5) return null;
       const eloDiff = el_ - ew;
