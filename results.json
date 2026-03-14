@@ -5510,7 +5510,7 @@
     "manual": true,
     "source": "r6_bracket"
   },
-  "_updated": "2026-03-14T18:12:51.923202+00:00",
+  "_updated": "2026-03-14T18:19:07.629492+00:00",
   "r5-16": {
     "winner": "snowdeerjulie",
     "loser": "Voidol",
@@ -5528,5 +5528,11 @@
     "loser": "swtl1",
     "manual": true,
     "source": "inferred_from_r2"
+  },
+  "r5-29": {
+    "winner": "fruitberries",
+    "loser": "knifelyy",
+    "manual": true,
+    "source": "manual_entry"
   }
 }
