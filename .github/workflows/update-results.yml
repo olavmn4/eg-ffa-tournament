@@ -1,0 +1,62 @@
+name: Update Match Results
+
+on:
+  workflow_dispatch:
+    inputs:
+      round:
+        description: 'Round number (1=R1, 2=R2, ...)'
+        required: true
+        default: '1'
+      workers:
+        description: 'Concurrent workers (default 5)'
+        required: false
+        default: '5'
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-results:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch match results
+        run: |
+          python scripts/fetch_results.py \
+            --round ${{ github.event.inputs.round }} \
+            --workers ${{ github.event.inputs.workers }}
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add results.json scripts/pending_review.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: R${{ github.event.inputs.round }} results [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+            git push
+          fi
+
+      - name: Show pending review
+        run: |
+          if [ -f scripts/pending_review.json ]; then
+            COUNT=$(python3 -c "import json; d=json.load(open('scripts/pending_review.json')); print(len([k for k,v in d.items() if not v.get('winner')]))")
+            echo "Matches needing manual review: $COUNT"
+            if [ "$COUNT" -gt "0" ]; then
+              python3 -c "
+import json
+d = json.load(open('scripts/pending_review.json'))
+for k, v in d.items():
+    if not v.get('winner'):
+        print(f'  {k}: {v[\"p1\"]} vs {v[\"p2\"]}')
+"
+            fi
+          fi
