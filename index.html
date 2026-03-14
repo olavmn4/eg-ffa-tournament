@@ -421,7 +421,10 @@ body {
   <h1>Couriway x EG FFA Tournament</h1>
   <div class="meta">956 players &nbsp;·&nbsp; <span id="elo-count">—</span> ranked players</div>
   <div id="elo-updated">—</div>
+  <div style="display:flex; align-items:center; gap:6px;">
   <div id="results-status" style="font-size:11px; color:#444;"></div>
+  <button onclick="loadResults()" id="results-refresh-btn" style="display:none; background:none; border:1px solid #2a2a2a; color:#444; font-family:'IBM Plex Mono',monospace; font-size:10px; cursor:pointer; padding:1px 7px;" title="force refresh results">↻</button>
+</div>
   <span style="color:#2a2a2a; font-size:11px; margin-left:4px;">@Prolav</span>
   <input id="search" type="text" placeholder="search..." oninput="onSearch(this.value)">
   <div style="position:relative; display:inline-block; margin-left:4px;">
@@ -561,7 +564,7 @@ let RESULTS = {}; // confirmed match results from results.json  // lowercase use
 
 async function loadElo() {
   try {
-    const r = await fetch('players.json?_=' + Date.now());
+    const r = await fetch('players.json?_=' + Date.now(), { cache: 'no-store' });
     if (!r.ok) return;
     const d = await r.json();
     CACHE = {};
@@ -2388,7 +2391,7 @@ function openBracketLuckFromList(username) {
 // ── RESULTS LOADER ────────────────────────────────────────────────────────
 async function loadResults() {
   try {
-    const r = await fetch('results.json?_=' + Date.now());
+    const r = await fetch('results.json?_=' + Date.now(), { cache: 'no-store' });
     if (!r.ok) return; // file doesn't exist yet — tournament hasn't started
     const d = await r.json();
     RESULTS = {};
@@ -2409,6 +2412,8 @@ async function loadResults() {
           })()
         : '';
       el.innerHTML = `<span style="color:#5dcc6a;">&#9679;</span> ${count} results${updated ? ' · ' + updated : ''}`;
+      const btn = document.getElementById('results-refresh-btn');
+      if (btn) btn.style.display = 'inline';
     }
 
     // Rebuild bracket if it has been opened, otherwise just store results
@@ -2421,7 +2426,7 @@ async function loadResults() {
 }
 
 // Auto-poll results.json every 60 seconds during tournament
-setInterval(loadResults, 60000);
+setInterval(loadResults, 15000); // poll every 15s during tournament
 
 
 // ── BUZZ TAB ──────────────────────────────────────────────────────────────
