@@ -48,15 +48,5 @@ jobs:
       - name: Show pending review
         run: |
           if [ -f scripts/pending_review.json ]; then
-            COUNT=$(python3 -c "import json; d=json.load(open('scripts/pending_review.json')); print(len([k for k,v in d.items() if not v.get('winner')]))")
-            echo "Matches needing manual review: $COUNT"
-            if [ "$COUNT" -gt "0" ]; then
-              python3 -c "
-import json
-d = json.load(open('scripts/pending_review.json'))
-for k, v in d.items():
-    if not v.get('winner'):
-        print(f'  {k}: {v[\"p1\"]} vs {v[\"p2\"]}')
-"
-            fi
+            python3 scripts/show_pending.py
           fi
