@@ -1,2099 +1,2652 @@
 {
-  "r1-1": {
-    "winner": "oDaksh",
-    "loser": "crazelol",
-    "time_ms": 966274,
-    "match_id": 8014479,
-    "date": 1773502294,
-    "forfeited": false
+  "r1-0": {
+    "winner": "FazeBlaze",
+    "loser": "Kaltsi",
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-2": {
-    "winner": "silverrruns",
-    "loser": "zaaning",
-    "time_ms": 864881,
-    "match_id": 8014354,
-    "date": 1773502184,
-    "forfeited": false
+  "r1-5": {
+    "winner": "Olivjeee",
+    "loser": "aerogels",
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-3": {
-    "winner": "IronHammer269",
-    "loser": "Slinky17",
-    "time_ms": 1011520,
-    "match_id": 8014521,
-    "date": 1773502336,
-    "forfeited": false
+  "r1-6": {
+    "winner": "fovolli",
+    "loser": "MeliBelly8301",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-7": {
     "winner": "Sycamo",
     "loser": "Its_Saanvi",
-    "time_ms": 955033,
-    "match_id": 8014467,
-    "date": 1773502277,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-11": {
-    "winner": "Kelawesome",
-    "loser": "dionle",
-    "time_ms": 608370,
-    "match_id": 8014069,
-    "date": 1773501931,
-    "forfeited": false
+  "r1-8": {
+    "winner": "Contraption8or",
+    "loser": "Ayball",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-9": {
+    "winner": "dnaiel_",
+    "loser": "Jestem_Dalex",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-12": {
     "winner": "Melizsa",
     "loser": "Rugbug_Redfern",
-    "time_ms": 965388,
-    "match_id": 8014476,
-    "date": 1773502286,
-    "forfeited": false
-  },
-  "r1-13": {
-    "winner": "dolqhin",
-    "loser": "ItsZel",
-    "time_ms": 583562,
-    "match_id": 8014045,
-    "date": 1773501911,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-14": {
     "winner": "meowmeow888",
     "loser": "kittymmeow",
-    "time_ms": 843876,
-    "match_id": 8014341,
-    "date": 1773502168,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-15": {
-    "winner": "Center_mass",
-    "loser": "Infernally",
-    "time_ms": 895113,
-    "match_id": 8014385,
-    "date": 1773502205,
-    "forfeited": false
+  "r1-16": {
+    "winner": "Fancyfied",
+    "loser": "Sky2516",
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-17": {
-    "winner": "legoboy1243_",
-    "loser": "Ilikepie04",
-    "time_ms": 734679,
-    "match_id": 8014215,
-    "date": 1773502055,
-    "forfeited": false
+  "r1-18": {
+    "winner": "Stuffwithsimon",
+    "loser": "YadongSong",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-19": {
     "winner": "landvis",
     "loser": "oGarfield",
-    "time_ms": 937743,
-    "match_id": 8014456,
-    "date": 1773502258,
-    "forfeited": false
-  },
-  "r1-21": {
-    "winner": "Braixen_",
-    "loser": "voomz",
-    "time_ms": 713562,
-    "match_id": 8014199,
-    "date": 1773502034,
-    "forfeited": false
-  },
-  "r1-23": {
-    "winner": "te2et",
-    "loser": "simghst",
-    "time_ms": 812709,
-    "match_id": 8014306,
-    "date": 1773502139,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-22": {
     "winner": "Povio",
     "loser": "DarthPaper5",
-    "time_ms": 1051908,
-    "match_id": 8014540,
-    "date": 1773502354,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-23": {
+    "winner": "te2et",
+    "loser": "simghst",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-24": {
     "winner": "Ultramongo",
     "loser": "ChidoriNL",
-    "time_ms": 906655,
-    "match_id": 8014392,
-    "date": 1773502210,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-25": {
     "winner": "maitrecraft1234",
     "loser": "MangoPoutine",
-    "time_ms": 787094,
-    "match_id": 8014275,
-    "date": 1773502111,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-26": {
+    "winner": "Doog4321",
+    "loser": "SlydonCooper",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-27": {
+    "winner": "Uranic",
+    "loser": "nb4p",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-28": {
     "winner": "Pjoes",
     "loser": "UkePlayer77",
-    "time_ms": 769804,
-    "match_id": 8014250,
-    "date": 1773502092,
-    "forfeited": false
-  },
-  "r1-29": {
-    "winner": "Zound_",
-    "loser": "FORSENLULWLULW",
-    "time_ms": 872573,
-    "match_id": 8014351,
-    "date": 1773502183,
-    "forfeited": false
-  },
-  "r1-31": {
-    "winner": "dddeergirl",
-    "loser": "newcool1230",
-    "time_ms": 1183557,
-    "match_id": 8014692,
-    "date": 1773502522,
-    "forfeited": false
-  },
-  "r1-30": {
-    "winner": "Renitky_",
-    "loser": "_axurios",
-    "time_ms": 705133,
-    "match_id": 8014195,
-    "date": 1773502030,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-32": {
     "winner": "ooVers",
     "loser": "Zaywire",
-    "time_ms": 1192792,
-    "match_id": 8014675,
-    "date": 1773502515,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-33": {
-    "winner": "clairofangirl",
-    "loser": "feeber45",
-    "time_ms": 844940,
-    "match_id": 8014343,
-    "date": 1773502172,
-    "forfeited": false
-  },
-  "r1-36": {
-    "winner": "catpats",
-    "loser": "Tripa1k2",
-    "time_ms": 1191575,
-    "match_id": 8014674,
-    "date": 1773502514,
-    "forfeited": false
-  },
-  "r1-35": {
-    "winner": "HufterL",
-    "loser": "Molong4",
-    "time_ms": 1161917,
-    "match_id": 8014640,
-    "date": 1773502478,
-    "forfeited": false
+  "r1-34": {
+    "winner": "derakous",
+    "loser": "Limeling",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-37": {
     "winner": "Senkunal",
     "loser": "PotatoLucy",
-    "time_ms": 871782,
-    "match_id": 8014371,
-    "date": 1773502196,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-38": {
+    "winner": "TheRedpool",
+    "loser": "sxtom",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-39": {
+    "winner": "Pancakeman143",
+    "loser": "aclassict0y",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-41": {
     "winner": "MasTroneP",
     "loser": "Crank0608",
-    "time_ms": 1196215,
-    "match_id": 8014730,
-    "date": 1773502538,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-42": {
     "winner": "MaybeSoul",
     "loser": "ness_19",
-    "time_ms": 656010,
-    "match_id": 8014129,
-    "date": 1773501987,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-43": {
-    "winner": "jakkeboy3651",
-    "loser": "Vysuals",
-    "time_ms": 649021,
-    "match_id": 8014130,
-    "date": 1773501988,
-    "forfeited": false
-  },
-  "r1-47": {
-    "winner": "VampishWheat",
-    "loser": "Kirbo1234",
-    "time_ms": 734214,
-    "match_id": 8014224,
-    "date": 1773502060,
-    "forfeited": false
+  "r1-44": {
+    "winner": "tabsmag",
+    "loser": "Tatu__",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-48": {
     "winner": "yubbawubba8",
     "loser": "Fonias_",
-    "time_ms": 810408,
-    "match_id": 8014300,
-    "date": 1773502135,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-50": {
-    "winner": "Duk4n_",
-    "loser": "ElRichi",
-    "time_ms": 507668,
-    "match_id": 8013974,
-    "date": 1773501831,
-    "forfeited": false
-  },
-  "r1-51": {
-    "winner": "arxll",
-    "loser": "Sammy_JP",
-    "time_ms": 678426,
-    "match_id": 8014184,
-    "date": 1773502022,
-    "forfeited": false
-  },
-  "r1-53": {
-    "winner": "Rezy_The_cupcake",
-    "loser": "_suboptimal",
-    "time_ms": 990926,
-    "match_id": 8014502,
-    "date": 1773502318,
-    "forfeited": false
+  "r1-49": {
+    "winner": "Sinid13",
+    "loser": "Urenzal",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-54": {
     "winner": "Piissii",
     "loser": "P3n9uin",
-    "time_ms": 686031,
-    "match_id": 8014165,
-    "date": 1773502012,
-    "forfeited": false
-  },
-  "r1-56": {
-    "winner": "elo_terminator",
-    "loser": "ImagineDragonX",
-    "time_ms": 957601,
-    "match_id": 8014471,
-    "date": 1773502282,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-57": {
     "winner": "HDMICables",
     "loser": "Palestinianmelon",
-    "time_ms": 527939,
-    "match_id": 8013990,
-    "date": 1773501853,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-58": {
-    "winner": "qafo_",
-    "loser": "Blooopy",
-    "time_ms": 863171,
-    "match_id": 8014360,
-    "date": 1773502186,
-    "forfeited": false
-  },
-  "r1-61": {
-    "winner": "_zupi",
-    "loser": "Verdqy",
-    "time_ms": 815292,
-    "match_id": 8014301,
-    "date": 1773502135,
-    "forfeited": false
-  },
-  "r1-64": {
-    "winner": "raheemm",
-    "loser": "Petalight",
-    "time_ms": 682610,
-    "match_id": 8014148,
-    "date": 1773502001,
-    "forfeited": false
+  "r1-60": {
+    "winner": "roobley",
+    "loser": "TripledToHerGap",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-62": {
     "winner": "AeroAstroid",
     "loser": "SolaceonX",
-    "time_ms": 756517,
-    "match_id": 8014245,
-    "date": 1773502085,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-63": {
+    "winner": "Unknwonc",
+    "loser": "UnOr1ginalName",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-67": {
+    "winner": "Logs808",
+    "loser": "12pk",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-68": {
     "winner": "21MashedPotatoes",
     "loser": "losercore",
-    "time_ms": 604697,
-    "match_id": 8014063,
-    "date": 1773501926,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-69": {
     "winner": "dandannyboy",
     "loser": "fishari",
-    "time_ms": 698515,
-    "match_id": 8014155,
-    "date": 1773502003,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-70": {
+    "winner": "A_md",
+    "loser": "Madoosu",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-72": {
     "winner": "voyager63",
     "loser": "fainrada",
-    "time_ms": 804333,
-    "match_id": 8014293,
-    "date": 1773502128,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-73": {
     "winner": "Chinxop",
     "loser": "De6ept",
-    "time_ms": 991623,
-    "match_id": 8014498,
-    "date": 1773502312,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-74": {
-    "winner": "_KrakerS",
-    "loser": "FinnQwert",
-    "time_ms": 598824,
-    "match_id": 8014057,
-    "date": 1773501919,
-    "forfeited": false
-  },
-  "r1-78": {
-    "winner": "NokeyDokey",
-    "loser": "Jokerod",
-    "time_ms": 646853,
-    "match_id": 8014105,
-    "date": 1773501970,
-    "forfeited": false
+  "r1-77": {
+    "winner": "PepperLIVE",
+    "loser": "GamePaigeHQ",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-79": {
     "winner": "beavery",
     "loser": "cvctus",
-    "time_ms": 630173,
-    "match_id": 8014087,
-    "date": 1773501952,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-82": {
-    "winner": "fnhvr",
-    "loser": "spesium",
-    "time_ms": 1050267,
-    "match_id": 8014551,
-    "date": 1773502367,
-    "forfeited": false
+  "r1-80": {
+    "winner": "Dxw3950",
+    "loser": "raddlez",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-81": {
+    "winner": "AlfieDxniels",
+    "loser": "knew",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-83": {
     "winner": "fytratey",
     "loser": "FireLord12",
-    "time_ms": 901552,
-    "match_id": 8014416,
-    "date": 1773502229,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-86": {
-    "winner": "marmarounos",
-    "loser": "aquaticpurity",
-    "time_ms": 934499,
-    "match_id": 8014420,
-    "date": 1773502232,
-    "forfeited": false
+  "r1-84": {
+    "winner": "ser0ses",
+    "loser": "mount4ng",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-85": {
     "winner": "HailZeus",
     "loser": "Luisyun",
-    "time_ms": 741108,
-    "match_id": 8014226,
-    "date": 1773502065,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-88": {
-    "winner": "JackoWacko62",
-    "loser": "Bonaparte",
-    "time_ms": 640910,
-    "match_id": 8014146,
-    "date": 1773501999,
-    "forfeited": false
+  "r1-86": {
+    "winner": "marmarounos",
+    "loser": "aquaticpurity",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-87": {
+    "winner": "LOOK_HERO",
+    "loser": "skullerr_",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-89": {
     "winner": "CONTRIMENCEPTOR",
     "loser": "Lycarus_",
-    "time_ms": 656236,
-    "match_id": 8014120,
-    "date": 1773501980,
-    "forfeited": false
-  },
-  "r1-90": {
-    "winner": "PaketniyMaster",
-    "loser": "FaNim21",
-    "time_ms": 557345,
-    "match_id": 8014016,
-    "date": 1773501890,
-    "forfeited": true
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-92": {
     "winner": "Invst",
     "loser": "SirTrinket",
-    "time_ms": 1017297,
-    "match_id": 8014528,
-    "date": 1773502341,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-93": {
     "winner": "Seapeekay",
     "loser": "musicalweapon",
-    "time_ms": 916057,
-    "match_id": 8014425,
-    "date": 1773502235,
-    "forfeited": false
-  },
-  "r1-94": {
-    "winner": "lunarcinna",
-    "loser": "Bearfrog2011",
-    "time_ms": 1168042,
-    "match_id": 8014659,
-    "date": 1773502499,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-95": {
     "winner": "Oliver_meh",
     "loser": "HiImCC",
-    "time_ms": 878972,
-    "match_id": 8014387,
-    "date": 1773502206,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-96": {
     "winner": "expellfar",
     "loser": "nixolio",
-    "time_ms": 929734,
-    "match_id": 8014446,
-    "date": 1773502250,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-98": {
-    "winner": "rdmncy",
-    "loser": "Denful3",
-    "time_ms": 922006,
-    "match_id": 8014439,
-    "date": 1773502243,
-    "forfeited": false
+  "r1-97": {
+    "winner": "Drowe",
+    "loser": "xagongd",
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-100": {
-    "winner": "Clueless147",
-    "loser": "Cslammer2012",
-    "time_ms": 1120440,
-    "match_id": 8014619,
-    "date": 1773502449,
-    "forfeited": false
+  "r1-99": {
+    "winner": "creeperskilldogs",
+    "loser": "Failurism",
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-101": {
-    "winner": "Darthloll",
-    "loser": "Nopeslope",
-    "time_ms": 699244,
-    "match_id": 8014186,
-    "date": 1773502023,
-    "forfeited": false
+  "r1-102": {
+    "winner": "Minepro_80",
+    "loser": "ukkq",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-103": {
     "winner": "DotALotTroller",
     "loser": "Separthe",
-    "time_ms": 810794,
-    "match_id": 8014304,
-    "date": 1773502139,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-105": {
     "winner": "AveryCello",
     "loser": "mistralta",
-    "time_ms": 883526,
-    "match_id": 8014389,
-    "date": 1773502206,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-106": {
+    "winner": "Pluszix202",
+    "loser": "myferret8myrat",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-108": {
     "winner": "277r",
     "loser": "portalmg",
-    "time_ms": 1056721,
-    "match_id": 8014563,
-    "date": 1773502386,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-109": {
     "winner": "IronicMatt",
     "loser": "rockmeriven",
-    "time_ms": 1086778,
-    "match_id": 8014588,
-    "date": 1773502410,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-110": {
     "winner": "TapL",
     "loser": "pavkin",
-    "time_ms": 681248,
-    "match_id": 8014151,
-    "date": 1773502002,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-112": {
-    "winner": "MangoMittens",
-    "loser": "Wimp0d",
-    "time_ms": 1101705,
-    "match_id": 8014618,
-    "date": 1773502448,
-    "forfeited": false
+  "r1-111": {
+    "winner": "3tenacity",
+    "loser": "qxuse",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-113": {
+    "winner": "BaccaDeww",
+    "loser": "Csilarion",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-116": {
     "winner": "infume",
     "loser": "edcr",
-    "time_ms": 466622,
-    "match_id": 8013946,
-    "date": 1773501787,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-115": {
-    "winner": "Miltonias",
-    "loser": "rtcrhino",
-    "time_ms": 720469,
-    "match_id": 8014207,
-    "date": 1773502042,
-    "forfeited": false
+  "r1-118": {
+    "winner": "ekbb2",
+    "loser": "TC102012",
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-117": {
-    "winner": "Aldood0920",
-    "loser": "Scopen86",
-    "time_ms": 909787,
-    "match_id": 8014403,
-    "date": 1773502216,
-    "forfeited": false
+  "r1-119": {
+    "winner": "tommorerow",
+    "loser": "yuukue",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-121": {
     "winner": "ethwit",
     "loser": "CurtisJK_",
-    "time_ms": 825838,
-    "match_id": 8014310,
-    "date": 1773502146,
-    "forfeited": false
-  },
-  "r1-120": {
-    "winner": "ulsah1n",
-    "loser": "_Chihiro",
-    "time_ms": 814431,
-    "match_id": 8014288,
-    "date": 1773502125,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-122": {
     "winner": "TuCarta",
     "loser": "TheLandSharkJeff",
-    "time_ms": 705861,
-    "match_id": 8014190,
-    "date": 1773502028,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-123": {
+    "winner": "roscomnadzor",
+    "loser": "supercells",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-124": {
+    "winner": "Ice_Wyve",
+    "loser": "Pandaboy200920",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-125": {
     "winner": "SheepAreFine",
     "loser": "Tiberrr_Ari",
-    "time_ms": 992778,
-    "match_id": 8014501,
-    "date": 1773502317,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-126": {
     "winner": "hilolbob",
     "loser": "bontalor",
-    "time_ms": 889605,
-    "match_id": 8014380,
-    "date": 1773502203,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-193": {
-    "winner": "piglin_backshots",
-    "loser": "Alpha_1644",
-    "time_ms": 823710,
-    "match_id": 8014322,
-    "date": 1773502156,
-    "forfeited": false
-  },
-  "r1-192": {
-    "winner": "SocratesDisciple",
-    "loser": "mdew_",
-    "time_ms": 667222,
-    "match_id": 8014106,
-    "date": 1773501971,
-    "forfeited": false
-  },
-  "r1-194": {
-    "winner": "Ranik_",
-    "loser": "koala488",
-    "time_ms": 725309,
-    "match_id": 8014208,
-    "date": 1773502048,
-    "forfeited": false
-  },
-  "r1-196": {
-    "winner": "Leeskie_",
-    "loser": "noobbcp",
-    "time_ms": 810948,
-    "match_id": 8014297,
-    "date": 1773502133,
-    "forfeited": false
-  },
-  "r1-198": {
-    "winner": "kenanin_ami",
-    "loser": "Lenged",
-    "time_ms": 461754,
-    "match_id": 8013944,
-    "date": 1773501784,
-    "forfeited": false
-  },
-  "r1-197": {
-    "winner": "bing_pigs",
-    "loser": "TonyPeperoni763",
-    "time_ms": 526325,
-    "match_id": 8013976,
-    "date": 1773501837,
-    "forfeited": false
+  "r1-195": {
+    "winner": "Plenttz",
+    "loser": "SayMyName",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-201": {
     "winner": "webwormy",
     "loser": "dillrice",
-    "time_ms": 616455,
-    "match_id": 8014081,
-    "date": 1773501942,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-210": {
-    "winner": "leiriell",
-    "loser": "pawsom",
-    "time_ms": 729498,
-    "match_id": 8014213,
-    "date": 1773502052,
-    "forfeited": false
+  "r1-203": {
+    "winner": "RecallOcean",
+    "loser": "Greencat9",
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-209": {
-    "winner": "AutomateoAR",
-    "loser": "MacleBacle",
-    "time_ms": 791911,
-    "match_id": 8014281,
-    "date": 1773502115,
-    "forfeited": false
+  "r1-208": {
+    "winner": "klazyt",
+    "loser": "ashlynx63",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-211": {
+    "winner": "srcd",
+    "loser": "Gilbert14",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-212": {
     "winner": "Talfy",
     "loser": "attilathehunnn",
-    "time_ms": 597145,
-    "match_id": 8014088,
-    "date": 1773501953,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-213": {
+    "winner": "Farbwechsler",
+    "loser": "MrKijMyh",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-215": {
     "winner": "Zaintew",
     "loser": "_nvptune",
-    "time_ms": 643264,
-    "match_id": 8014103,
-    "date": 1773501969,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-214": {
-    "winner": "ilovemay72",
-    "loser": "happycoolgamer49",
-    "time_ms": 792427,
-    "match_id": 8014261,
-    "date": 1773502101,
-    "forfeited": false
-  },
-  "r1-217": {
-    "winner": "DARVY__X1",
-    "loser": "Ally_Luke",
-    "time_ms": 733067,
-    "match_id": 8014223,
-    "date": 1773502059,
-    "forfeited": false
+  "r1-216": {
+    "winner": "Leexz",
+    "loser": "WDWiktor",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-218": {
     "winner": "kW1st",
     "loser": "Zehdryk",
-    "time_ms": 890256,
-    "match_id": 8014396,
-    "date": 1773502213,
-    "forfeited": false
-  },
-  "r1-219": {
-    "winner": "T0astyBoot",
-    "loser": "Mbappiani",
-    "time_ms": 888806,
-    "match_id": 8014383,
-    "date": 1773502205,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-221": {
     "winner": "fe666",
     "loser": "Poody_",
-    "time_ms": 695675,
-    "match_id": 8014187,
-    "date": 1773502024,
-    "forfeited": false
-  },
-  "r1-222": {
-    "winner": "Casssual",
-    "loser": "TunaBscuit",
-    "time_ms": 677836,
-    "match_id": 8014154,
-    "date": 1773502003,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-223": {
     "winner": "Jasgamer409",
     "loser": "mellow_rr",
-    "time_ms": 718338,
-    "match_id": 8014211,
-    "date": 1773502050,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-224": {
     "winner": "35pi",
     "loser": "wansou",
-    "time_ms": 863336,
-    "match_id": 8014359,
-    "date": 1773502186,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-225": {
     "winner": "Cookieaddicts",
     "loser": "oshgay",
-    "time_ms": 592725,
-    "match_id": 8014053,
-    "date": 1773501915,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-233": {
-    "winner": "_Frier3n_",
-    "loser": "MendedSphere820",
-    "time_ms": 697015,
-    "match_id": 8014164,
-    "date": 1773502011,
-    "forfeited": false
+  "r1-227": {
+    "winner": "CrispLake",
+    "loser": "clasherrms",
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-235": {
-    "winner": "Jos_13",
-    "loser": "Only_flame",
-    "time_ms": 1100230,
-    "match_id": 8014615,
-    "date": 1773502443,
-    "forfeited": false
+  "r1-228": {
+    "winner": "PotatoBRB",
+    "loser": "Phoenix334",
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-237": {
-    "winner": "Ancoboyy",
-    "loser": "Meps1",
-    "time_ms": 591162,
-    "match_id": 8014052,
-    "date": 1773501915,
-    "forfeited": false
+  "r1-230": {
+    "winner": "Helloxyz",
+    "loser": "Hycosmal",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-231": {
+    "winner": "Tharve",
+    "loser": "Aleys",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-232": {
+    "winner": "Gdasher",
+    "loser": "_Edvin_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-234": {
+    "winner": "Genkii27",
+    "loser": "Frazz",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-236": {
+    "winner": "Vorpal1",
+    "loser": "handfool",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-239": {
     "winner": "pandaendoz",
     "loser": "PorkPiedPenguin",
-    "time_ms": 686048,
-    "match_id": 8014175,
-    "date": 1773502016,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
-  "r1-244": {
-    "winner": "AllAdvancements",
-    "loser": "PrimarySZN",
-    "time_ms": 879087,
-    "match_id": 8014373,
-    "date": 1773502199,
-    "forfeited": false
+  "r1-242": {
+    "winner": "MinosChampion",
+    "loser": "TasteTomato",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-243": {
+    "winner": "jpliketaco",
+    "loser": "Taccm",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-247": {
     "winner": "IdealTV",
     "loser": "2tzVoid",
-    "time_ms": 902825,
-    "match_id": 8014397,
-    "date": 1773502213,
-    "forfeited": false
-  },
-  "r1-251": {
-    "winner": "EpicSnek",
-    "loser": "wagapizu",
-    "time_ms": 774239,
-    "match_id": 8014253,
-    "date": 1773502095,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-249": {
     "winner": "mangrovejack",
     "loser": "Akimaster",
-    "time_ms": 914903,
-    "match_id": 8014432,
-    "date": 1773502240,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-250": {
     "winner": "SpectralThief",
     "loser": "CalicoMystique",
-    "time_ms": 836249,
-    "match_id": 8014339,
-    "date": 1773502167,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-251": {
+    "winner": "EpicSnek",
+    "loser": "wagapizu",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-253": {
+    "winner": "graysandwich",
+    "loser": "TumaChiss",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-254": {
     "winner": "BlazeMind",
     "loser": "fat_femcel",
-    "time_ms": 682427,
-    "match_id": 8014161,
-    "date": 1773502009,
-    "forfeited": false
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-258": {
+    "winner": "IBringSuffering",
+    "loser": "shah_heet",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-259": {
+    "winner": "Cyphered",
+    "loser": "That_Logan_Guy",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-262": {
+    "winner": "MrAaz",
+    "loser": "sunRay625",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-264": {
+    "winner": "JebFromGameHouse",
+    "loser": "ContraVz",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-269": {
+    "winner": "Voidol",
+    "loser": "Bayermaster",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-270": {
+    "winner": "therowdie",
+    "loser": "GraggyGod",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-273": {
+    "winner": "steez",
+    "loser": "kiszona_kapusta",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-274": {
+    "winner": "crazyguy1908",
+    "loser": "Bu77erBeater",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-275": {
+    "winner": "raylucks",
+    "loser": "mulanv44",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-276": {
+    "winner": "PizzaTre",
+    "loser": "nprosk",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-277": {
+    "winner": "Caqen",
+    "loser": "Haid_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-278": {
+    "winner": "Jedispace1",
+    "loser": "rain_betwixt",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-279": {
+    "winner": "Fritjofson",
+    "loser": "CSniper7",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-281": {
+    "winner": "karmeq",
+    "loser": "Jackotyn",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-283": {
+    "winner": "Crifzer",
+    "loser": "StackzOfBlocks",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-284": {
+    "winner": "Jedispace2",
+    "loser": "ashe_is_op",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-285": {
+    "winner": "vaedish",
+    "loser": "Autological_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-287": {
+    "winner": "WaterSwordsman",
+    "loser": "KalBec",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-288": {
+    "winner": "benemies",
+    "loser": "MickeyDeeeez",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-291": {
+    "winner": "araglus",
+    "loser": "crispy_squid1",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-294": {
+    "winner": "7rowl",
+    "loser": "Big_Wazza69",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-296": {
+    "winner": "Vullord",
+    "loser": "Uzema_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-297": {
+    "winner": "Frolde",
+    "loser": "pure9243",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-298": {
+    "winner": "eriklul",
+    "loser": "MaximusThe_1st",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-299": {
+    "winner": "FrizzClips",
+    "loser": "FredTheWreck2",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-300": {
+    "winner": "blindtravel",
+    "loser": "retrQ_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-303": {
+    "winner": "CyberOG",
+    "loser": "TreeIsMyName",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-306": {
+    "winner": "Horranzo",
+    "loser": "NoLongerMuted",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-307": {
+    "winner": "d_gq",
+    "loser": "iDroo",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-308": {
+    "winner": "Byugoi",
+    "loser": "namlaE",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-309": {
+    "winner": "King_WolfLIVE",
+    "loser": "jona1158",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-313": {
+    "winner": "oLudio",
+    "loser": "ellaarue",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-314": {
+    "winner": "Nata50SK",
+    "loser": "Transcurious",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-317": {
+    "winner": "Sfren",
+    "loser": "voytasHZ",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-321": {
+    "winner": "12braincells",
+    "loser": "Oscat_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-322": {
+    "winner": "rekrap2",
+    "loser": "Sathursen",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-324": {
+    "winner": "Feinberg",
+    "loser": "zer0ky0",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-325": {
+    "winner": "Mauvu",
+    "loser": "Koereit",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-326": {
+    "winner": "Trqp_kun",
+    "loser": "Flammable_Bunny",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-327": {
+    "winner": "Sanhez",
+    "loser": "Kargere",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-328": {
+    "winner": "Karlo585",
+    "loser": "siddharth_k10",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-330": {
+    "winner": "Cancyr",
+    "loser": "Ananaciya",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-331": {
+    "winner": "rouxzzcfop",
+    "loser": "Shafin",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-336": {
+    "winner": "Burawoy",
+    "loser": "pizx",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-338": {
+    "winner": "rcd__11",
+    "loser": "snekuru",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-339": {
+    "winner": "Eyal_ROYALE",
+    "loser": "Eibezukunft",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-341": {
+    "winner": "WiiSuper",
+    "loser": "marr0w_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-342": {
+    "winner": "goopli",
+    "loser": "julieeyay",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-343": {
+    "winner": "CxrtxR",
+    "loser": "Nadoms",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-344": {
+    "winner": "Stratum7",
+    "loser": "NoahTheZy",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-348": {
+    "winner": "Starchomper",
+    "loser": "NoplayerCh",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-350": {
+    "winner": "TUDORULE",
+    "loser": "DunceDuck",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-354": {
+    "winner": "SpectrumThing",
+    "loser": "BRYniac",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-356": {
+    "winner": "ANJOUU",
+    "loser": "Shadoune777",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-359": {
+    "winner": "yeopgihoney",
+    "loser": "RRed",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-360": {
+    "winner": "Tool_not_me",
+    "loser": "Trojaneq",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-361": {
+    "winner": "loodlow",
+    "loser": "AstroSaysGG",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-362": {
+    "winner": "Haxagon",
+    "loser": "Coreybird",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-364": {
+    "winner": "Sinjinplays",
+    "loser": "I_Reidman",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-365": {
+    "winner": "samioh",
+    "loser": "kranberrie_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-366": {
+    "winner": "Dowqe",
+    "loser": "Vintex0",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-368": {
+    "winner": "ivyosun",
+    "loser": "SpicedHam7",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-369": {
+    "winner": "kubik2",
+    "loser": "Kh4rt",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-370": {
+    "winner": "walter_3",
+    "loser": "jblade345",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-371": {
+    "winner": "skylewl",
+    "loser": "CrazyMartino237",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-375": {
+    "winner": "FIrstGuy",
+    "loser": "adicriedwolf",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-378": {
+    "winner": "NoHacsJustRoblox",
+    "loser": "insanity3829",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-379": {
+    "winner": "smeks",
+    "loser": "ueben",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-381": {
+    "winner": "Brightlmom",
+    "loser": "Andyos28",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-382": {
+    "winner": "gamer_nl",
+    "loser": "Akshxy",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-385": {
+    "winner": "PiggyPlague302",
+    "loser": "Henen_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-386": {
+    "winner": "Thatguy_Pat",
+    "loser": "waterdog4202",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-388": {
+    "winner": "Specnr",
+    "loser": "FourthDylan",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-392": {
+    "winner": "thecamo6",
+    "loser": "lumeh_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-393": {
+    "winner": "vampyro111",
+    "loser": "HEYHOHI11",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-394": {
+    "winner": "PatrickTN_",
+    "loser": "RaptorDuck",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-396": {
+    "winner": "Czelco",
+    "loser": "Ivanfesco",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-398": {
+    "winner": "YippeeKaiDay",
+    "loser": "Dicleee",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-400": {
+    "winner": "Comfa",
+    "loser": "Evrognut",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-402": {
+    "winner": "U1tr0",
+    "loser": "Pykesel",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-403": {
+    "winner": "sanjinhu",
+    "loser": "ReidMCSR",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-404": {
+    "winner": "bribition",
+    "loser": "catgirlvenus",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-406": {
+    "winner": "90Tom",
+    "loser": "MoleyG",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-409": {
+    "winner": "poposor",
+    "loser": "Deuce_68",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-411": {
+    "winner": "Certvial",
+    "loser": "G67MS",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-412": {
+    "winner": "Artem240kmpeek",
+    "loser": "MrkvaMan",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-414": {
+    "winner": "Krake",
+    "loser": "NerdyCap",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-415": {
+    "winner": "Rrcks51",
+    "loser": "apentagon",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-417": {
+    "winner": "Malleum",
+    "loser": "ShinyN_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-418": {
+    "winner": "damlet",
+    "loser": "queergirl",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-419": {
+    "winner": "Lumion_",
+    "loser": "Autumn_Variation",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-421": {
+    "winner": "N0tJim",
+    "loser": "Ironozzzz",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-422": {
+    "winner": "cheeat",
+    "loser": "Termii59",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-425": {
+    "winner": "kehler",
+    "loser": "Tuusi",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-427": {
+    "winner": "sjauwn",
+    "loser": "leeches101",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-430": {
+    "winner": "nEmerald",
+    "loser": "drizyl",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-433": {
+    "winner": "QwertyYou",
+    "loser": "yourepicruler",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-437": {
+    "winner": "Potatifier",
+    "loser": "Frenet1c",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-438": {
+    "winner": "Daniel_H212",
+    "loser": "FreezingFyre",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-439": {
+    "winner": "Raptoroftheend",
+    "loser": "Im_Just_Ashe",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-441": {
+    "winner": "VentiBeast",
+    "loser": "nosam555",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-442": {
+    "winner": "TyPier",
+    "loser": "Fluwur1an",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-443": {
+    "winner": "Solder",
+    "loser": "AwkwardWolf25",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-445": {
+    "winner": "Erikfzf",
+    "loser": "Nerinixus",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-446": {
+    "winner": "madobrick",
+    "loser": "velpux",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-448": {
+    "winner": "Nacay",
+    "loser": "Evbo_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-449": {
+    "winner": "Doqvii",
+    "loser": "hatchlinggg",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-450": {
+    "winner": "ExAtom",
+    "loser": "Mdm_J",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-451": {
+    "winner": "Zonax",
+    "loser": "freddiehamburger",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-453": {
+    "winner": "Rahmations",
+    "loser": "derpingderp",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-456": {
+    "winner": "Jppsh",
+    "loser": "Papalo007",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-457": {
+    "winner": "dwoh",
+    "loser": "Arqher",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-460": {
+    "winner": "Jpg777777",
+    "loser": "zenosprout",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-462": {
+    "winner": "Kierros",
+    "loser": "DaitakuHeli0s",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-463": {
+    "winner": "21mustard",
+    "loser": "Aquacorde",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-467": {
+    "winner": "Meowfasa",
+    "loser": "CodeyFPS",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-469": {
+    "winner": "JadeCut",
+    "loser": "pastyboy497",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-470": {
+    "winner": "fruitberries",
+    "loser": "Aplexia",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-472": {
+    "winner": "Adaik",
+    "loser": "Prackledd",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-474": {
+    "winner": "atbili",
+    "loser": "Enluna__",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-475": {
+    "winner": "knifelyy",
+    "loser": "oSharkie",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-476": {
+    "winner": "dwaqee1",
+    "loser": "allanlee2003",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-478": {
+    "winner": "romuxii",
+    "loser": "jua_3421",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-479": {
+    "winner": "eimiie",
+    "loser": "Parszek",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-482": {
+    "winner": "suravil",
+    "loser": "Aiphx",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-483": {
+    "winner": "Archipelego",
+    "loser": "Its_a_fish",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-484": {
+    "winner": "jackuroo",
+    "loser": "TUCNOTA",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-485": {
+    "winner": "DJathome",
+    "loser": "TwitchyW",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-488": {
+    "winner": "xBlitzy1",
+    "loser": "kleptopitek",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-490": {
+    "winner": "KEBABCOO",
+    "loser": "nooobi",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-492": {
+    "winner": "Shalomanon",
+    "loser": "FcFlamingRed",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-495": {
+    "winner": "megafalcons",
+    "loser": "DoubledMint2803",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-496": {
+    "winner": "PickPig",
+    "loser": "KomboJack",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-499": {
+    "winner": "michawsomereborn",
+    "loser": "Skizzle6174",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-500": {
+    "winner": "nsla",
+    "loser": "MelmanPvP",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-501": {
+    "winner": "wooftuah",
+    "loser": "ddrlevelasian",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-503": {
+    "winner": "seseg",
+    "loser": "smrgl",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-504": {
+    "winner": "spyQT",
+    "loser": "itz_rizzlr",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-507": {
+    "winner": "BroWo9",
+    "loser": "Tenori_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-508": {
+    "winner": "Dasumato",
+    "loser": "Paibola",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-511": {
+    "winner": "UnderWolf",
+    "loser": "tigronyaa",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "_updated": "2026-03-14T16:18:06.807130+00:00",
+  "r1-1": {
+    "winner": "oDaksh",
+    "loser": "crazelol",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-2": {
+    "winner": "silverrruns",
+    "loser": "zaaning",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-3": {
+    "winner": "IronHammer269",
+    "loser": "Slinky17",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-4": {
+    "winner": "whisperingraven_",
+    "loser": "kazoklp",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-10": {
+    "winner": "GL0riousKingGojo",
+    "loser": "Clashey",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-11": {
+    "winner": "Kelawesome",
+    "loser": "dionle",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-13": {
+    "winner": "dolqhin",
+    "loser": "ItsZel",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-15": {
+    "winner": "Center_mass",
+    "loser": "Infernally",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-17": {
+    "winner": "legoboy1243_",
+    "loser": "Ilikepie04",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-20": {
+    "winner": "andysh1sells",
+    "loser": "Inospit",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-21": {
+    "winner": "Braixen_",
+    "loser": "voomz",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-29": {
+    "winner": "Zound_",
+    "loser": "FORSENLULWLULW",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-30": {
+    "winner": "Renitky_",
+    "loser": "_axurios",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-31": {
+    "winner": "dddeergirl",
+    "loser": "newcool1230",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-33": {
+    "winner": "clairofangirl",
+    "loser": "feeber45",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-35": {
+    "winner": "HufterL",
+    "loser": "Molong4",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-36": {
+    "winner": "catpats",
+    "loser": "Tripa1k2",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-40": {
+    "winner": "remora__",
+    "loser": "soybeansauce",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-43": {
+    "winner": "jakkeboy3651",
+    "loser": "Vysuals",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-45": {
+    "winner": "SheepyWeepy6883",
+    "loser": "Bemoji",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-46": {
+    "winner": "CoyRhyme",
+    "loser": "Donut0821",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-47": {
+    "winner": "VampishWheat",
+    "loser": "Kirbo1234",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-50": {
+    "winner": "Duk4n_",
+    "loser": "ElRichi",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-51": {
+    "winner": "arxll",
+    "loser": "Sammy_JP",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-52": {
+    "winner": "_Joshuaar",
+    "loser": "Zacaroo",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-53": {
+    "winner": "Rezy_The_cupcake",
+    "loser": "_suboptimal",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-55": {
+    "winner": "vankumbu",
+    "loser": "Zainoo_Baba",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-56": {
+    "winner": "elo_terminator",
+    "loser": "ImagineDragonX",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-58": {
+    "winner": "qafo_",
+    "loser": "Blooopy",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-59": {
+    "winner": "lilypyonn",
+    "loser": "Hentreeb",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-61": {
+    "winner": "_zupi",
+    "loser": "Verdqy",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-64": {
+    "winner": "raheemm",
+    "loser": "Petalight",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-65": {
+    "winner": "Sensiboomer",
+    "loser": "ThugMCSR",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-66": {
+    "winner": "NeoR_",
+    "loser": "Painfacter",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-71": {
+    "winner": "nolettuceplz",
+    "loser": "Ybot__",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-74": {
+    "winner": "_KrakerS",
+    "loser": "FinnQwert",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-75": {
+    "winner": "phxc",
+    "loser": "Violett_e",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-76": {
+    "winner": "lctaco",
+    "loser": "rhythm700Live",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-78": {
+    "winner": "NokeyDokey",
+    "loser": "Jokerod",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-82": {
+    "winner": "fnhvr",
+    "loser": "spesium",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-88": {
+    "winner": "JackoWacko62",
+    "loser": "Bonaparte",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-90": {
+    "winner": "PaketniyMaster",
+    "loser": "FaNim21",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-91": {
+    "winner": "pxb_",
+    "loser": "proftoad",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-94": {
+    "winner": "lunarcinna",
+    "loser": "Bearfrog2011",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-98": {
+    "winner": "rdmncy",
+    "loser": "Denful3",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-100": {
+    "winner": "Clueless147",
+    "loser": "Cslammer2012",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-101": {
+    "winner": "Darthloll",
+    "loser": "Nopeslope",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-104": {
+    "winner": "pplazzz",
+    "loser": "Iamaturtle1",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-107": {
+    "winner": "LeBabouin30",
+    "loser": "Phyo",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-112": {
+    "winner": "MangoMittens",
+    "loser": "Wimp0d",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-114": {
+    "winner": "mellanade",
+    "loser": "WookieThePookie",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-115": {
+    "winner": "Miltonias",
+    "loser": "rtcrhino",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-117": {
+    "winner": "Aldood0920",
+    "loser": "Scopen86",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-120": {
+    "winner": "ulsah1n",
+    "loser": "_Chihiro",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-127": {
+    "winner": "drx6",
+    "loser": "_Reide",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-192": {
+    "winner": "SocratesDisciple",
+    "loser": "mdew_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-193": {
+    "winner": "piglin_backshots",
+    "loser": "Alpha_1644",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-194": {
+    "winner": "Ranik_",
+    "loser": "koala488",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-196": {
+    "winner": "Leeskie_",
+    "loser": "noobbcp",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-197": {
+    "winner": "bing_pigs",
+    "loser": "TonyPeperoni763",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-199": {
+    "winner": "Aku_xyz",
+    "loser": "Livld",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-200": {
+    "winner": "aquari5",
+    "loser": "silver_les",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-202": {
+    "winner": "Meli_GG",
+    "loser": "biiishop",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-209": {
+    "winner": "AutomateoAR",
+    "loser": "MacleBacle",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-210": {
+    "winner": "leiriell",
+    "loser": "pawsom",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-214": {
+    "winner": "ilovemay72",
+    "loser": "happycoolgamer49",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-217": {
+    "winner": "DARVY__X1",
+    "loser": "Ally_Luke",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-219": {
+    "winner": "T0astyBoot",
+    "loser": "Mbappiani",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-220": {
+    "winner": "offlinelotus",
+    "loser": "K4WWE",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-222": {
+    "winner": "Casssual",
+    "loser": "TunaBscuit",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-226": {
+    "winner": "Perspectpeiae",
+    "loser": "ConfusedBTW",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-229": {
+    "winner": "kingbugcatcher",
+    "loser": "mcakaa",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-233": {
+    "winner": "_Frier3n_",
+    "loser": "MendedSphere820",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-235": {
+    "winner": "Jos_13",
+    "loser": "Only_flame",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-237": {
+    "winner": "Ancoboyy",
+    "loser": "Meps1",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-238": {
+    "winner": "BigSoub",
+    "loser": "BlobDaCat",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-240": {
+    "winner": "comfypeepo",
+    "loser": "aCactie",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-241": {
+    "winner": "Heeheemiester68",
+    "loser": "EVPZ",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-244": {
+    "winner": "AllAdvancements",
+    "loser": "PrimarySZN",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-245": {
+    "winner": "marcyselo_",
+    "loser": "Popomann_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-246": {
+    "winner": "DaWildWombat",
+    "loser": "justaltoid",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-248": {
+    "winner": "okCobalt",
+    "loser": "painnted",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-252": {
+    "winner": "riveralx",
+    "loser": "Dq1an",
+    "manual": true,
+    "source": "r2_bracket"
   },
   "r1-255": {
     "winner": "xLourx",
     "loser": "Dragalkai",
-    "time_ms": 699989,
-    "match_id": 8014182,
-    "date": 1773502021,
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-257": {
+    "winner": "macaronilopo",
+    "loser": "tangojung",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-260": {
+    "winner": "cheeseonfries",
+    "loser": "64Craft",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-261": {
+    "winner": "gertpoizz05",
+    "loser": "kofechashkovich",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-263": {
+    "winner": "Pub1ius_",
+    "loser": "Peachy_gurl",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-265": {
+    "winner": "confyowo",
+    "loser": "sad_isnt_it",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-266": {
+    "winner": "The_Zakster",
+    "loser": "6vx8",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-267": {
+    "winner": "oChqos",
+    "loser": "JimothyJr_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-268": {
+    "winner": "Sh1nzu",
+    "loser": "slimmyj1",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-271": {
+    "winner": "HDM3",
+    "loser": "BRAMBOSKILLS",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-272": {
+    "winner": "CKLeo_",
+    "loser": "b3nii_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-280": {
+    "winner": "sk_im",
+    "loser": "3x7en",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-282": {
+    "winner": "kvlike_",
+    "loser": "iCac2s",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-286": {
+    "winner": "violet_veil",
+    "loser": "x0ri_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-289": {
+    "winner": "GradientGray",
+    "loser": "Nataliahaha",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-290": {
+    "winner": "hackingnoises",
+    "loser": "niftygull_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-292": {
+    "winner": "2welt",
+    "loser": "Alboin",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-293": {
+    "winner": "v_strid",
+    "loser": "lumaf1y",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-295": {
+    "winner": "rindylomb",
+    "loser": "wSalt",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-301": {
+    "winner": "CallMeBlumi",
+    "loser": "FiendishCodex",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-302": {
+    "winner": "rhodium45_",
+    "loser": "xRimzo",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-304": {
+    "winner": "fireball67_",
+    "loser": "estonianballpit",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-305": {
+    "winner": "yjako",
+    "loser": "PxtchBlack",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-310": {
+    "winner": "atrejoe2004",
+    "loser": "chickwich",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-311": {
+    "winner": "Tobetoflipb",
+    "loser": "Tadeokx",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-312": {
+    "winner": "KorutoColt",
+    "loser": "WWX__",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-315": {
+    "winner": "mukvl",
+    "loser": "QC_SYLVEON_LOVER",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-318": {
+    "winner": "Enryu_43",
+    "loser": "CharlieRigatoni",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-319": {
+    "winner": "bewwox",
+    "loser": "Magmania",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-320": {
+    "winner": "Nubek_Taktyk",
+    "loser": "SnoWSt0rm_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-323": {
+    "winner": "bbiddd",
+    "loser": "drainedxbrain",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-329": {
+    "winner": "Luxvored",
+    "loser": "TwitchyQL",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-332": {
+    "winner": "_Makke",
+    "loser": "Nv2n",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-333": {
+    "winner": "Pinne",
+    "loser": "Duzks",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-334": {
+    "winner": "LuLz___",
+    "loser": "Roza9999",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-335": {
+    "winner": "lottsy_",
+    "loser": "Scorpiobuzzcut",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-337": {
+    "winner": "purrr_cuddlesss",
+    "loser": "killerbot1028",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-340": {
+    "winner": "paukll",
+    "loser": "qBedwars",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-345": {
+    "winner": "Picklefish23350",
+    "loser": "xellish",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-346": {
+    "winner": "usefulsister24",
+    "loser": "pebetedesame",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-347": {
+    "winner": "arnexlol",
+    "loser": "sharpkittyfangs",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-349": {
+    "winner": "Cooobb",
+    "loser": "K4ter",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-351": {
+    "winner": "starruns",
+    "loser": "Proz__",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-352": {
+    "winner": "kohout135",
+    "loser": "hammergeil",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-353": {
+    "winner": "McSammich",
+    "loser": "Technobladefan86",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-355": {
+    "winner": "AutomattPLUS",
+    "loser": "AwaDeFructus",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-357": {
+    "winner": "eipherr",
+    "loser": "SpongeGaming",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-358": {
+    "winner": "Lathilla",
+    "loser": "ukulson",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-363": {
+    "winner": "RiverTurtle_",
+    "loser": "Profiht",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-367": {
+    "winner": "thenewcity",
+    "loser": "EREZKMC",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-372": {
+    "winner": "thatguyDZI",
+    "loser": "Sabah_pole",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-373": {
+    "winner": "Topimpapig",
+    "loser": "fobyr",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-374": {
+    "winner": "CGQ_",
+    "loser": "primekr05",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-376": {
+    "winner": "defek13",
+    "loser": "dowophin",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-377": {
+    "winner": "Gho",
+    "loser": "HYDR0GENCHLORIDE",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-380": {
+    "winner": "RedLunatic",
+    "loser": "Dyzvo",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-383": {
+    "winner": "IIsALlama",
+    "loser": "Whislored",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-384": {
+    "winner": "TheRemekkPlays",
+    "loser": "puggoboi",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-387": {
+    "winner": "sryyyyyyyyyyyyyy",
+    "loser": "KickenApples_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-389": {
+    "winner": "MuhammadPro5741",
+    "loser": "alexchoo",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-390": {
+    "winner": "Slime_Guy_",
+    "loser": "tribys_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-391": {
+    "winner": "JackFromHell1",
+    "loser": "Trout__",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-397": {
+    "winner": "Ailurro",
+    "loser": "puppydawncx",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-399": {
+    "winner": "Pieiscool123",
+    "loser": "Not_Jaxxon",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-401": {
+    "winner": "AsaMitaka21",
+    "loser": "ronalduzin",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-405": {
+    "winner": "furk1e",
+    "loser": "Kaaswaterje",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-407": {
+    "winner": "Prince_01",
+    "loser": "yuunihact",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-408": {
+    "winner": "Squams",
+    "loser": "BompkinFTW",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-410": {
+    "winner": "nyachloe",
+    "loser": "MrLu4n",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-413": {
+    "winner": "RemakeRes",
+    "loser": "Yorgo__",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-416": {
+    "winner": "galaxy1010_w",
+    "loser": "13ADGE",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-420": {
+    "winner": "johnMYER",
+    "loser": "MasOknaf",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-423": {
+    "winner": "AlexEnkii",
+    "loser": "IPlayTheTuba",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-424": {
+    "winner": "LuigiIsGod",
+    "loser": "TimelierLily",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-426": {
+    "winner": "Flarez__",
+    "loser": "BanditoPlaysMC",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-428": {
+    "winner": "brenana__",
+    "loser": "itxMoon",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-429": {
+    "winner": "Redos_s",
+    "loser": "Maxboi_Playz",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-431": {
+    "winner": "okrzej_",
+    "loser": "f1Lz",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-432": {
+    "winner": "tebor",
+    "loser": "BrainCrash101",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-434": {
+    "winner": "connietheycookie",
+    "loser": "Cheetah",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-435": {
+    "winner": "_Hypn0tic",
+    "loser": "JoomzMonkey",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-436": {
+    "winner": "GrahamRR",
+    "loser": "MatrixMation",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-440": {
+    "winner": "awsome3",
+    "loser": "Ocesloth",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-444": {
+    "winner": "_Trl_",
+    "loser": "MrVenuSnail",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-447": {
+    "winner": "teddyexe",
+    "loser": "sticmys",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-452": {
+    "winner": "A1rlesss",
+    "loser": "tealeafy",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-454": {
+    "winner": "MrBudgiee",
+    "loser": "wmacc",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-455": {
+    "winner": "oWinny",
+    "loser": "naujconlive",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-458": {
+    "winner": "JarmezGD",
+    "loser": "spqrit",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-461": {
+    "winner": "mrc_y",
+    "loser": "mrboo_boo9",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-465": {
+    "winner": "Anjoru",
+    "loser": "DopeySeer",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-466": {
+    "winner": "Tompas_",
+    "loser": "Loedje",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-468": {
+    "winner": "romuu__",
+    "loser": "amcguirk03",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-471": {
+    "winner": "yesh1l",
+    "loser": "worblo",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-473": {
+    "winner": "WockaWocka",
+    "loser": "rainystay",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-477": {
+    "winner": "carinanebula25",
+    "loser": "alyssing",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-480": {
+    "winner": "outrag",
+    "loser": "joshh7_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-481": {
+    "winner": "M84U",
+    "loser": "CorsicaAlyssa",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-486": {
+    "winner": "swoss_",
+    "loser": "Soggyy",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-487": {
+    "winner": "SIGMACARLOMAN",
+    "loser": "rtdstuart",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-489": {
+    "winner": "CrisOnTop",
+    "loser": "APS229",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-491": {
+    "winner": "Deago_",
+    "loser": "sql_enjoyer",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-493": {
+    "winner": "idkghost_",
+    "loser": "GleamFG",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-494": {
+    "winner": "snorlaxirl_",
+    "loser": "LisaLazuli",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-497": {
+    "winner": "_Weeoo",
+    "loser": "Khantest",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-498": {
+    "winner": "Goreay",
+    "loser": "kapaa2k",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-502": {
+    "winner": "SquidBites",
+    "loser": "BritishEmpire_",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-505": {
+    "winner": "Spiget",
+    "loser": "3Dslime",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-506": {
+    "winner": "7rc3",
+    "loser": "Gabushipa",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-509": {
+    "winner": "JZia",
+    "loser": "LiliPuddlee",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-510": {
+    "winner": "uglylosergirl",
+    "loser": "greattttt",
+    "manual": true,
+    "source": "r2_bracket"
+  },
+  "r1-198": {
+    "winner": "kenanin_ami",
+    "loser": "Lenged",
+    "manual": true,
+    "source": "manual_entry",
     "forfeited": false
   },
   "r1-256": {
     "winner": "snowdeerjulie",
     "loser": "xootynator",
-    "time_ms": 785074,
-    "match_id": 8014273,
-    "date": 1773502109,
+    "manual": true,
+    "source": "manual_entry",
     "forfeited": false
   },
-  "r1-257": {
-    "winner": "macaronilopo",
-    "loser": "tangojung",
-    "time_ms": 688322,
-    "match_id": 8014169,
-    "date": 1773502014,
+  "r1-395": {
+    "winner": "ImTooAwesome",
+    "loser": "sarahstarberry",
+    "manual": true,
+    "source": "manual_entry",
     "forfeited": false
-  },
-  "r1-260": {
-    "winner": "cheeseonfries",
-    "loser": "64Craft",
-    "time_ms": 938026,
-    "match_id": 8014462,
-    "date": 1773502273,
-    "forfeited": false
-  },
-  "r1-258": {
-    "winner": "IBringSuffering",
-    "loser": "shah_heet",
-    "time_ms": 1007351,
-    "match_id": 8014546,
-    "date": 1773502361,
-    "forfeited": false
-  },
-  "r1-261": {
-    "winner": "gertpoizz05",
-    "loser": "kofechashkovich",
-    "time_ms": 1108043,
-    "match_id": 8014611,
-    "date": 1773502437,
-    "forfeited": false
-  },
-  "r1-262": {
-    "winner": "MrAaz",
-    "loser": "sunRay625",
-    "time_ms": 1097138,
-    "match_id": 8014594,
-    "date": 1773502418,
-    "forfeited": false
-  },
-  "r1-264": {
-    "winner": "JebFromGameHouse",
-    "loser": "ContraVz",
-    "time_ms": 559149,
-    "match_id": 8014007,
-    "date": 1773501876,
-    "forfeited": false
-  },
-  "r1-266": {
-    "winner": "The_Zakster",
-    "loser": "6vx8",
-    "time_ms": 752440,
-    "match_id": 8014238,
-    "date": 1773502077,
-    "forfeited": false
-  },
-  "r1-268": {
-    "winner": "Sh1nzu",
-    "loser": "slimmyj1",
-    "time_ms": 829079,
-    "match_id": 8014316,
-    "date": 1773502151,
-    "forfeited": false
-  },
-  "r1-269": {
-    "winner": "Bayermaster",
-    "loser": "Voidol",
-    "time_ms": 83742,
-    "match_id": 8013895,
-    "date": 1773501714,
-    "forfeited": true
-  },
-  "r1-271": {
-    "winner": "BRAMBOSKILLS",
-    "loser": "HDM3",
-    "time_ms": 385177,
-    "match_id": 8013922,
-    "date": 1773501749,
-    "forfeited": true
-  },
-  "r1-273": {
-    "winner": "steez",
-    "loser": "kiszona_kapusta",
-    "time_ms": 582595,
-    "match_id": 8014038,
-    "date": 1773501906,
-    "forfeited": false
-  },
-  "r1-283": {
-    "winner": "Crifzer",
-    "loser": "StackzOfBlocks",
-    "time_ms": 981834,
-    "match_id": 8014495,
-    "date": 1773502310,
-    "forfeited": false
-  },
-  "r1-281": {
-    "winner": "karmeq",
-    "loser": "Jackotyn",
-    "time_ms": 754888,
-    "match_id": 8014235,
-    "date": 1773502075,
-    "forfeited": false
-  },
-  "r1-284": {
-    "winner": "Jedispace2",
-    "loser": "ashe_is_op",
-    "time_ms": 991644,
-    "match_id": 8014511,
-    "date": 1773502325,
-    "forfeited": false
-  },
-  "r1-285": {
-    "winner": "vaedish",
-    "loser": "Autological_",
-    "time_ms": 1151886,
-    "match_id": 8014638,
-    "date": 1773502478,
-    "forfeited": true
-  },
-  "r1-286": {
-    "winner": "violet_veil",
-    "loser": "x0ri_",
-    "time_ms": 991341,
-    "match_id": 8014527,
-    "date": 1773502341,
-    "forfeited": false
-  },
-  "r1-290": {
-    "winner": "hackingnoises",
-    "loser": "niftygull_",
-    "time_ms": 563533,
-    "match_id": 8014013,
-    "date": 1773501887,
-    "forfeited": false
-  },
-  "r1-288": {
-    "winner": "benemies",
-    "loser": "MickeyDeeeez",
-    "time_ms": 790649,
-    "match_id": 8014277,
-    "date": 1773502112,
-    "forfeited": false
-  },
-  "r1-292": {
-    "winner": "2welt",
-    "loser": "Alboin",
-    "time_ms": 939427,
-    "match_id": 8014458,
-    "date": 1773502262,
-    "forfeited": false
-  },
-  "r1-294": {
-    "winner": "7rowl",
-    "loser": "Big_Wazza69",
-    "time_ms": 697113,
-    "match_id": 8014176,
-    "date": 1773502017,
-    "forfeited": false
-  },
-  "r1-293": {
-    "winner": "v_strid",
-    "loser": "lumaf1y",
-    "time_ms": 593630,
-    "match_id": 8014065,
-    "date": 1773501927,
-    "forfeited": false
-  },
-  "r1-298": {
-    "winner": "eriklul",
-    "loser": "MaximusThe_1st",
-    "time_ms": 943533,
-    "match_id": 8014472,
-    "date": 1773502282,
-    "forfeited": false
-  },
-  "r1-296": {
-    "winner": "Vullord",
-    "loser": "Uzema_",
-    "time_ms": 1062615,
-    "match_id": 8014572,
-    "date": 1773502394,
-    "forfeited": false
-  },
-  "r1-299": {
-    "winner": "FrizzClips",
-    "loser": "FredTheWreck2",
-    "time_ms": 589414,
-    "match_id": 8014079,
-    "date": 1773501941,
-    "forfeited": false
-  },
-  "r1-297": {
-    "winner": "Frolde",
-    "loser": "pure9243",
-    "time_ms": 602523,
-    "match_id": 8014066,
-    "date": 1773501928,
-    "forfeited": false
-  },
-  "r1-301": {
-    "winner": "CallMeBlumi",
-    "loser": "FiendishCodex",
-    "time_ms": 677398,
-    "match_id": 8014143,
-    "date": 1773501997,
-    "forfeited": false
-  },
-  "r1-303": {
-    "winner": "TreeIsMyName",
-    "loser": "CyberOG",
-    "time_ms": 5177,
-    "match_id": 8014751,
-    "date": 1773502559,
-    "forfeited": true
-  },
-  "r1-305": {
-    "winner": "yjako",
-    "loser": "PxtchBlack",
-    "time_ms": 631945,
-    "match_id": 8014094,
-    "date": 1773501959,
-    "forfeited": false
-  },
-  "r1-307": {
-    "winner": "d_gq",
-    "loser": "iDroo",
-    "time_ms": 732855,
-    "match_id": 8014222,
-    "date": 1773502058,
-    "forfeited": false
-  },
-  "r1-306": {
-    "winner": "Horranzo",
-    "loser": "NoLongerMuted",
-    "time_ms": 1095530,
-    "match_id": 8014597,
-    "date": 1773502422,
-    "forfeited": false
-  },
-  "r1-308": {
-    "winner": "Byugoi",
-    "loser": "namlaE",
-    "time_ms": 811254,
-    "match_id": 8014302,
-    "date": 1773502136,
-    "forfeited": false
-  },
-  "r1-310": {
-    "winner": "atrejoe2004",
-    "loser": "chickwich",
-    "time_ms": 862856,
-    "match_id": 8014367,
-    "date": 1773502195,
-    "forfeited": false
-  },
-  "r1-313": {
-    "winner": "oLudio",
-    "loser": "ellaarue",
-    "time_ms": 693675,
-    "match_id": 8014178,
-    "date": 1773502018,
-    "forfeited": false
-  },
-  "r1-315": {
-    "winner": "mukvl",
-    "loser": "QC_SYLVEON_LOVER",
-    "time_ms": 654960,
-    "match_id": 8014115,
-    "date": 1773501978,
-    "forfeited": false
-  },
-  "r1-324": {
-    "winner": "Feinberg",
-    "loser": "zer0ky0",
-    "time_ms": 446957,
-    "match_id": 8013938,
-    "date": 1773501775,
-    "forfeited": false
-  },
-  "r1-323": {
-    "winner": "bbiddd",
-    "loser": "drainedxbrain",
-    "time_ms": 593809,
-    "match_id": 8014054,
-    "date": 1773501918,
-    "forfeited": false
-  },
-  "r1-322": {
-    "winner": "rekrap2",
-    "loser": "Sathursen",
-    "time_ms": 701244,
-    "match_id": 8014183,
-    "date": 1773502022,
-    "forfeited": false
-  },
-  "r1-328": {
-    "winner": "Karlo585",
-    "loser": "siddharth_k10",
-    "time_ms": 993215,
-    "match_id": 8014515,
-    "date": 1773502329,
-    "forfeited": false
-  },
-  "r1-330": {
-    "winner": "Cancyr",
-    "loser": "Ananaciya",
-    "time_ms": 984079,
-    "match_id": 8014513,
-    "date": 1773502325,
-    "forfeited": false
-  },
-  "r1-329": {
-    "winner": "Luxvored",
-    "loser": "TwitchyQL",
-    "time_ms": 607368,
-    "match_id": 8014073,
-    "date": 1773501937,
-    "forfeited": false
-  },
-  "r1-332": {
-    "winner": "_Makke",
-    "loser": "Nv2n",
-    "time_ms": 649888,
-    "match_id": 8014109,
-    "date": 1773501972,
-    "forfeited": false
-  },
-  "r1-333": {
-    "winner": "Pinne",
-    "loser": "Duzks",
-    "time_ms": 543959,
-    "match_id": 8014001,
-    "date": 1773501869,
-    "forfeited": false
-  },
-  "r1-335": {
-    "winner": "lottsy_",
-    "loser": "Scorpiobuzzcut",
-    "time_ms": 612738,
-    "match_id": 8014075,
-    "date": 1773501939,
-    "forfeited": false
-  },
-  "r1-337": {
-    "winner": "purrr_cuddlesss",
-    "loser": "killerbot1028",
-    "time_ms": 825252,
-    "match_id": 8014318,
-    "date": 1773502152,
-    "forfeited": false
-  },
-  "r1-339": {
-    "winner": "Eyal_ROYALE",
-    "loser": "Eibezukunft",
-    "time_ms": 848030,
-    "match_id": 8014361,
-    "date": 1773502188,
-    "forfeited": false
-  },
-  "r1-341": {
-    "winner": "WiiSuper",
-    "loser": "marr0w_",
-    "time_ms": 883822,
-    "match_id": 8014388,
-    "date": 1773502206,
-    "forfeited": false
-  },
-  "r1-343": {
-    "winner": "CxrtxR",
-    "loser": "Nadoms",
-    "time_ms": 841695,
-    "match_id": 8014362,
-    "date": 1773502189,
-    "forfeited": false
-  },
-  "r1-344": {
-    "winner": "Stratum7",
-    "loser": "NoahTheZy",
-    "time_ms": 1015236,
-    "match_id": 8014539,
-    "date": 1773502352,
-    "forfeited": false
-  },
-  "r1-345": {
-    "winner": "Picklefish23350",
-    "loser": "xellish",
-    "time_ms": 856395,
-    "match_id": 8014366,
-    "date": 1773502194,
-    "forfeited": false
-  },
-  "r1-348": {
-    "winner": "Starchomper",
-    "loser": "NoplayerCh",
-    "time_ms": 880590,
-    "match_id": 8014436,
-    "date": 1773502242,
-    "forfeited": false
-  },
-  "r1-350": {
-    "winner": "TUDORULE",
-    "loser": "DunceDuck",
-    "time_ms": 636066,
-    "match_id": 8014096,
-    "date": 1773501960,
-    "forfeited": false
-  },
-  "r1-347": {
-    "winner": "arnexlol",
-    "loser": "sharpkittyfangs",
-    "time_ms": 591251,
-    "match_id": 8014046,
-    "date": 1773501912,
-    "forfeited": false
-  },
-  "r1-352": {
-    "winner": "kohout135",
-    "loser": "hammergeil",
-    "time_ms": 592621,
-    "match_id": 8014080,
-    "date": 1773501941,
-    "forfeited": false
-  },
-  "r1-351": {
-    "winner": "starruns",
-    "loser": "Proz__",
-    "time_ms": 929210,
-    "match_id": 8014448,
-    "date": 1773502251,
-    "forfeited": true
-  },
-  "r1-354": {
-    "winner": "SpectrumThing",
-    "loser": "BRYniac",
-    "time_ms": 874029,
-    "match_id": 8014408,
-    "date": 1773502221,
-    "forfeited": false
-  },
-  "r1-355": {
-    "winner": "AutomattPLUS",
-    "loser": "AwaDeFructus",
-    "time_ms": 736131,
-    "match_id": 8014219,
-    "date": 1773502057,
-    "forfeited": false
-  },
-  "r1-356": {
-    "winner": "ANJOUU",
-    "loser": "Shadoune777",
-    "time_ms": 656215,
-    "match_id": 8014123,
-    "date": 1773501982,
-    "forfeited": false
-  },
-  "r1-357": {
-    "winner": "eipherr",
-    "loser": "SpongeGaming",
-    "time_ms": 792223,
-    "match_id": 8014282,
-    "date": 1773502117,
-    "forfeited": false
-  },
-  "r1-359": {
-    "winner": "yeopgihoney",
-    "loser": "RRed",
-    "time_ms": 749878,
-    "match_id": 8014232,
-    "date": 1773502073,
-    "forfeited": false
-  },
-  "r1-360": {
-    "winner": "Tool_not_me",
-    "loser": "Trojaneq",
-    "time_ms": 652295,
-    "match_id": 8014113,
-    "date": 1773501977,
-    "forfeited": false
-  },
-  "r1-361": {
-    "winner": "loodlow",
-    "loser": "AstroSaysGG",
-    "time_ms": 601636,
-    "match_id": 8014062,
-    "date": 1773501925,
-    "forfeited": false
-  },
-  "r1-362": {
-    "winner": "Haxagon",
-    "loser": "Coreybird",
-    "time_ms": 688388,
-    "match_id": 8014162,
-    "date": 1773502010,
-    "forfeited": false
-  },
-  "r1-364": {
-    "winner": "Sinjinplays",
-    "loser": "I_Reidman",
-    "time_ms": 720831,
-    "match_id": 8014206,
-    "date": 1773502040,
-    "forfeited": false
-  },
-  "r1-366": {
-    "winner": "Dowqe",
-    "loser": "Vintex0",
-    "time_ms": 530998,
-    "match_id": 8013993,
-    "date": 1773501855,
-    "forfeited": false
-  },
-  "r1-367": {
-    "winner": "thenewcity",
-    "loser": "EREZKMC",
-    "time_ms": 946513,
-    "match_id": 8014507,
-    "date": 1773502322,
-    "forfeited": true
-  },
-  "r1-368": {
-    "winner": "ivyosun",
-    "loser": "SpicedHam7",
-    "time_ms": 735575,
-    "match_id": 8014225,
-    "date": 1773502061,
-    "forfeited": false
-  },
-  "r1-373": {
-    "winner": "Topimpapig",
-    "loser": "fobyr",
-    "time_ms": 728751,
-    "match_id": 8014209,
-    "date": 1773502048,
-    "forfeited": false
-  },
-  "r1-372": {
-    "winner": "thatguyDZI",
-    "loser": "Sabah_pole",
-    "time_ms": 770788,
-    "match_id": 8014262,
-    "date": 1773502101,
-    "forfeited": false
-  },
-  "r1-374": {
-    "winner": "CGQ_",
-    "loser": "primekr05",
-    "time_ms": 889141,
-    "match_id": 8014391,
-    "date": 1773502207,
-    "forfeited": false
-  },
-  "r1-375": {
-    "winner": "FIrstGuy",
-    "loser": "adicriedwolf",
-    "time_ms": 1192022,
-    "match_id": 8014681,
-    "date": 1773502519,
-    "forfeited": false
-  },
-  "r1-378": {
-    "winner": "NoHacsJustRoblox",
-    "loser": "insanity3829",
-    "time_ms": 587101,
-    "match_id": 8014047,
-    "date": 1773501913,
-    "forfeited": false
-  },
-  "r1-377": {
-    "winner": "Gho",
-    "loser": "HYDR0GENCHLORIDE",
-    "time_ms": 871865,
-    "match_id": 8014377,
-    "date": 1773502200,
-    "forfeited": false
-  },
-  "r1-376": {
-    "winner": "defek13",
-    "loser": "dowophin",
-    "time_ms": 926297,
-    "match_id": 8014449,
-    "date": 1773502251,
-    "forfeited": true
-  },
-  "r1-379": {
-    "winner": "smeks",
-    "loser": "ueben",
-    "time_ms": 616714,
-    "match_id": 8014076,
-    "date": 1773501939,
-    "forfeited": false
-  },
-  "r1-382": {
-    "winner": "gamer_nl",
-    "loser": "Akshxy",
-    "time_ms": 1043621,
-    "match_id": 8014552,
-    "date": 1773502369,
-    "forfeited": false
-  },
-  "r1-385": {
-    "winner": "PiggyPlague302",
-    "loser": "Henen_",
-    "time_ms": 906405,
-    "match_id": 8014413,
-    "date": 1773502226,
-    "forfeited": false
-  },
-  "r1-388": {
-    "winner": "Specnr",
-    "loser": "FourthDylan",
-    "time_ms": 827156,
-    "match_id": 8014312,
-    "date": 1773502147,
-    "forfeited": false
-  },
-  "r1-389": {
-    "winner": "MuhammadPro5741",
-    "loser": "alexchoo",
-    "time_ms": 971940,
-    "match_id": 8014477,
-    "date": 1773502291,
-    "forfeited": false
-  },
-  "r1-391": {
-    "winner": "JackFromHell1",
-    "loser": "Trout__",
-    "time_ms": 1061379,
-    "match_id": 8014565,
-    "date": 1773502387,
-    "forfeited": false
-  },
-  "r1-392": {
-    "winner": "thecamo6",
-    "loser": "lumeh_",
-    "time_ms": 535277,
-    "match_id": 8013994,
-    "date": 1773501856,
-    "forfeited": false
-  },
-  "r1-394": {
-    "winner": "PatrickTN_",
-    "loser": "RaptorDuck",
-    "time_ms": 1194913,
-    "match_id": 8014676,
-    "date": 1773502515,
-    "forfeited": false
-  },
-  "r1-397": {
-    "winner": "Ailurro",
-    "loser": "puppydawncx",
-    "time_ms": 942006,
-    "match_id": 8014460,
-    "date": 1773502267,
-    "forfeited": false
-  },
-  "r1-396": {
-    "winner": "Czelco",
-    "loser": "Ivanfesco",
-    "time_ms": 640454,
-    "match_id": 8014101,
-    "date": 1773501968,
-    "forfeited": false
-  },
-  "r1-402": {
-    "winner": "U1tr0",
-    "loser": "Pykesel",
-    "time_ms": 842275,
-    "match_id": 8014335,
-    "date": 1773502163,
-    "forfeited": false
-  },
-  "r1-407": {
-    "winner": "Prince_01",
-    "loser": "yuunihact",
-    "time_ms": 756941,
-    "match_id": 8014241,
-    "date": 1773502081,
-    "forfeited": false
-  },
-  "r1-406": {
-    "winner": "90Tom",
-    "loser": "MoleyG",
-    "time_ms": 618486,
-    "match_id": 8014097,
-    "date": 1773501960,
-    "forfeited": false
-  },
-  "r1-408": {
-    "winner": "Squams",
-    "loser": "BompkinFTW",
-    "time_ms": 774713,
-    "match_id": 8014257,
-    "date": 1773502098,
-    "forfeited": false
-  },
-  "r1-409": {
-    "winner": "poposor",
-    "loser": "Deuce_68",
-    "time_ms": 856232,
-    "match_id": 8014390,
-    "date": 1773502207,
-    "forfeited": false
-  },
-  "r1-410": {
-    "winner": "nyachloe",
-    "loser": "MrLu4n",
-    "time_ms": 561913,
-    "match_id": 8014012,
-    "date": 1773501884,
-    "forfeited": false
-  },
-  "r1-412": {
-    "winner": "Artem240kmpeek",
-    "loser": "MrkvaMan",
-    "time_ms": 1033351,
-    "match_id": 8014582,
-    "date": 1773502405,
-    "forfeited": false
-  },
-  "r1-415": {
-    "winner": "Rrcks51",
-    "loser": "apentagon",
-    "time_ms": 699250,
-    "match_id": 8014163,
-    "date": 1773502010,
-    "forfeited": false
-  },
-  "r1-416": {
-    "winner": "galaxy1010_w",
-    "loser": "13ADGE",
-    "time_ms": 976573,
-    "match_id": 8014486,
-    "date": 1773502302,
-    "forfeited": false
-  },
-  "r1-420": {
-    "winner": "johnMYER",
-    "loser": "MasOknaf",
-    "time_ms": 898792,
-    "match_id": 8014406,
-    "date": 1773502219,
-    "forfeited": false
-  },
-  "r1-421": {
-    "winner": "N0tJim",
-    "loser": "Ironozzzz",
-    "time_ms": 727713,
-    "match_id": 8014214,
-    "date": 1773502055,
-    "forfeited": false
-  },
-  "r1-422": {
-    "winner": "cheeat",
-    "loser": "Termii59",
-    "time_ms": 1065961,
-    "match_id": 8014577,
-    "date": 1773502399,
-    "forfeited": false
-  },
-  "r1-423": {
-    "winner": "AlexEnkii",
-    "loser": "IPlayTheTuba",
-    "time_ms": 868334,
-    "match_id": 8014409,
-    "date": 1773502222,
-    "forfeited": false
-  },
-  "r1-424": {
-    "winner": "LuigiIsGod",
-    "loser": "TimelierLily",
-    "time_ms": 1056646,
-    "match_id": 8014564,
-    "date": 1773502387,
-    "forfeited": false
-  },
-  "r1-428": {
-    "winner": "brenana__",
-    "loser": "itxMoon",
-    "time_ms": 684348,
-    "match_id": 8014140,
-    "date": 1773501997,
-    "forfeited": false
-  },
-  "r1-430": {
-    "winner": "nEmerald",
-    "loser": "drizyl",
-    "time_ms": 539301,
-    "match_id": 8014002,
-    "date": 1773501869,
-    "forfeited": false
-  },
-  "r1-427": {
-    "winner": "sjauwn",
-    "loser": "leeches101",
-    "time_ms": 613086,
-    "match_id": 8014064,
-    "date": 1773501927,
-    "forfeited": false
-  },
-  "r1-431": {
-    "winner": "okrzej_",
-    "loser": "f1Lz",
-    "time_ms": 769603,
-    "match_id": 8014251,
-    "date": 1773502094,
-    "forfeited": false
-  },
-  "r1-433": {
-    "winner": "QwertyYou",
-    "loser": "yourepicruler",
-    "time_ms": 792316,
-    "match_id": 8014284,
-    "date": 1773502119,
-    "forfeited": false
-  },
-  "r1-432": {
-    "winner": "tebor",
-    "loser": "BrainCrash101",
-    "time_ms": 821619,
-    "match_id": 8014308,
-    "date": 1773502141,
-    "forfeited": false
-  },
-  "r1-435": {
-    "winner": "_Hypn0tic",
-    "loser": "JoomzMonkey",
-    "time_ms": 561337,
-    "match_id": 8014009,
-    "date": 1773501878,
-    "forfeited": false
-  },
-  "r1-436": {
-    "winner": "GrahamRR",
-    "loser": "MatrixMation",
-    "time_ms": 661624,
-    "match_id": 8014136,
-    "date": 1773501992,
-    "forfeited": true
-  },
-  "r1-439": {
-    "winner": "Raptoroftheend",
-    "loser": "Im_Just_Ashe",
-    "time_ms": 1043322,
-    "match_id": 8014550,
-    "date": 1773502367,
-    "forfeited": false
-  },
-  "r1-437": {
-    "winner": "Potatifier",
-    "loser": "Frenet1c",
-    "time_ms": 757592,
-    "match_id": 8014259,
-    "date": 1773502099,
-    "forfeited": false
-  },
-  "r1-438": {
-    "winner": "Daniel_H212",
-    "loser": "FreezingFyre",
-    "time_ms": 749181,
-    "match_id": 8014230,
-    "date": 1773502069,
-    "forfeited": false
-  },
-  "r1-442": {
-    "winner": "TyPier",
-    "loser": "Fluwur1an",
-    "time_ms": 883788,
-    "match_id": 8014381,
-    "date": 1773502203,
-    "forfeited": false
-  },
-  "r1-441": {
-    "winner": "VentiBeast",
-    "loser": "nosam555",
-    "time_ms": 1119227,
-    "match_id": 8014617,
-    "date": 1773502445,
-    "forfeited": true
-  },
-  "r1-443": {
-    "winner": "Solder",
-    "loser": "AwkwardWolf25",
-    "time_ms": 852092,
-    "match_id": 8014345,
-    "date": 1773502176,
-    "forfeited": false
-  },
-  "r1-448": {
-    "winner": "Nacay",
-    "loser": "Evbo_",
-    "time_ms": 686735,
-    "match_id": 8014185,
-    "date": 1773502022,
-    "forfeited": false
-  },
-  "r1-449": {
-    "winner": "Doqvii",
-    "loser": "hatchlinggg",
-    "time_ms": 750373,
-    "match_id": 8014234,
-    "date": 1773502074,
-    "forfeited": false
-  },
-  "r1-452": {
-    "winner": "A1rlesss",
-    "loser": "tealeafy",
-    "time_ms": 909449,
-    "match_id": 8014426,
-    "date": 1773502236,
-    "forfeited": false
-  },
-  "r1-453": {
-    "winner": "Rahmations",
-    "loser": "derpingderp",
-    "time_ms": 736332,
-    "match_id": 8014220,
-    "date": 1773502057,
-    "forfeited": false
-  },
-  "r1-454": {
-    "winner": "MrBudgiee",
-    "loser": "wmacc",
-    "time_ms": 511673,
-    "match_id": 8013975,
-    "date": 1773501834,
-    "forfeited": false
-  },
-  "r1-455": {
-    "winner": "oWinny",
-    "loser": "naujconlive",
-    "time_ms": 866655,
-    "match_id": 8014347,
-    "date": 1773502178,
-    "forfeited": false
-  },
-  "r1-457": {
-    "winner": "dwoh",
-    "loser": "Arqher",
-    "time_ms": 652822,
-    "match_id": 8014110,
-    "date": 1773501976,
-    "forfeited": false
-  },
-  "r1-456": {
-    "winner": "Jppsh",
-    "loser": "Papalo007",
-    "time_ms": 864453,
-    "match_id": 8014369,
-    "date": 1773502195,
-    "forfeited": false
-  },
-  "r1-458": {
-    "winner": "JarmezGD",
-    "loser": "spqrit",
-    "time_ms": 1059270,
-    "match_id": 8014559,
-    "date": 1773502378,
-    "forfeited": false
-  },
-  "r1-460": {
-    "winner": "Jpg777777",
-    "loser": "zenosprout",
-    "time_ms": 968721,
-    "match_id": 8014481,
-    "date": 1773502297,
-    "forfeited": false
-  },
-  "r1-462": {
-    "winner": "Kierros",
-    "loser": "DaitakuHeli0s",
-    "time_ms": 1021586,
-    "match_id": 8014535,
-    "date": 1773502345,
-    "forfeited": false
-  },
-  "r1-461": {
-    "winner": "mrc_y",
-    "loser": "mrboo_boo9",
-    "time_ms": 810107,
-    "match_id": 8014353,
-    "date": 1773502183,
-    "forfeited": false
-  },
-  "r1-465": {
-    "winner": "Anjoru",
-    "loser": "DopeySeer",
-    "time_ms": 676859,
-    "match_id": 8014149,
-    "date": 1773502001,
-    "forfeited": false
-  },
-  "r1-468": {
-    "winner": "romuu__",
-    "loser": "amcguirk03",
-    "time_ms": 507466,
-    "match_id": 8013992,
-    "date": 1773501855,
-    "forfeited": false
-  },
-  "r1-469": {
-    "winner": "JadeCut",
-    "loser": "pastyboy497",
-    "time_ms": 880280,
-    "match_id": 8014384,
-    "date": 1773502205,
-    "forfeited": false
-  },
-  "r1-470": {
-    "winner": "fruitberries",
-    "loser": "Aplexia",
-    "time_ms": 660480,
-    "match_id": 8014126,
-    "date": 1773501983,
-    "forfeited": false
-  },
-  "r1-471": {
-    "winner": "yesh1l",
-    "loser": "worblo",
-    "time_ms": 981299,
-    "match_id": 8014497,
-    "date": 1773502312,
-    "forfeited": false
-  },
-  "r1-472": {
-    "winner": "Adaik",
-    "loser": "Prackledd",
-    "time_ms": 680644,
-    "match_id": 8014173,
-    "date": 1773502015,
-    "forfeited": false
-  },
-  "r1-475": {
-    "winner": "knifelyy",
-    "loser": "oSharkie",
-    "time_ms": 861809,
-    "match_id": 8014350,
-    "date": 1773502182,
-    "forfeited": false
-  },
-  "r1-477": {
-    "winner": "carinanebula25",
-    "loser": "alyssing",
-    "time_ms": 784060,
-    "match_id": 8014266,
-    "date": 1773502105,
-    "forfeited": false
-  },
-  "r1-481": {
-    "winner": "M84U",
-    "loser": "CorsicaAlyssa",
-    "time_ms": 892361,
-    "match_id": 8014405,
-    "date": 1773502217,
-    "forfeited": false
-  },
-  "r1-478": {
-    "winner": "romuxii",
-    "loser": "jua_3421",
-    "time_ms": 581053,
-    "match_id": 8014039,
-    "date": 1773501906,
-    "forfeited": false
-  },
-  "r1-479": {
-    "winner": "eimiie",
-    "loser": "Parszek",
-    "time_ms": 696124,
-    "match_id": 8014167,
-    "date": 1773502012,
-    "forfeited": false
-  },
-  "r1-482": {
-    "winner": "suravil",
-    "loser": "Aiphx",
-    "time_ms": 618982,
-    "match_id": 8014086,
-    "date": 1773501948,
-    "forfeited": false
-  },
-  "r1-484": {
-    "winner": "jackuroo",
-    "loser": "TUCNOTA",
-    "time_ms": 989386,
-    "match_id": 8014505,
-    "date": 1773502320,
-    "forfeited": false
-  },
-  "r1-485": {
-    "winner": "DJathome",
-    "loser": "TwitchyW",
-    "time_ms": 992095,
-    "match_id": 8014510,
-    "date": 1773502325,
-    "forfeited": false
-  },
-  "r1-486": {
-    "winner": "swoss_",
-    "loser": "Soggyy",
-    "time_ms": 1002758,
-    "match_id": 8014519,
-    "date": 1773502330,
-    "forfeited": false
-  },
-  "r1-489": {
-    "winner": "CrisOnTop",
-    "loser": "APS229",
-    "time_ms": 963429,
-    "match_id": 8014488,
-    "date": 1773502304,
-    "forfeited": false
-  },
-  "r1-490": {
-    "winner": "KEBABCOO",
-    "loser": "nooobi",
-    "time_ms": 859748,
-    "match_id": 8014386,
-    "date": 1773502205,
-    "forfeited": false
-  },
-  "r1-491": {
-    "winner": "Deago_",
-    "loser": "sql_enjoyer",
-    "time_ms": 891621,
-    "match_id": 8014401,
-    "date": 1773502214,
-    "forfeited": false
-  },
-  "r1-492": {
-    "winner": "Shalomanon",
-    "loser": "FcFlamingRed",
-    "time_ms": 1153011,
-    "match_id": 8014634,
-    "date": 1773502474,
-    "forfeited": false
-  },
-  "r1-495": {
-    "winner": "megafalcons",
-    "loser": "DoubledMint2803",
-    "time_ms": 1051515,
-    "match_id": 8014570,
-    "date": 1773502392,
-    "forfeited": false
-  },
-  "r1-493": {
-    "winner": "idkghost_",
-    "loser": "GleamFG",
-    "time_ms": 1064426,
-    "match_id": 8014568,
-    "date": 1773502388,
-    "forfeited": false
-  },
-  "r1-494": {
-    "winner": "snorlaxirl_",
-    "loser": "LisaLazuli",
-    "time_ms": 897838,
-    "match_id": 8014417,
-    "date": 1773502229,
-    "forfeited": false
-  },
-  "r1-496": {
-    "winner": "PickPig",
-    "loser": "KomboJack",
-    "time_ms": 882963,
-    "match_id": 8014382,
-    "date": 1773502204,
-    "forfeited": false
-  },
-  "r1-499": {
-    "winner": "michawsomereborn",
-    "loser": "Skizzle6174",
-    "time_ms": 694792,
-    "match_id": 8014179,
-    "date": 1773502019,
-    "forfeited": false
-  },
-  "r1-500": {
-    "winner": "nsla",
-    "loser": "MelmanPvP",
-    "time_ms": 789183,
-    "match_id": 8014286,
-    "date": 1773502119,
-    "forfeited": false
-  },
-  "r1-502": {
-    "winner": "SquidBites",
-    "loser": "BritishEmpire_",
-    "time_ms": 1184054,
-    "match_id": 8014657,
-    "date": 1773502496,
-    "forfeited": false
-  },
-  "r1-504": {
-    "winner": "spyQT",
-    "loser": "itz_rizzlr",
-    "time_ms": 1173243,
-    "match_id": 8014647,
-    "date": 1773502486,
-    "forfeited": false
-  },
-  "r1-508": {
-    "winner": "Dasumato",
-    "loser": "Paibola",
-    "time_ms": 974242,
-    "match_id": 8014480,
-    "date": 1773502297,
-    "forfeited": false
-  },
-  "r1-506": {
-    "winner": "7rc3",
-    "loser": "Gabushipa",
-    "time_ms": 684556,
-    "match_id": 8014159,
-    "date": 1773502005,
-    "forfeited": false
-  },
-  "r1-505": {
-    "winner": "Spiget",
-    "loser": "3Dslime",
-    "time_ms": 909571,
-    "match_id": 8014430,
-    "date": 1773502239,
-    "forfeited": false
-  },
-  "r1-510": {
-    "winner": "uglylosergirl",
-    "loser": "greattttt",
-    "time_ms": 729798,
-    "match_id": 8014217,
-    "date": 1773502057,
-    "forfeited": false
-  },
-  "_updated": "2026-03-14T15:46:59.415841+00:00"
+  }
 }
