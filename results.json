@@ -5630,5 +5630,35 @@
     "manual": true,
     "source": "r7_bracket"
   },
-  "_updated": "2026-03-14T18:36:30.980695+00:00"
+  "r7-0": {
+    "winner": "HDMICables",
+    "loser": "silverrruns",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r7-1": {
+    "winner": "21MashedPotatoes",
+    "loser": "ulsah1n",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r7-2": {
+    "winner": "Snakezy",
+    "loser": "Bartorino",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "_updated": "2026-03-14T19:40:09.479927+00:00",
+  "r7-3": {
+    "winner": "DARVY__X1",
+    "loser": "Cookieaddicts",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r7-4": {
+    "winner": "yjako",
+    "loser": "steez",
+    "manual": true,
+    "source": "manual_entry"
+  }
 }
