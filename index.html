@@ -219,6 +219,9 @@ body {
 .bk-slot:last-child { border-bottom: none; }
 .bk-slot.bye { opacity: .25; }
 
+
+.bk-slot.result-winner { background: #0d1a0d; }
+.bk-slot.result-winner .s-name { color: #7dc95e; }
 .bk-slot .s-seed { font-size: 10px; color: #303030; min-width: 24px; text-align: right; flex-shrink: 0; }
 .bk-slot .s-name { flex: 1; font-size: 13px; color: #aaa; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bk-slot .s-name.tbd { color: #2e2e2e; font-style: italic; }
@@ -396,6 +399,7 @@ body {
   <h1>Couriway x EG FFA Tournament</h1>
   <div class="meta">956 players &nbsp;·&nbsp; <span id="elo-count">—</span> ranked players</div>
   <div id="elo-updated">—</div>
+  <div id="results-status" style="font-size:11px; color:#444;"></div>
   <span style="color:#2a2a2a; font-size:11px; margin-left:4px;">@Prolav</span>
   <input id="search" type="text" placeholder="search..." oninput="onSearch(this.value)">
   <div style="position:relative; display:inline-block; margin-left:4px;">
@@ -439,7 +443,7 @@ body {
       <button class="srt"    onclick="setBracketSort('discrepancy',this)">elo gap ↓</button>
       <button class="srt"    onclick="setBracketSort('top_elo',this)">top elo ↓</button>
       <div style="margin-left:auto; display:flex; align-items:center; gap:6px; position:relative;">
-        <label style="color:#444; font-size:11px;">most likely opponents:</label>
+        <label style="color:#444; font-size:11px;">bracket luck:</label>
         <input id="luck-search" type="text" placeholder="search player…" autocomplete="off"
           style="background:#1a1a1a; border:1px solid #2a2a2a; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 8px; width:160px; outline:none;"
           oninput="luckSearchInput(this.value)" onfocus="luckSearchInput(this.value)" onclick="event.stopPropagation()">
@@ -525,7 +529,8 @@ const R1 = [{"p1":{"seed":281,"display":"Kaltsi","username":"Kaltsi","autoAdvanc
 // ── ELO CACHE ──
 // Keyed by username (original case from usernames.json)
 // We build a case-insensitive lookup
-let CACHE = {};  // lowercase username -> full player data object
+let CACHE = {};
+let RESULTS = {}; // confirmed match results from results.json  // lowercase username -> full player data object
 
 async function loadElo() {
   try {
@@ -801,18 +806,63 @@ function matchScore(m) {
 }
 
 function buildRounds(r1, depth) {
-  let rounds = [r1.map(m => ({
-    p1: m.p1, p2: m.p2, hasBye: m.isBye,
-    winner: (m.isBye || !m.p2) ? m.p1 : null
-  }))];
+  // Round 0: seed from R1 data, inject confirmed results if available
+  let rounds = [r1.map((m, mi) => {
+    const isBye = m.isBye || !m.p2;
+    let winner = isBye ? m.p1 : null;
+    let confirmed = false;
+    if (!isBye) {
+      // results.json uses 1-based round: r1-matchIndex
+      // We need to find by player usernames since display sort may reorder indices
+      const key = findResultKey(1, m.p1?.username, m.p2?.username);
+      if (key) { winner = getResultWinner(key, m.p1, m.p2); confirmed = !!winner; }
+    }
+    return { p1: m.p1, p2: m.p2, hasBye: isBye, winner, confirmed };
+  })];
+
   for (let r = 1; r < depth; r++) {
     const prev = rounds[r-1];
     const next = [];
-    for (let i = 0; i < prev.length; i += 2)
-      next.push({ p1: prev[i]?.winner??null, p2: prev[i+1]?.winner??null, hasBye: false, winner: null });
+    for (let i = 0; i < prev.length; i += 2) {
+      const p1 = prev[i]?.winner ?? null;
+      const p2 = prev[i+1]?.winner ?? null;
+      let winner = null, confirmed = false;
+      if (p1 && p2) {
+        const key = findResultKey(r + 1, p1.username, p2.username);
+        if (key) { winner = getResultWinner(key, p1, p2); confirmed = !!winner; }
+      } else if (p1 && !p2) {
+        winner = p1; // bye
+      }
+      next.push({ p1, p2, hasBye: (!p1 || !p2), winner, confirmed });
+    }
     rounds.push(next);
   }
   return rounds;
+}
+
+// Find a result key by round number and player usernames (order-insensitive)
+function findResultKey(roundNum, u1, u2) {
+  if (!u1 || !u2) return null;
+  const prefix = `r${roundNum}-`;
+  for (const [key, val] of Object.entries(RESULTS)) {
+    if (!key.startsWith(prefix)) continue;
+    const w = val.winner?.toLowerCase();
+    const l = val.loser?.toLowerCase();
+    if ((w === u1.toLowerCase() || l === u1.toLowerCase()) &&
+        (w === u2.toLowerCase() || l === u2.toLowerCase())) {
+      return key;
+    }
+  }
+  return null;
+}
+
+// Get the winner player object from a result key
+function getResultWinner(key, p1, p2) {
+  const val = RESULTS[key];
+  if (!val?.winner) return null;
+  if (val.winner.toLowerCase() === p1?.username?.toLowerCase()) return p1;
+  if (val.winner.toLowerCase() === p2?.username?.toLowerCase()) return p2;
+  return null;
 }
 
 function buildBracket() { bracketBuilt = true; rebuildBracket(); }
@@ -855,8 +905,8 @@ function rebuildBracket() {
       card.dataset.u = users.join(',');
       if (hlUser && users.includes(hlUser)) card.classList.add('hl');
       card.onclick = () => { if (users[0]) openMatchModal(users[0], users[1] ?? null); };
-      card.appendChild(mkSlot(m.p1, m.hasBye && !m.p2));
-      card.appendChild(mkSlot(m.p2, false));
+      card.appendChild(mkSlot(m.p1, m.hasBye && !m.p2, m.confirmed && m.winner === m.p1));
+      card.appendChild(mkSlot(m.p2, false,                  m.confirmed && m.winner === m.p2));
       row.appendChild(card);
 
       if (ri < rounds.length - 1) {
@@ -881,9 +931,9 @@ function rebuildBracket() {
   });
 }
 
-function mkSlot(p, isBye) {
+function mkSlot(p, isBye, isWinner) {
   const div = document.createElement('div');
-  div.className = 'bk-slot' + (isBye ? ' bye' : '');
+  div.className = 'bk-slot' + (isBye ? ' bye' : '') + (isWinner ? ' result-winner' : '');
   if (!p) {
     div.innerHTML = `<span class="s-seed"></span><span class="s-name tbd">tbd</span>`;
     return div;
@@ -1410,6 +1460,7 @@ function openPkMatchInfo(p1, p2) {
 
 renderList();
 loadElo();
+loadResults();
   setViewHeights();
 
 // ── SIMULATION ENGINE ──
@@ -2279,6 +2330,45 @@ function openBracketLuckFromList(username) {
     document.getElementById('luck-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }, 50);
 }
+
+
+// ── RESULTS LOADER ────────────────────────────────────────────────────────
+async function loadResults() {
+  try {
+    const r = await fetch('results.json?_=' + Date.now());
+    if (!r.ok) return; // file doesn't exist yet — tournament hasn't started
+    const d = await r.json();
+    RESULTS = {};
+    let count = 0;
+    for (const [key, val] of Object.entries(d)) {
+      if (key.startsWith('_')) continue; // skip _updated etc
+      if (val.winner) { RESULTS[key] = val; count++; }
+    }
+    if (count === 0) return;
+
+    // Show results indicator in topbar
+    const el = document.getElementById('results-status');
+    if (el) {
+      const updated = d._updated
+        ? (() => {
+            const mins = Math.round((Date.now() - new Date(d._updated)) / 60000);
+            return mins < 2 ? 'just now' : mins < 60 ? mins + 'm ago' : Math.floor(mins/60) + 'h ago';
+          })()
+        : '';
+      el.innerHTML = `<span style="color:#5dcc6a;">&#9679;</span> ${count} results${updated ? ' · ' + updated : ''}`;
+    }
+
+    // Rebuild bracket if it has been opened, otherwise just store results
+    // so it's ready when the user navigates there
+    rebuildBracket();
+
+  } catch(e) {
+    // results.json not found or invalid — silent fail, tournament hasn't started
+  }
+}
+
+// Auto-poll results.json every 60 seconds during tournament
+setInterval(loadResults, 60000);
 
 
 
