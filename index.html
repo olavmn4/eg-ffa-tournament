@@ -439,7 +439,7 @@ body {
       <button class="srt"    onclick="setBracketSort('discrepancy',this)">elo gap ↓</button>
       <button class="srt"    onclick="setBracketSort('top_elo',this)">top elo ↓</button>
       <div style="margin-left:auto; display:flex; align-items:center; gap:6px; position:relative;">
-        <label style="color:#444; font-size:11px;">bracket luck:</label>
+        <label style="color:#444; font-size:11px;">most likely opponents:</label>
         <input id="luck-search" type="text" placeholder="search player…" autocomplete="off"
           style="background:#1a1a1a; border:1px solid #2a2a2a; color:#ccc; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 8px; width:160px; outline:none;"
           oninput="luckSearchInput(this.value)" onfocus="luckSearchInput(this.value)" onclick="event.stopPropagation()">
@@ -1987,7 +1987,7 @@ function analyzeBracketLuck(username) {
   const rounds = [];
   for (const step of path) {
     const { round, pool } = step;
-    if (!pool.length) break;
+    if (!pool.length) continue; // bye players have no R1 opponent — skip to R2
 
     // How many to show: R1=1, R2=2, R3+=4
     const showCount = round === 0 ? 1 : round === 1 ? 2 : 4;
