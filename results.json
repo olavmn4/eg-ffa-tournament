@@ -5288,7 +5288,6 @@
     "manual": true,
     "source": "r5_bracket"
   },
-  "_updated": "2026-03-14T17:44:56.917244+00:00",
   "r4-32": {
     "winner": "snowdeerjulie",
     "loser": "MrAaz",
@@ -5328,6 +5327,193 @@
   "r4-58": {
     "winner": "fruitberries",
     "loser": "Anjoru",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r5-0": {
+    "winner": "silverrruns",
+    "loser": "dolqhin",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-1": {
+    "winner": "Pjoes",
+    "loser": "landvis",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-2": {
+    "winner": "VampishWheat",
+    "loser": "HufterL",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-3": {
+    "winner": "HDMICables",
+    "loser": "Duk4n_",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-4": {
+    "winner": "21MashedPotatoes",
+    "loser": "_KrakerS",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-5": {
+    "winner": "JackoWacko62",
+    "loser": "HailZeus",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-6": {
+    "winner": "Darthloll",
+    "loser": "pplazzz",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-7": {
+    "winner": "ulsah1n",
+    "loser": "infume",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-8": {
+    "winner": "Murtgah",
+    "loser": "Voitto1",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-9": {
+    "winner": "Snakezy",
+    "loser": "autoqualler",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-10": {
+    "winner": "WarioTime1",
+    "loser": "BroncoSR",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-11": {
+    "winner": "Bartorino",
+    "loser": "AzHEHE",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-12": {
+    "winner": "Ranik_",
+    "loser": "webwormy",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-13": {
+    "winner": "DARVY__X1",
+    "loser": "Zaintew",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-14": {
+    "winner": "Cookieaddicts",
+    "loser": "_Frier3n_",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-15": {
+    "winner": "comfypeepo",
+    "loser": "BlazeMind",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-17": {
+    "winner": "steez",
+    "loser": "karmeq",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-18": {
+    "winner": "7rowl",
+    "loser": "Frolde",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-19": {
+    "winner": "yjako",
+    "loser": "mukvl",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-20": {
+    "winner": "Pinne",
+    "loser": "Feinberg",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-21": {
+    "winner": "paukll",
+    "loser": "TUDORULE",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-22": {
+    "winner": "ANJOUU",
+    "loser": "Dowqe",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-23": {
+    "winner": "NoHacsJustRoblox",
+    "loser": "Topimpapig",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-24": {
+    "winner": "Czelco",
+    "loser": "Specnr",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-25": {
+    "winner": "nyachloe",
+    "loser": "Prince_01",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-26": {
+    "winner": "nEmerald",
+    "loser": "galaxy1010_w",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-27": {
+    "winner": "Erikfzf",
+    "loser": "_Hypn0tic",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-28": {
+    "winner": "MrBudgiee",
+    "loser": "dwoh",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-30": {
+    "winner": "outrag",
+    "loser": "KEBABCOO",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "r5-31": {
+    "winner": "nsla",
+    "loser": "UnderWolf",
+    "manual": true,
+    "source": "r6_bracket"
+  },
+  "_updated": "2026-03-14T18:06:02.473130+00:00",
+  "r5-16": {
+    "winner": "snowdeerjulie",
+    "loser": "Voidol",
     "manual": true,
     "source": "manual_entry"
   }
