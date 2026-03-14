@@ -2487,9 +2487,9 @@ function renderBuzz() {
     })
     .filter(Boolean)
     .sort((a, b) => a.winnerProb - b.winnerProb)
-    .slice(0, 20);
+    .slice(0, 50);
 
-  html += `<div style="font-size:11px; color:#444; letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px;">top 20 upsets — all rounds</div>`;
+  html += `<div style="font-size:11px; color:#444; letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px;">top 50 upsets — all rounds</div>`;
 
   if (!allUpsets.length) {
     html += '<p style="color:#333; font-size:12px;">No upsets detected yet.</p>';
