@@ -159,10 +159,32 @@ body {
   background: #111;
   z-index: 10;
 }
-#sim-bk-outer .bk-col-hd {
+#sim-bk-outer .bk-col-hd,
+#bk-outer .bk-col-hd {
   cursor: pointer;
   user-select: none;
 }
+#bk-outer .bk-col-hd:hover { color: #777; }
+#bk-outer .bk-col.collapsed {
+  width: 28px;
+  min-width: 28px;
+  flex-shrink: 0;
+}
+#bk-outer .bk-col.collapsed .bk-col-hd {
+  width: 28px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  padding: 12px 0;
+  border-right: 1px solid #222;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+}
+#bk-outer .bk-col.collapsed .bk-col-body { display: none; }
 #sim-bk-outer .bk-col-hd:hover { color: #777; }
 #sim-bk-outer .bk-col.collapsed {
   width: 28px;
@@ -886,52 +908,70 @@ function rebuildBracket() {
   const names = ['R1','R2','R3','R4','R5','R6','R7','R8','Semi','Final'];
   const SLOT_H = 58;
 
+  // visDepth: how many uncollapsed rounds precede ri
+  function bkVisDepth(ri) {
+    let d = 0;
+    for (let i = 0; i < ri; i++) if (!bkCollapsed.has(i)) d++;
+    return d;
+  }
+
   rounds.forEach((matches, ri) => {
+    const collapsed = bkCollapsed.has(ri);
+
     const col = document.createElement('div');
-    col.className = 'bk-col';
+    col.className = 'bk-col' + (collapsed ? ' collapsed' : '');
 
     const hd = document.createElement('div');
     hd.className = 'bk-col-hd';
     hd.textContent = names[ri] ?? 'R'+(ri+1);
+    hd.title = 'click to collapse/expand';
+    hd.onclick = () => {
+      if (bkCollapsed.has(ri)) bkCollapsed.delete(ri);
+      else bkCollapsed.add(ri);
+      rebuildBracket();
+    };
     col.appendChild(hd);
 
-    const body = document.createElement('div');
-    body.className = 'bk-col-body';
-    const matchH = Math.pow(2, ri) * SLOT_H;
+    if (!collapsed) {
+      const body = document.createElement('div');
+      body.className = 'bk-col-body';
+      const matchH = Math.pow(2, bkVisDepth(ri)) * SLOT_H;
 
-    matches.forEach((m, mi) => {
-      const row = document.createElement('div');
-      row.className = 'bk-row';
-      row.style.height = matchH + 'px';
+      matches.forEach((m, mi) => {
+        const row = document.createElement('div');
+        row.className = 'bk-row';
+        row.style.height = matchH + 'px';
 
-      const card = document.createElement('div');
-      card.className = 'bk-match';
-      const users = [m.p1?.username, m.p2?.username].filter(Boolean);
-      card.dataset.u = users.join(',');
-      if (hlUser && users.includes(hlUser)) card.classList.add('hl');
-      card.onclick = () => { if (users[0]) openMatchModal(users[0], users[1] ?? null); };
-      card.appendChild(mkSlot(m.p1, m.hasBye && !m.p2, m.confirmed && m.winner === m.p1));
-      card.appendChild(mkSlot(m.p2, false,                  m.confirmed && m.winner === m.p2));
-      row.appendChild(card);
+        const card = document.createElement('div');
+        card.className = 'bk-match';
+        const users = [m.p1?.username, m.p2?.username].filter(Boolean);
+        card.dataset.u = users.join(',');
+        if (hlUser && users.includes(hlUser)) card.classList.add('hl');
+        card.onclick = () => { if (users[0]) openMatchModal(users[0], users[1] ?? null); };
+        card.appendChild(mkSlot(m.p1, m.hasBye && !m.p2, m.confirmed && m.winner === m.p1));
+        card.appendChild(mkSlot(m.p2, false,                  m.confirmed && m.winner === m.p2));
+        row.appendChild(card);
 
-      if (ri < rounds.length - 1) {
-        const conn = document.createElement('div');
-        conn.className = 'bk-conn';
-        const a = document.createElement('div');
-        const b = document.createElement('div');
-        if (mi % 2 === 0) {
-          a.className = 'c-empty'; b.className = 'c-bottom';
-        } else {
-          a.className = 'c-top'; b.className = 'c-empty';
+        const nextVisible = ri < rounds.length - 1 && !bkCollapsed.has(ri + 1);
+        if (nextVisible) {
+          const conn = document.createElement('div');
+          conn.className = 'bk-conn';
+          const a = document.createElement('div');
+          const b = document.createElement('div');
+          if (mi % 2 === 0) {
+            a.className = 'c-empty'; b.className = 'c-bottom';
+          } else {
+            a.className = 'c-top'; b.className = 'c-empty';
+          }
+          conn.appendChild(a); conn.appendChild(b);
+          row.appendChild(conn);
         }
-        conn.appendChild(a); conn.appendChild(b);
-        row.appendChild(conn);
-      }
 
-      body.appendChild(row);
-    });
+        body.appendChild(row);
+      });
 
-    col.appendChild(body);
+      col.appendChild(body);
+    }
     outer.appendChild(col);
   });
 }
@@ -1805,6 +1845,7 @@ function simulateSingleTournament(r1Matches, sigma) {
 
 // Track which rounds are collapsed: Set of round indices
 const simCollapsed = new Set();
+const bkCollapsed = new Set();
 
 function renderSimBracket(rounds) {
   // Update header info
@@ -2434,8 +2475,8 @@ function renderBuzz() {
       .sort((a, b) => b.avgElo - a.avgElo)
       .slice(0, 10);
 
-    html += `<div style="margin-bottom:28px;">
-      <div style="font-size:11px; color:#444; letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px;">${rname} — matches to watch</div>`;
+    html += `<div style="margin-bottom:28px; max-width:700px; margin-left:auto; margin-right:auto;">
+      <div style="font-size:11px; color:#444; letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px; text-align:center;">${rname} — matches to watch</div>`;
 
     if (!scoredMatches.length) {
       html += '<p style="color:#333; font-size:12px;">No upcoming matchups found yet.</p>';
