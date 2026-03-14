@@ -5510,11 +5510,23 @@
     "manual": true,
     "source": "r6_bracket"
   },
-  "_updated": "2026-03-14T18:06:02.473130+00:00",
+  "_updated": "2026-03-14T18:12:51.923202+00:00",
   "r5-16": {
     "winner": "snowdeerjulie",
     "loser": "Voidol",
     "manual": true,
     "source": "manual_entry"
+  },
+  "r1-316": {
+    "winner": "ShaydSeven",
+    "loser": "hiegh",
+    "manual": true,
+    "source": "inferred_from_r2"
+  },
+  "r1-464": {
+    "winner": "tommyinnit_uwu_",
+    "loser": "swtl1",
+    "manual": true,
+    "source": "inferred_from_r2"
   }
 }
