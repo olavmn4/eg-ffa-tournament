@@ -5510,7 +5510,6 @@
     "manual": true,
     "source": "r6_bracket"
   },
-  "_updated": "2026-03-14T18:19:07.629492+00:00",
   "r5-16": {
     "winner": "snowdeerjulie",
     "loser": "Voidol",
@@ -5534,5 +5533,102 @@
     "loser": "knifelyy",
     "manual": true,
     "source": "manual_entry"
-  }
+  },
+  "r6-0": {
+    "winner": "silverrruns",
+    "loser": "Pjoes",
+    "manual": true,
+    "source": "r7_bracket"
+  },
+  "r6-1": {
+    "winner": "HDMICables",
+    "loser": "VampishWheat",
+    "manual": true,
+    "source": "r7_bracket"
+  },
+  "r6-2": {
+    "winner": "21MashedPotatoes",
+    "loser": "JackoWacko62",
+    "manual": true,
+    "source": "r7_bracket"
+  },
+  "r6-3": {
+    "winner": "ulsah1n",
+    "loser": "Darthloll",
+    "manual": true,
+    "source": "r7_bracket"
+  },
+  "r6-4": {
+    "winner": "Snakezy",
+    "loser": "Murtgah",
+    "manual": true,
+    "source": "r7_bracket"
+  },
+  "r6-5": {
+    "winner": "Bartorino",
+    "loser": "WarioTime1",
+    "manual": true,
+    "source": "r7_bracket"
+  },
+  "r6-6": {
+    "winner": "DARVY__X1",
+    "loser": "Ranik_",
+    "manual": true,
+    "source": "r7_bracket"
+  },
+  "r6-7": {
+    "winner": "Cookieaddicts",
+    "loser": "comfypeepo",
+    "manual": true,
+    "source": "r7_bracket"
+  },
+  "r6-8": {
+    "winner": "steez",
+    "loser": "snowdeerjulie",
+    "manual": true,
+    "source": "r7_bracket"
+  },
+  "r6-9": {
+    "winner": "yjako",
+    "loser": "7rowl",
+    "manual": true,
+    "source": "r7_bracket"
+  },
+  "r6-10": {
+    "winner": "Pinne",
+    "loser": "paukll",
+    "manual": true,
+    "source": "r7_bracket"
+  },
+  "r6-11": {
+    "winner": "NoHacsJustRoblox",
+    "loser": "ANJOUU",
+    "manual": true,
+    "source": "r7_bracket"
+  },
+  "r6-12": {
+    "winner": "nyachloe",
+    "loser": "Czelco",
+    "manual": true,
+    "source": "r7_bracket"
+  },
+  "r6-13": {
+    "winner": "Erikfzf",
+    "loser": "nEmerald",
+    "manual": true,
+    "source": "r7_bracket"
+  },
+  "r6-14": {
+    "winner": "MrBudgiee",
+    "loser": "fruitberries",
+    "manual": true,
+    "source": "r7_bracket"
+  },
+  "r6-15": {
+    "winner": "outrag",
+    "loser": "nsla",
+    "manual": true,
+    "source": "r7_bracket"
+  },
+  "_updated": "2026-03-14T18:36:30.980695+00:00"
 }
