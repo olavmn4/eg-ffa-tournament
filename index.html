@@ -2030,16 +2030,22 @@ function analyzeBracketLuck(username) {
     sumExpected += prob;
   }
   const expectedWinProb = sumExpected / N_LUCK;
-  const luckRatio = expectedWinProb > 0 ? actualWinProb / expectedWinProb : 1;
+  // Rank-based luck: compute bracketDiffScore for all players, rank this player
+  const allScores = PLAYERS.map(p => ({ username: p.username, score: bracketDiffScore(p.username) }));
+  // Sort descending: rank 1 = hardest bracket
+  allScores.sort((a, b) => b.score - a.score);
+  const myRank = allScores.findIndex(p => p.username === username) + 1;
+  const total = allScores.length;
+  const pct = myRank / total; // 0 = hardest, 1 = easiest
 
   let luckLabel, luckColor;
-  if      (luckRatio > 1.3)  { luckLabel = 'very favourable draw'; luckColor = '#5dcc6a'; }
-  else if (luckRatio > 1.1)  { luckLabel = 'favourable draw';      luckColor = '#7dc95e'; }
-  else if (luckRatio > 0.9)  { luckLabel = 'neutral draw';         luckColor = '#888'; }
-  else if (luckRatio > 0.7)  { luckLabel = 'tough draw';           luckColor = '#c07a3a'; }
-  else                        { luckLabel = 'very tough draw';      luckColor = '#c05a5a'; }
+  if      (pct <= 0.10) { luckLabel = 'very tough draw';     luckColor = '#c05a5a'; }
+  else if (pct <= 0.25) { luckLabel = 'tough draw';          luckColor = '#c07a3a'; }
+  else if (pct <= 0.75) { luckLabel = 'neutral draw';        luckColor = '#888'; }
+  else if (pct <= 0.90) { luckLabel = 'favourable draw';     luckColor = '#7dc95e'; }
+  else                  { luckLabel = 'very favourable draw'; luckColor = '#5dcc6a'; }
 
-  return { rounds, fieldAvgElo, luckLabel, luckColor, luckRatio, actualWinProb, expectedWinProb };
+  return { rounds, fieldAvgElo, luckLabel, luckColor, myRank, total };
 }
 
 function renderLuckPanel(username) {
@@ -2047,7 +2053,7 @@ function renderLuckPanel(username) {
   const analysis = analyzeBracketLuck(username);
   if (!analysis) { panel.style.display = 'none'; return; }
 
-  const { rounds, fieldAvgElo, luckLabel, luckColor } = analysis;
+  const { rounds, fieldAvgElo, luckLabel, luckColor, myRank, total } = analysis;
   const roundNames = ['R1','R2','R3','R4','R5','R6','R7','R8','Semi','Final'];
   const myC = getCache(username);
   const myEloVal = myC?.eloRate ?? null;
@@ -2058,6 +2064,8 @@ function renderLuckPanel(username) {
   // Header
   html += `<div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px;">
     <span style="color:#888; font-size:11px;">${myFlag} <span style="color:#ddd; font-weight:500;">${x(username)}</span>${myEloVal ? ` <span class="${eloClass(myEloVal)}" style="margin-left:4px;">${myEloVal}</span>` : ''}</span>
+    <span style="font-size:11px; padding:2px 8px; border:1px solid ${luckColor}33; color:${luckColor};">${luckLabel}</span>
+    <span style="font-size:10px; color:#555;">#${myRank}<span style="color:#333;">/${total}</span></span>
     <span style="color:#2a2a2a; font-size:10px; margin-left:auto;">field avg elo: <span style="color:#444;">${fieldAvgElo ?? '—'}</span></span>
   </div>`;
 
