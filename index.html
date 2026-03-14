@@ -417,6 +417,7 @@ body {
   <button class="tab"    onclick="switchTab('pickems',this)">pickems</button>
   <button class="tab"    onclick="switchTab('predict',this)">predictions</button>
   <button class="tab"    onclick="switchTab('simulate',this)">simulate</button>
+  <button class="tab"    onclick="switchTab('buzz',this)">live updates</button>
 </div>
 
 <div id="main">
@@ -472,6 +473,10 @@ body {
     <div id="pk-outer" style="overflow-x:auto;padding:16px 8px 24px;"></div>
   </div>
 
+</div>
+
+<div id="v-buzz" style="display:none; overflow:auto; padding:16px;">
+  <div id="buzz-content"><p style="color:#333; font-size:12px; padding:20px 0;">No results yet — check back once matches are in.</p></div>
 </div>
 
 <div id="v-predict" style="display:none; flex-direction:column; overflow:hidden;">
@@ -980,6 +985,7 @@ function setViewHeights() {
   document.getElementById('v-predict').style.maxHeight = h;
   document.getElementById('v-simulate').style.height = h;
   document.getElementById('v-simulate').style.maxHeight = h;
+  document.getElementById('v-buzz').style.maxHeight    = h;
 }
 
 function switchTab(id, btn) {
@@ -991,6 +997,8 @@ function switchTab(id, btn) {
   document.getElementById('v-pickems').style.display  = id==='pickems' ? 'block' : 'none';
   document.getElementById('v-predict').style.display  = id==='predict' ? 'flex' : 'none';
   document.getElementById('v-simulate').style.display = id==='simulate'? 'flex' : 'none';
+  document.getElementById('v-buzz').style.display    = id==='buzz'    ? 'block': 'none';
+  if (id === 'buzz') renderBuzz();
   if (id === 'bracket' && !bracketBuilt) buildBracket();
   if (id === 'pickems' && !pickemBuilt) buildPickems();
   setViewHeights();
@@ -2275,6 +2283,10 @@ const HELP_CONTENT = {
     ['sort columns', 'Click any round header in the table to sort by it.'],
     ['show counts / show %', 'Toggle between percentages and raw counts out of 10,000.'],
   ]},
+  buzz: { title: 'live updates tab', tips: [
+    ['biggest upsets', 'For each completed round, the matches where the biggest underdog won — ranked by how unlikely the result was.'],
+    ['matches to watch', 'The most interesting upcoming matchups: close ELO coin flips, high-quality battles, and prime upset candidates.'],
+  ]},
   simulate: { title: 'simulate tab', tips: [
     ['run tournament', 'Simulates one full tournament. Re-run for different outcomes.'],
     ['gold player', 'The champion of that simulation run.'],
@@ -2369,6 +2381,178 @@ async function loadResults() {
 
 // Auto-poll results.json every 60 seconds during tournament
 setInterval(loadResults, 60000);
+
+
+// ── BUZZ TAB ──────────────────────────────────────────────────────────────
+
+function renderBuzz() {
+  const el = document.getElementById('buzz-content');
+  if (!el) return;
+
+  const roundNames = ['R1','R2','R3','R4','R5','R6','R7','R8','Semi','Final'];
+
+  // Gather all completed rounds from RESULTS
+  const byRound = {};
+  for (const [key, val] of Object.entries(RESULTS)) {
+    if (key.startsWith('_') || !val.winner) continue;
+    const parts = key.match(/^r(\d+)-/);
+    if (!parts) continue;
+    const r = parseInt(parts[1]);
+    if (!byRound[r]) byRound[r] = [];
+    byRound[r].push({ key, ...val });
+  }
+
+  const completedRounds = Object.keys(byRound).map(Number).sort((a,b) => a-b);
+  if (!completedRounds.length) {
+    el.innerHTML = '<p style="color:#333; font-size:12px; padding:20px 0;">No results yet.</p>';
+    return;
+  }
+
+  // Find the current round: first round with no results yet
+  const maxCompletedRound = Math.max(...completedRounds);
+  const nextRound = maxCompletedRound + 1;
+
+  // Build bracket rounds to know upcoming matchups
+  const bracketRounds = buildRounds(R1, 10);
+
+  let html = '';
+
+  // ── MATCHES TO WATCH ──────────────────────────────────────────────────
+  if (nextRound <= 10) {
+    const upcoming = bracketRounds[nextRound - 1] ?? [];
+    const rname = roundNames[nextRound - 1] ?? ('R' + nextRound);
+
+    // Score each upcoming match
+    const scoredMatches = upcoming
+      .filter(m => m.p1 && m.p2 && !m.hasBye)
+      .map(m => {
+        const s1 = playerScore(m.p1.username);
+        const s2 = playerScore(m.p2.username);
+        const e1 = elo(m.p1.username) ?? 0;
+        const e2 = elo(m.p2.username) ?? 0;
+        const avgElo = (e1 + e2) / 2;
+        const winProb = matchWinProb(s1, s2, 0.25);
+        // Closeness: closer to 50% = more interesting
+        const closeness = 1 - Math.abs(winProb - 0.5) * 2;
+        // Quality: higher avg elo = better match
+        const quality = avgElo / 2000;
+        // Interest score: blend closeness + quality
+        const interest = closeness * 0.6 + quality * 0.4;
+        return { m, s1, s2, e1, e2, winProb, avgElo, closeness, interest };
+      })
+      .sort((a, b) => b.interest - a.interest);
+
+    html += `<div style="margin-bottom:28px;">
+      <div style="font-size:11px; color:#444; letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px;">${rname} — matches to watch</div>`;
+
+    const topMatches = scoredMatches.slice(0, 10);
+    if (!topMatches.length) {
+      html += '<p style="color:#333; font-size:12px;">No upcoming matchups found yet.</p>';
+    } else {
+      html += '<div style="display:flex; flex-direction:column; gap:4px;">';
+      topMatches.forEach(({ m, e1, e2, winProb, closeness }) => {
+        const c1 = getCache(m.p1.username);
+        const c2 = getCache(m.p2.username);
+        const f1 = c1?.country ? countryFlag(c1.country) : '';
+        const f2 = c2?.country ? countryFlag(c2.country) : '';
+        const pct1 = Math.round(winProb * 100);
+        const pct2 = 100 - pct1;
+        // Label
+        let label = '';
+        if (closeness > 0.85) label = '<span style="color:#c07a3a; font-size:10px; margin-left:6px;">coin flip</span>';
+        else if (e1 > 1500 && e2 > 1500) label = '<span style="color:#5bc8e8; font-size:10px; margin-left:6px;">high quality</span>';
+        else if (closeness > 0.6 && Math.max(e1,e2) > 1200) label = '<span style="color:#7dc95e; font-size:10px; margin-left:6px;">upset watch</span>';
+
+        html += `<div style="background:#141414; border:1px solid #1e1e1e; padding:8px 12px; display:flex; align-items:center; gap:8px; cursor:pointer;"
+          onclick="openMatchModal('${x(m.p1.username)}','${x(m.p2.username)}')"
+          onmouseover="this.style.background='#1a1a1a'" onmouseout="this.style.background='#141414'">
+          <span style="color:#aaa; font-size:12px; flex:1;">${f1} <span class="${eloClass(e1)||''}">${x(m.p1.display||m.p1.username)}</span></span>
+          <span style="font-size:10px; color:#555;">${pct1}%</span>
+          <div style="width:80px; height:4px; background:#1e1e1e; border-radius:2px; overflow:hidden;">
+            <div style="width:${pct1}%; height:100%; background:#444;"></div>
+          </div>
+          <span style="font-size:10px; color:#555;">${pct2}%</span>
+          <span style="color:#aaa; font-size:12px; flex:1; text-align:right;"><span class="${eloClass(e2)||''}">${x(m.p2.display||m.p2.username)}</span> ${f2}</span>
+          ${label}
+        </div>`;
+      });
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+
+  // ── BIGGEST UPSETS ────────────────────────────────────────────────────
+  html += `<div style="font-size:11px; color:#444; letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px;">biggest upsets by round</div>`;
+
+  // Build a lookup: username -> player object from R1 data
+  const playerLookup = {};
+  for (const m of R1) {
+    for (const p of [m.p1, m.p2]) {
+      if (p) playerLookup[p.username.toLowerCase()] = p;
+    }
+  }
+
+  for (const r of completedRounds) {
+    const rname = roundNames[r - 1] ?? ('R' + r);
+    const matches = byRound[r];
+
+    // Score each match as an upset
+    const upsets = matches
+      .map(val => {
+        const wp = playerLookup[val.winner.toLowerCase()];
+        const lp = playerLookup[val.loser.toLowerCase()];
+        if (!wp || !lp) return null;
+        const sw = playerScore(wp.username);
+        const sl = playerScore(lp.username);
+        // Winner's probability (they were the underdog if < 50%)
+        const winnerProb = matchWinProb(sw, sl, 0.25);
+        if (winnerProb >= 0.5) return null; // not an upset
+        return { wp, lp, winnerProb: Math.round(winnerProb * 100), val };
+      })
+      .filter(Boolean)
+      .sort((a, b) => a.winnerProb - b.winnerProb)
+      .slice(0, 5);
+
+    if (!upsets.length) {
+      html += `<div style="margin-bottom:20px;">
+        <div style="font-size:11px; color:#333; margin-bottom:6px;">${rname}</div>
+        <p style="color:#2a2a2a; font-size:11px;">No upsets detected.</p>
+      </div>`;
+      continue;
+    }
+
+    html += `<div style="margin-bottom:20px;">
+      <div style="font-size:11px; color:#333; margin-bottom:6px;">${rname}</div>
+      <div style="display:flex; flex-direction:column; gap:3px;">`;
+
+    upsets.forEach(({ wp, lp, winnerProb, val }) => {
+      const cw = getCache(wp.username);
+      const cl = getCache(lp.username);
+      const fw = cw?.country ? countryFlag(cw.country) : '';
+      const fl = cl?.country ? countryFlag(cl.country) : '';
+      const ew = cw?.eloRate ?? null;
+      const el_ = cl?.eloRate ?? null;
+      const timeStr = val.time_ms ? ` · ${Math.floor(val.time_ms/60000)}:${String(Math.floor((val.time_ms%60000)/1000)).padStart(2,'0')}` : '';
+      const forfeitStr = val.forfeited ? ' <span style="color:#444; font-size:10px;">[forfeit]</span>' : '';
+
+      html += `<div style="background:#141414; border:1px solid #1e1e1e; padding:7px 12px; display:flex; align-items:center; gap:8px; cursor:pointer;"
+        onclick="openMatchModal('${x(wp.username)}','${x(lp.username)}')"
+        onmouseover="this.style.background='#1a1a1a'" onmouseout="this.style.background='#141414'">
+        <span style="font-size:10px; color:#c05a5a; min-width:32px; font-weight:600;">${winnerProb}%</span>
+        <span style="font-size:12px; color:#7dc95e;">${fw} ${x(wp.display||wp.username)}</span>
+        ${ew ? `<span class="${eloClass(ew)}" style="font-size:10px;">${ew}</span>` : ''}
+        <span style="color:#333; font-size:11px;">beat</span>
+        <span style="font-size:12px; color:#666;">${fl} ${x(lp.display||lp.username)}</span>
+        ${el_ ? `<span class="${eloClass(el_)}" style="font-size:10px;">${el_}</span>` : ''}
+        <span style="color:#333; font-size:10px; margin-left:auto;">${timeStr}${forfeitStr}</span>
+      </div>`;
+    });
+
+    html += '</div></div>';
+  }
+
+  el.innerHTML = html;
+}
 
 
 
