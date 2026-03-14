@@ -5288,10 +5288,46 @@
     "manual": true,
     "source": "r5_bracket"
   },
-  "_updated": "2026-03-14T17:18:39.088250+00:00",
+  "_updated": "2026-03-14T17:44:56.917244+00:00",
   "r4-32": {
     "winner": "snowdeerjulie",
     "loser": "MrAaz",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r2-158": {
+    "winner": "Sfren",
+    "loser": "ShaydSeven",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r3-79": {
+    "winner": "Enryu_43",
+    "loser": "Sfren",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r4-39": {
+    "winner": "mukvl",
+    "loser": "Enryu_43",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r2-232": {
+    "winner": "Anjoru",
+    "loser": "tommyinnit_uwu_",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r3-116": {
+    "winner": "Anjoru",
+    "loser": "Tompas_",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r4-58": {
+    "winner": "fruitberries",
+    "loser": "Anjoru",
     "manual": true,
     "source": "manual_entry"
   }
