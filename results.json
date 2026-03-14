@@ -5657,7 +5657,7 @@
     "manual": true,
     "source": "manual_entry"
   },
-  "_updated": "2026-03-14T20:37:19.744008+00:00",
+  "_updated": "2026-03-14T21:21:04.752285+00:00",
   "r7-3": {
     "winner": "DARVY__X1",
     "loser": "Cookieaddicts",
@@ -5685,6 +5685,30 @@
   "r7-7": {
     "winner": "outrag",
     "loser": "MrBudgiee",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r8-0": {
+    "winner": "HDMICables",
+    "loser": "21MashedPotatoes",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r8-1": {
+    "winner": "DARVY__X1",
+    "loser": "Snakezy",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r8-2": {
+    "winner": "Pinne",
+    "loser": "yjako",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r8-3": {
+    "winner": "outrag",
+    "loser": "Erikfzf",
     "manual": true,
     "source": "manual_entry"
   }
