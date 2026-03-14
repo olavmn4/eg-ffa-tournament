@@ -5648,7 +5648,7 @@
     "manual": true,
     "source": "manual_entry"
   },
-  "_updated": "2026-03-14T19:40:09.479927+00:00",
+  "_updated": "2026-03-14T19:59:55.715060+00:00",
   "r7-3": {
     "winner": "DARVY__X1",
     "loser": "Cookieaddicts",
@@ -5658,6 +5658,12 @@
   "r7-4": {
     "winner": "yjako",
     "loser": "steez",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r7-5": {
+    "winner": "Pinne",
+    "loser": "NoHacsJustRoblox",
     "manual": true,
     "source": "manual_entry"
   }
