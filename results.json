@@ -33,7 +33,8 @@
     "winner": "dnaiel_",
     "loser": "Jestem_Dalex",
     "manual": true,
-    "source": "r2_bracket"
+    "source": "r2_bracket",
+    "walkover": true
   },
   "r1-12": {
     "winner": "Melizsa",
@@ -327,7 +328,8 @@
     "winner": "creeperskilldogs",
     "loser": "Failurism",
     "manual": true,
-    "source": "r2_bracket"
+    "source": "r2_bracket",
+    "walkover": true
   },
   "r1-102": {
     "winner": "Minepro_80",
@@ -1941,13 +1943,15 @@
     "winner": "marcyselo_",
     "loser": "Popomann_",
     "manual": true,
-    "source": "r2_bracket"
+    "source": "r2_bracket",
+    "walkover": true
   },
   "r1-246": {
     "winner": "DaWildWombat",
     "loser": "justaltoid",
     "manual": true,
-    "source": "r2_bracket"
+    "source": "r2_bracket",
+    "walkover": true
   },
   "r1-248": {
     "winner": "okCobalt",
@@ -2031,7 +2035,8 @@
     "winner": "sk_im",
     "loser": "3x7en",
     "manual": true,
-    "source": "r2_bracket"
+    "source": "r2_bracket",
+    "walkover": true
   },
   "r1-282": {
     "winner": "kvlike_",
@@ -2139,7 +2144,8 @@
     "winner": "Nubek_Taktyk",
     "loser": "SnoWSt0rm_",
     "manual": true,
-    "source": "r2_bracket"
+    "source": "r2_bracket",
+    "walkover": true
   },
   "r1-323": {
     "winner": "bbiddd",
@@ -2211,7 +2217,8 @@
     "winner": "Cooobb",
     "loser": "K4ter",
     "manual": true,
-    "source": "r2_bracket"
+    "source": "r2_bracket",
+    "walkover": true
   },
   "r1-351": {
     "winner": "starruns",
@@ -5520,7 +5527,8 @@
     "winner": "ShaydSeven",
     "loser": "hiegh",
     "manual": true,
-    "source": "inferred_from_r2"
+    "source": "inferred_from_r2",
+    "walkover": true
   },
   "r1-464": {
     "winner": "tommyinnit_uwu_",
@@ -5648,7 +5656,7 @@
     "manual": true,
     "source": "manual_entry"
   },
-  "_updated": "2026-03-14T19:59:55.715060+00:00",
+  "_updated": "2026-03-14T20:27:22.331285+00:00",
   "r7-3": {
     "winner": "DARVY__X1",
     "loser": "Cookieaddicts",
@@ -5664,6 +5672,18 @@
   "r7-5": {
     "winner": "Pinne",
     "loser": "NoHacsJustRoblox",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r7-6": {
+    "winner": "Erikfzf",
+    "loser": "nyachloe",
+    "manual": true,
+    "source": "manual_entry"
+  },
+  "r7-7": {
+    "winner": "outrag",
+    "loser": "MrBudgiee",
     "manual": true,
     "source": "manual_entry"
   }
