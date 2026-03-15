@@ -3899,8 +3899,8 @@
     "source": "r3_bracket"
   },
   "r2-123": {
-    "winner": "DaWildWombat",
-    "loser": "IdealTV",
+    "winner": "IdealTV",
+    "loser": "DaWildWombat",
     "manual": true,
     "source": "r3_bracket"
   },
@@ -4542,7 +4542,7 @@
   },
   "r3-61": {
     "winner": "AllAdvancements",
-    "loser": "DaWildWombat",
+    "loser": "IdealTV",
     "manual": true,
     "source": "r4_bracket"
   },
@@ -5657,7 +5657,7 @@
     "manual": true,
     "source": "manual_entry"
   },
-  "_updated": "2026-03-14T22:15:36.228179+00:00",
+  "_updated": "2026-03-15T17:26:12.406810+00:00",
   "r7-3": {
     "winner": "DARVY__X1",
     "loser": "Cookieaddicts",
